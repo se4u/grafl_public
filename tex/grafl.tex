@@ -1,0 +1,198 @@
+\documentclass[11pt]{article}
+
+\usepackage{graphicx,amsmath,amssymb,subfigure,url,xspace}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\bigeg}{E.g.,\xspace}
+\newcommand{\etal}{\textit{et~al.\xspace}}
+\newcommand{\etc}{etc.\@\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\bigie}{I.e.,\xspace}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+\title{Graph Filling with constraints}
+% \author{Pushpendre Rastogi}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+\label{sec:introduction} Over the course of their lives humans learn
+an encoding of the world.  If we model the knowledge about the world
+as graph then one important ability that humans demonstrate and that
+has practical applications is the ability to predict relations and
+connections in an unseen part of the graph based only on the
+representations learnt to represent one part of the graph. See
+\ref{sec:exampl-form-probl} for concrete examples.
+
+\section{Notation}
+\label{sec:notation} {\huge Very important to nail down the
+notation. Do not proceed with experiments without nailing down the
+notation.}
+
+\section{Examples of the Formal Problem}
+\label{sec:exampl-form-probl}
+
+
+\subsection{Entailment Prediction}
+\label{subsec:entailment}
+Imagine that we have chain of entailments going from $x_1$ to $x_n$ as follows:
+
+\begin{verbatim}
+     ---          -----            ---         -----
+    /   \        /     \          /   \       /     \
+   /     \      /       \        /     \     /       \
+   |  x1 | ---> |   x2  | -----> |  x3 | ... |   xn  |
+   \     /      \       /        \     /     \       /
+    \   /        \     /          \   /       \     /
+     ---          -----            ---         -----
+\end{verbatim}
+
+For instance $(x_1, x_2, x_3)$ may be (rover, dog, animal). Now if we
+acquire new knowledge about ``animals'' then we can instantly answer
+questions about ``rover'' that use that new knowledge, without having
+to update the representation for ``rover'' in any way.
+
+For example we may learn the following ``type level'' knowledge about
+animals from a science textbook that all animals have a
+``pancreas''. Based on this knowledge we can figure out that ``rover''
+has a pancreas.
+
+In the terminology of languages we are presented the following strings
+from a language
+
+(rover, implies, dog) \\
+(dog, implies, animal) \\
+(animal, implies, pancreas)
+
+The important twist to the problem is that we may be presented the
+third string very late in our lives.  Even though we may have known
+the first two strings for very long from much earlier.  So there is a
+temporal separation between the start of the chain of inference and
+the last part of the chain.  In a more extreme setting the first 2
+strings may be the first 20,000 and we may only know them
+sub-consciously.  That is to say that we not even remember all of the
+training data about the first part of the chain but we only have
+impressions/signature/representations stored in our mind for the nodes
+of the graphs.
+
+Even in such a scenario based on just this single fact of information
+that we are able to infer that
+
+(rover, implies, pancreas) \\
+(dog, implies, pancreas)
+
+So essentially we were able to fill in unobserved edges in a
+graph based on a bottle-neck of information.
+
+\subsection{Natural Logic Relation Prediction}
+\label{sec:natur-logic-relat}
+Imagine a more powerful example
+
+we are presented following examples from a language of the following type:
+a, b, c are tags denoting kinds and P, Q, R are possible relations
+between them. We may or may not have ancilliary knowledge about the
+relations P, Q, R such as that they are symmetric or transitive.
+Now, P, Q, R could be interpreted as edge types between the tags/nodes
+a, b, c. In case multiple relations are allowed then the data becomes
+multi-relational. If multiple relations are not allowed then the data
+is uni-relational or simply relational. We also have path composition
+functions that state how two paths of particular types can be combined
+at an intermediate node to create a single path of a new type.
+
+For example: the following table shows that (a R b) and (b Q c) can be
+combined to create a new path of the type (a Q c).
+\begin{verbatim}
+a R b   |   | P | Q | R |
+a P c   | P |   | R | Q |
+b P c   | Q | P |   |   |
+c Q b   | R |   | Q |   |
+\end{verbatim}
+
+
+In such scenario out goal is to learn representations that enable
+certain operations such as containment/nearness etc. to be efficiently
+computed once learnt and to ``learn algorithms'' that are able to
+search for entailment paths if one hop paths are not available or they
+are not encodable in the representation chosen.
+
+\subsection{Wordnet Hierarchy Prediction}
+\label{sec:wordn-hier-pred}
+
+
+\subsection{Wordnet Attribute Prediction}
+\label{sec:wordn-attr-pred}
+
+
+
+\subsection{Freebase Link Prediction}
+\label{sec:freeb-link-pred}
+
+\section{Formal Problem}
+\label{sec:formal-problem}
+The basic task is path in a graph completion: Given two nodes in a
+tree are there paths between the two nodes? when we are only allowed
+to train on one of the cuts of a graph and then forced to forget that
+portion of the data.
+
+There can be a fwe variants on the training; either the training is
+one-shot or not. The important part is that the data is incomplete and
+that we are learning on directed graphs.
+
+More formally, we have T types of paths and composition sfunctions
+that tells us what the type of a new path is. Now the problem is of
+path prediction: We can use either wordnet/ontonotes or freebase for
+the edges/nodes/edgetypes
+
+2 questions are
+\begin{itemize}
+\item What representation to use? Assuming that the representation
+  that I have allows for efficient containsment and efficient
+  geometrical questions of nearness and angles
+\item What algorithm for searhc can be used along with the
+  representation? When would that algorithm allow me to leverage these effciencies?
+\end{itemize}
+
+There can be variants such as multiple edge types and affinity of
+nodes for those edge types. There can be variants where the goal is to
+give an answer correctly when the information is specified in terms of
+quantifications over arbitrary conjunctions of predicates.
+
+There are a large number of problems that we want to solve:
+
+\begin{enumerate}
+\item Which completely embeddings based models support incremental
+  updating strategies and how well do they work without any support
+  from algorithmic search?
+\item Compared to the results of previous algorithms how much can you
+  gain by supporting search?
+\end{enumerate}
+\framebox{
+  \begin{equation*}
+    \text{Entail}(x, y) =
+    \begin{cases}
+      1, & \text{if}\ f(x,y) > \text{threshold} \\
+      1, & \text{if} \text{search returns a valid path} \\
+      0, & \text{otherwise}
+    \end{cases}
+  \end{equation}
+}
+
+\subsection{Constraints}
+\label{sec:constraints}
+
+\begin{itemize}
+\item We are not allowed to store the training data to train on it later.
+\item The main task is to be able to do wordnet hierarchy completion.
+\item
+\end{itemize}
+
+
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

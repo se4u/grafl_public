@@ -1,0 +1,5 @@
+tex/_region_*
+tex/auto
+*.aux
+tex/*.log
+*.pdf
