@@ -126,6 +126,26 @@ are not encodable in the representation chosen.
 \subsection{Freebase Link Prediction}
 \label{sec:freeb-link-pred}
 
+\subsection{TAC ColdStart}
+\label{sec:coldstart}
+
+TAC ColdStart KBP is a task where one extracts relations (tuples) from
+a large text collection, then are given an anchor in a given document,
+say ``Jim'', and asked a multi-part question that can only be answered
+by properly extracting relations from multiple documents and
+performing linking across those documents.  As a hypothetical example:
+
+\emph{``who is the brother of Jim's boss?''}
+
+Where the questions are given in a structured form, not natural
+language.  The COE has multiple end to end systems for constructing
+these Cold Start KBs, and Tongfei's current work is aimed at embedding
+the task (or at least a closely related task) into one of nearest
+neighbor search.  We can discuss at some point the connection to this
+and the incremental presentation of knowledge, and whether to mention
+it in this paper; to run experiments; or to run experiments for a
+different paper, perhaps in conjunction with Tongfei.
+
 \section{Formal Problem}
 \label{sec:formal-problem}
 The basic task is path in a graph completion: Given two nodes in a
