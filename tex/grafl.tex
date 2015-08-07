@@ -15,13 +15,59 @@
 \begin{document}
 \maketitle
 \section{Introduction}
-\label{sec:introduction} Over the course of their lives humans learn
-an encoding of the world.  If we model the knowledge about the world
-as graph then one important ability that humans demonstrate and that
-has practical applications is the ability to predict relations and
-connections in an unseen part of the graph based only on the
-representations learnt to represent one part of the graph. See
-\ref{sec:exampl-form-probl} for concrete examples.
+\label{sec:introduction}
+
+
+
+
+%%%
+Over the course of their lives humans learn an encoding of the world.
+If we model the knowledge about the world as a graph then one
+important ability that humans demonstrate and that has practical
+applications is the ability to predict relations and connections in an
+unseen part of the graph based only on the representations learnt to
+represent one part of the graph. See \ref{sec:exampl-form-probl} for
+concrete examples.
+
+\section{Motivation}
+Human knowledge can be broken into three main categories, knowledge
+we: (1) are born with; (2) learn through examples; and (3) learn
+through being told.  Category (1) refers to knowledge such as our
+predisposition to recognize faces from the surrounding visual canvas:
+mental capabilities that evolution has selected for us as being useful
+to optimize for.  Category (2) describes our sensory experiences on a
+day to day basis: we observe specific situations and from that
+generalize rules of the world; \eg each person we see has a nose, so
+we learn to assume that \sc{A Person Has A Nose}. Category (3) refers
+to instruction: \eg the todler being read to, told that \emph{``People
+  have eyes! People have noses!''}.
+
+We increase our knowledge through a combination of (2) and (3).  If
+one learns the existence of Pat, Chris, Jack, and Sue, and that they
+are all people, then if someone were to tell you: \emph{People are
+  ticklish behind their right ear}, then assuming you believe them,
+you could immediately answer the question: \emph{Is Chris ticklish
+  behind her right ear?''}.  This requires the use of
+\emph{kind}-level (or \emph{generic}) knowledge, applying it to
+instances.  We can do this quickly: you likely know of many people,
+from personal acquaintances to the leaders of countries, and yet when
+told a new fact about people in general, you answer questions about a
+specific person immediately.  It does not seem to require that we
+update what we know of each individual person in the face of new
+knowledge about a characterizing kind.
+
+
+\section{Background}
+
+\subsection{Generics}
+Krifka et al. 
+
+Greg Carlson, learning from evidence vs interpreting generics; summary of terminology of kind, object, etc.
+
+\subsection{Vector Space Models in CL}
+
+
+
 
 \section{Notation}
 \label{sec:notation} {\huge Very important to nail down the
