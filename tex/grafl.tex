@@ -1,6 +1,6 @@
 \documentclass[11pt]{article}
 
-\usepackage{graphicx,amsmath,amssymb,subfigure,url,xspace}
+\usepackage{graphicx,amsmath,amssymb,subcaption,url,xspace}
 \newcommand{\eg}{e.g.,\xspace}
 \newcommand{\bigeg}{E.g.,\xspace}
 \newcommand{\etal}{\textit{et~al.\xspace}}
@@ -15,9 +15,52 @@
 \begin{document}
 \maketitle
 \section{Introduction}
-\label{sec:introduction} Over the course of their lives humans learn
-an encoding of the world.   See
-\ref{sec:exampl-form-probl} for concrete examples.
+\label{sec:introduction}
+%%%
+Over the course of their lives humans learn an encoding of the world.
+If we model the knowledge about the world as a graph then one
+important ability that humans demonstrate and that has practical
+applications is the ability to predict relations and connections in an
+unseen part of the graph based only on the representations learnt to
+represent one part of the graph. See \ref{sec:exampl-form-probl} for
+concrete examples.
+
+\section{Motivation}
+Human knowledge can be broken into three main categories, knowledge
+we: (1) are born with; (2) learn through examples; and (3) learn
+through being told.  Category (1) refers to knowledge such as our
+predisposition to recognize faces from the surrounding visual canvas:
+mental capabilities that evolution has selected for us as being useful
+to optimize for.  Category (2) describes our sensory experiences on a
+day to day basis: we observe specific situations and from that
+generalize rules of the world; \eg each person we see has a nose, so
+we learn to assume that \sc{A Person Has A Nose}. Category (3) refers
+to instruction: \eg the todler being read to, told that \emph{``People
+  have eyes! People have noses!''}.
+
+We increase our knowledge through a combination of (2) and (3).  If
+one learns the existence of Pat, Chris, Jack, and Sue, and that they
+are all people, then if someone were to tell you: \emph{People are
+  ticklish behind their right ear}, and assuming you believe them,
+you could immediately answer the question: \emph{Is Chris ticklish
+  behind her right ear?''}.  This requires the use of
+\emph{kind}-level (or \emph{generic}) knowledge, applying it to
+instances.  We can do this quickly: you likely know of many people,
+from personal acquaintances to the leaders of countries, and yet when
+told a new fact about people in general, you answer questions about a
+specific person immediately.  This does not seem to require that we
+update what we know of each individual person in the face of new
+knowledge about a characterizing kind.
+
+
+\section{Background}
+
+\subsection{Generics}
+Krifka et al.
+
+Greg Carlson, learning from evidence vs interpreting generics; summary of terminology of kind, object, etc.
+
+\subsection{Vector Space Models in CL}
 
 \section{Notation}
 
@@ -120,6 +163,26 @@ are not encodable in the representation chosen.
 \subsection{Freebase Link Prediction}
 \label{sec:freeb-link-pred}
 
+\subsection{TAC ColdStart}
+\label{sec:coldstart}
+
+TAC ColdStart KBP is a task where one extracts relations (tuples) from
+a large text collection, then are given an anchor in a given document,
+say ``Jim'', and asked a multi-part question that can only be answered
+by properly extracting relations from multiple documents and
+performing linking across those documents.  As a hypothetical example:
+
+\emph{``who is the brother of Jim's boss?''}
+
+Where the questions are given in a structured form, not natural
+language.  The COE has multiple end to end systems for constructing
+these Cold Start KBs, and Tongfei's current work is aimed at embedding
+the task (or at least a closely related task) into one of nearest
+neighbor search.  We can discuss at some point the connection to this
+and the incremental presentation of knowledge, and whether to mention
+it in this paper; to run experiments; or to run experiments for a
+different paper, perhaps in conjunction with Tongfei.
+
 \section{Formal Problem}
 \label{sec:formal-problem}
 The basic task is path in a graph completion: Given two nodes in a
@@ -159,7 +222,7 @@ There are a large number of problems that we want to solve:
 \item Compared to the results of previous algorithms how much can you
   gain by supporting search?
 \end{enumerate}
-\framebox{
+{
   \begin{equation*}
     \text{Entail}(x, y) =
     \begin{cases}
@@ -167,7 +230,7 @@ There are a large number of problems that we want to solve:
       1, & \text{if} \text{search returns a valid path} \\
       0, & \text{otherwise}
     \end{cases}
-  \end{equation}
+  \end{equation*}
 }
 
 \subsection{Constraints}
@@ -329,3 +392,8 @@ Z -> Y accurately for any Z and these problem also has relations to
 inframetric learning.
 \end{verbatim}
 }
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
