@@ -3,3 +3,13 @@ tex/auto
 *.aux
 tex/*.log
 *.pdf
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist

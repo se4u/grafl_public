@@ -1,0 +1,788 @@
+\documentclass[12pt]{exam} % [answers] enables/disables answers
+\usepackage{graphicx,amsmath,amssymb,subcaption,url,xspace}
+% http://tex.stackexchange.com/questions/2291/how-do-i-change-the-enumerate-list-format-to-use-letters-instead-of-the-defaul#comment3172_2294
+\usepackage[shortlabels]{enumitem}
+% http://stackoverflow.com/questions/4768694/word-wrap-in-verbatim-environments#comment5279194_4769018
+% \usepackage{listings}
+% \lstset{breaklines=true}
+% http://tex.stackexchange.com/questions/171803/change-font-size-of-the-verbatim-environment
+\usepackage{fancyvrb}
+\usepackage[acronym]{glossaries}
+\ifprintanswers
+\usepackage[]{todonotes} % insert [disable] to disable all notes.
+\else
+\usepackage[disable]{todonotes} % insert [disable] to disable all notes.
+\fi
+\usepackage{chronology}
+% Remove/Insert inline to change the positioning of notes.
+% Remove/insert fancyline to add/remove arrows.
+\newcommand{\note}[1]{\todo[author=Pushpendre,color=blue!40,size=\small,fancyline,inline]{#1}}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\bigeg}{E.g.,\xspace}
+\newcommand{\etal}{\textit{et~al.\xspace}}
+\newcommand{\etc}{etc.\@\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\bigie}{I.e.,\xspace}
+\renewcommand{\cite}[1]{cite\{#1\}}
+\newcommand{\citet}[1]{citet\{#1\}}
+\ifprintanswers
+\newcommand{\remove}[0]{}
+\else
+\newcommand{\remove}[1]{}
+\fi
+% The EnvFullwidth environment is broken
+% http://tex.stackexchange.com/questions/89251/how-to-break-long-solutions-in-exam-class
+\makeatletter
+\def\SetTotalwidth{\advance\linewidth by \@totalleftmargin
+\@totalleftmargin=0pt}
+\makeatother
+
+\newcommand{\answer}[1]{
+\ifprintanswers
+\SetTotalwidth
+  \begin{solution}[0in]#1\end{solution}
+\else \fi
+}
+\renewcommand{\solutiontitle}{\noindent\textbf{}\enspace}
+\title{Experiments to run}
+\author{Pushpendre}
+\makeglossaries
+
+\begin{document}
+\maketitle
+\begin{questions}
+  \question{What is the purpose of this project?\label{q:purpose}}
+  \answer{Our project has the following three goals.
+    \begin{enumerate}
+    \item An ``intelligent'' machine should have the ability to
+      quickly update its knowledge representation as new knowledge is
+      added to its collection of rules. There is evidence that humans
+      are able to do this as well \cite{pending}. We want to create
+      algorithms and knowledge representations that meet this
+      requirement better than the state of the art. It could be said
+      that we want to solve the problem of logical omniscience. Our
+      emphasis in this work would be on both the space efficiency for
+      the storage of representations and time efficiency for updating
+      representations:
+      \begin{enumerate}
+      \item How to ``quickly'' update the representation of entities
+        quickly in light of increasing evidence.
+      \item How to maintain a compact representation of knowledge.
+      \end{enumerate}
+    \item An ``intelligent'' machine should have the ability to make
+      educated guesses about statements that it cannot explicitly
+      prove to be true or false and it should be able quickly make
+      these guesses. We want our machine's inference algorithm to be
+      fast and robust.
+    \item We want to investigate the benefits of explicitly
+      guaranteeing symmetry and transitivity in vector space based
+      models for logical deduction.
+    \end{enumerate} }
+
+  \question{What is the importance of this work?\label{q:importance}}
+  \answer{The earliest symbolic systems such as SHRDLU \cite{SHRDLU}
+    could be ``told'' facts about the world and those systems could
+    then ``memorize'' the facts and ``use'' those facts as known true
+    propositions to restrict and guide their deductions and
+    inferences. \citet{norvig2003aima} called it the ability to
+    ``Tell'' and ``Ask'' a database. However these systems suffered
+    with two problems when used on their own in real life:
+    \begin{enumerate}
+    \item It proved impossible to build symbolic systems that could
+      generalize to broad domains. These systems did not naturally
+      possess the knowledge required for inference and at the time
+      ``machine learning'' was not advanced enough to glean that
+      knowledge automatically.
+    \item The syntactic deduction and inference mechanisms of such
+      symbolic logical systems proved to be too slow in general and
+      sufficiently fast special purpose algorithms that were also
+      widely applicable to important problem could not be
+      developed. Slow inference became a bottleneck.
+    \item These systems were not designed to handle uncertainity in
+      knowledge and inference.
+    \end{enumerate} One solution to this problem was to restrict the
+    domain of the AI systems. This method was used to create
+    successful domain specific software such as
+    \cite{feignbaumSpectrography,feignbaumMedicalDiagnosis}. These
+    systems thrived by limiting their area of operations to those high
+    impact areas where the knowledge required for success could be
+    encoded manually. The next breakthroughs were achieved by learning
+    the knowledge directly from data through ``machine
+    learning''. ``Bayesian Graphical Models'' like ``Factor Graphs''
+    and ``Bayes Nets'' and ``Conditional Random Fields'' in particular
+    solved the problem of reasoning with uncertainty and learning
+    paradigms like ``Margin Based Methods'' were leveraged to create
+    margin based robust models that performed well under the task
+    specific loss, for example
+    \cite{ganchevM3N,StructuredSVM,CollinsStructuredPerceptron}. Unfortunately,
+    ``Markov Logic Networks (MLNs)'' the natural adaptations of
+    graphical models for performing logical inference in propositional
+    and first order logic proved to be too slow for most tasks like
+    reading comprehension for various reasons , with large grounding
+    being the most insurmountable \cite{orenAI2MLN}. More recently the
+    specific methodology of ``deep learning'' and ``representation
+    learning'' has created systems that can perform a wide array of
+    large multi-class and structured classification, regression and
+    transduction tasks. Spectacular results have been achieved on both
+    ``perceptual'' tasks like object classification\cite{imagenet} and
+    speeech recognition\cite{hintonspeech} and even the supposedly
+    higher reasoning oriented tasks like machine translation and
+    question
+    answering\cite{devlinetal,mohitaiyyerUMDsocherAMA,manyOthers}. The
+    methodology of ``Tensor/Matrix Factorization'' which has been
+    heavily pushed by Sameer Singh and Tim Rocktaschel amongst others
+    through their papers on \cite{SameerAndTim} together with the
+    methods of ``Deep Learning'' can be clubbed together as ``vector
+    space models''\cite{baroni} which can be further generalized into
+    ``representation learning with arbitrary objects'' a specific
+    example of which is the work by \cite{gaussianEmbeddingsMcCallum}.
+    These systems and methods are cutting edge in 2015. Most
+    pertinently these methods have been used for Edge Type Prediction
+    in Knowledge Graphs, under the name of knowledge base completion
+    \cite{socherKbCompletion,percyQAasRegularization} and for Natural
+    Logic Relation prediction \cite{bowman3Papers}. The paradigm under
+    which this work has occurred is the batch training and prediction
+    paradigm and it has established strong baselines. For example
+    \cite{bowmanWordnetPaper} demonstrated that a model that assigns
+    continous deep representations to ``Natural Logic Relations'' and
+    vector representations to ``Entities'' one could be trained with
+    data randomly sampled from the transitive closure of the edges in
+    Wordnet to predict other edges in the transitive closure. The
+    problem with Bowman's work in particular and this type of work in
+    general can be summed up in the following two points:
+
+    \begin{enumerate}
+    \item It is assumed that the training and testing data is
+      generated through random samples of the possible arcs. The
+      training and testing data in real databases is a lot more skewed
+      than that. Intelligent machines would have to generally predict
+      the relations in an unseen part of the graph based only on the
+      representations learnt to represent one part of the graph.
+    \item No constraints of symmetry and transitivity are enforced.
+    \item No consideration is given to the model's ability to be
+      ``Told'' and ``Asked'' about the inferences to be drawn based on
+      increments in the information.
+    \item No consideration is given to the fact that during trainig we
+      do not retain random access to the entire training data. More
+      specifically in a large semantic graph we would not have access
+      to the entire transitive closure of a skeletal graph because it
+      would be too expensive to store and also as humans learn during
+      their lifetime they tend to update their representations of the
+      world efficiently and perhaps even lazily.
+    \item The fact that ``Searching'' is an important method of
+      inference is completely ignored in the previous work that uses
+      these models. Since all representation learning based methods
+      essentially induce a graph based metric space that is
+      inframetric\cite{BookWithDefinitionOfInframetric} which does not
+      even necessarily obey the triangle inequality or
+      symmetry~\cite{McCallumGaussianEmbeddings} therefore searching
+      becomes even more important.
+    \end{enumerate}
+
+    In this work we would build models that improve the state of the
+    art by answering these concerns.  }
+
+  \question{What contemporary work is most similar in its application
+    area to your project?}
+
+  \answer{
+    \begin{enumerate}
+    \item ``Neural/Deep'' or ``Tensor/Matrix Factorization'' based
+      ``Vector Space'' models under the guise of ``memory network''
+      have recently been applied to the task of responding
+      instantaneously to input presented to a user. These models have
+      a component that is reminiscent of ``Ask'' and ``Tell''.
+    \item The problem of zero shot learning in particular and domain
+      adaptation in general are the general areas that address the
+      difference between distributions of training and testing data.
+    \item Theoretical work by \cite{GuillaimeAndSameer} presents some
+      recommendations along with theorerical justifications that show
+      that matrix factorization under hinge loss and logistic loss can
+      preserve the relational structure of transitivity with high
+      fidelity.
+    \item A large body of work under the term multi-relational
+      learning that was produced by Antoine Bordes and pushed by Leon
+      Bottou amongst others has some overlap in its goals with our
+      goals. Multi-relational refers to the fact that entities in
+      graph databases that contain ``knowledge'' about the world can
+      have more than one relation between them. For example two
+      celebrities in free base may be co-stars in a movie and also
+      spouse. This work along with the work on learning to generalize
+      from triples has superficial similarity with our work but in
+      some sense that work was a steady state analysis.
+    \item Encoding FOL formulas in neural nets with quantified meta
+      variables. This work was presented in the paper
+      \cite{FirstOrderLogicLearninginArtificialNeuralNetworks}.
+    \item Recently a trend of ad-hoc fitting the representations to
+      manually-curated datasets has also started.
+    \end{enumerate}
+
+    Based on this enumeration we can say that ``Searching'' for
+    inference with ``vector space methods and the fact that we do not
+    either observe or maintain an explicit transitive closure of a
+    semantic graph have been ignored previously and we are completely
+    original in bringing these up.  }
+
+  \question{Are you going to encode all rule in FOL or only some
+    special types of rules? \label{q:areyou}} \answer{While we would
+    like to consider encoding all kinds of arbitrarily rules in FOL
+    with nested quantifications we have stuck to a very particular
+    type of rules that comes up in knowledge bases and natural logic
+    based entailment. \cite{guhaModelTheory2015} claims that a ``a
+    significant fraction of axioms'' in the common sense knowledge
+    base Cyc \cite{lenat1990Cyc} are of the form
+    $(\forall x P(x,A) \implies Q(x,B))$ where P, Q are predicates and
+    A, B are constants. This axiom can be represented as a type of
+    edge composition rule in a graph. If x -> A through an arc of type
+    P and A -> B through some unspecified arc type then x ->
+    B. Similarly the natural logic inference rules can be encoded as
+    path compositions with types. See
+    \url{www.cs.jhu.edu/~prastog3/2015/08/05/edge-prediction-in-semantic-graphs.html}
+    for details and notation.  }
+
+  \question{Give me references for why you think your problem
+    formulation is going to cover a large portion of real world
+    scenarios?}  \question{Why do you think that your specific
+    restrictions are good restrictions? Shouldn't your theory be as
+    general as possible?}  \answer{See answer to~\ref{q:areyou}. That
+    answer shows that the class of rules I am cosndering is a
+    generally useful class. That's my defense.}
+
+  \question{What are the different ways of framing the problem?}
+  \answer{Well this is too broad a question. Apart from the previous
+    methods that I detailed in~\ref{q:importance} one remark I would
+    like to make is that generally the distinction that people make is
+    that where do we want to put the information? Do we want to learn
+    representation that are associated to each word such that complex
+    relations like entailement and hypernymy and hyponymy fall out
+    gracefully or do we want to learn complex continous representation
+    for this relations as well? Also people differ in their
+    application~\cite{SameerTimHowTheyAreDifferent} (PENDING) and in
+    the way they grow an ontology~\cite{snow} }
+
+  \question{What is the draw of using this vector based
+    representations?  Why not just use symbolic logic or MLNs?}
+  \answer{Vector space models of logic have emerged recently as an
+    effective tool for combating the computational inefficiency of
+    purely syntactic proof theoretic deduction systems and also for
+    overcoming the ``scarcity'' of data \cite{addcitation}. See answer
+    to~\ref{q:importance} for details}
+
+  \question{What are the different ways people have built vector
+    models?  What did Socher do? Think of RNTN, Bilinear Forms, Neural
+    Tensor Forms} \answer{}
+
+  \question{Do you know what Sameer Singh did?}  \answer{}
+
+  \question{What is your most direct inspiration?}  \answer{My most
+    direct inspiration is the work by Bowman.}
+
+  \question{What kind of mathematical structures are there? Why is
+    encoding mathematical structures important?}  \question{All right
+    what is this online business? Why is incorporating online learning
+    and representation of rules important?}  \question{What is the
+    main problem that you are solving?}  \answer{See answer
+    to~\ref{q:purpose}~\ref{q:areyou} for answers to the above.}
+
+\section{Specifics}
+  \label{sec:specifics}
+  \question{Tell me the specific experiments that you will run? What
+    results do you hope to get?}
+
+  \answer{ To wit our goal is of encoding omnicience.
+    \begin{enumerate}
+    \item Add rules incrementally.
+    \item Construct models whose Transient/steady state performance
+      for edge detection in \newglossaryentry{rg}{name={RG},
+        long={Rule Generated Graphs},
+        description={Rule Generated Graphs are special graphs that
+          obey rules of compositionality on how the edges are
+          generated in the graphs.},
+        first={Rule Generated Graphs~(RG)}} \gls{rg}
+      high. The measure of performance is 0-1 loss while predicting
+      existence of edges and edge types in the transitive closures of
+      graphs or with added information.
+    \end{enumerate}
+
+    Specifically I would do edge prediction in the following types of graphs:
+    \begin{description}
+    \item[Compositional, Monochromatic Graphs]
+      \begin{itemize}
+      \item Symmetric
+        \begin{itemize}
+        \item Multi-Graph
+        \item Uni-Graph
+        \end{itemize}
+      \item Transitive
+        \begin{itemize}
+        \item Multi-Graph
+        \item Uni-Graph
+        \end{itemize}
+      \end{itemize}
+    \item[Compositional, Two Colored Graphs]
+      \begin{itemize}
+      \item Symmetric
+        \begin{itemize}
+        \item Multi-Graph
+        \item Uni-Graph
+        \end{itemize}
+      \item Transitive
+        \begin{itemize}
+        \item Multi-Graph
+        \item Uni-Graph
+        \end{itemize}
+      \end{itemize}
+    \item[Compositional, Rainbow Graphs]
+      \begin{itemize}
+      \item Symmetric
+        \begin{itemize}
+        \item Multi-Graph
+        \item Uni-Graph
+        \end{itemize}
+      \item Transitive
+        \begin{itemize}
+        \item Multi-Graph
+        \item Uni-Graph
+        \end{itemize}
+      \end{itemize}
+    \end{description}
+
+    For each graph imagine that there is a ideal $I$ that contains the
+    rules expressed in reality in the graph. and imagine that there is
+    a set or rules $R$ that is used to generate the transitive closure
+    of $I = \tilde{I}$. I would perform the following tasks:
+
+    \begin{itemize}
+    \item Assuming that a randomly sampled subset of $T \subset \tilde{I}$ is available
+      as training data build a model to predict the edges in $T^C =
+      \tilde{I} - T$.
+    \item Assuming that a growing filtration of $I$ is made available
+      to us. Let's say that the elements of the filtrations are $D_1
+      \subset D_2 \subset D_3\ldots I$ and that the transitive
+      closures of the filtrations are as follows
+      $\tilde{D_1} \subset \tilde{D_2} \subset \tilde{D_3} \subset
+      \tilde{I}$
+      Then I would learn models that would have high performance in
+      predicting edges in either:
+      \begin{itemize}
+      \item $I$ given $D_i$
+      \item $\tilde{D_I}$ given $D_i$
+      \end{itemize}
+    \item Assuming that a growing filtration of $R$ is made available
+      to us. That is to say that we did not know all the
+      compositionality rules in the beginning and steadily and surely
+      these rules are being told to ut.
+      These filtration are different because these are
+      filtrations in the rules that are generating the graphs.
+      These have an exponential effect on the edges in the graph.
+      Adding a single rule is tantamount to adding a large number of
+      edges in the completed graph.
+    \end{itemize}
+
+We would run experiments with the following two approaches:
+\begin{itemize}
+\item I would enlist constraints of transitivity and symmetry for help.
+\item I would enlist on-line learning for help. While doing on-line
+  learning we can grow rulesets in two different ways:
+  \begin{enumerate}
+  \item The rulesets can be strict skeletal trees
+  \item The rulesets can be mid way between skeletal tree $S$ that generate
+    the transitive closure and the transitive closure $C$. An
+    interpolation between them with DAG like cyclic edges.
+    We can create them from wordnet and freebase and PPDB etc.
+  \end{enumerate}
+\end{itemize}
+
+There can be two types of edge predictions that we might want to do
+\begin{enumerate}
+ \item Under the transitive closure is there a direct edges between the two entities.
+\item  Is y reachable from x under the ruleset? \note{This is only
+    different from previous task if the transitive closure is not
+    computable even though the $y$ is reachable from $x$ but the
+    rulesets and the tasks we have considered are only interested in
+    some relation holding between the two nodes in a graph and that is
+  explicitly represented through an edge between the two nodes. So its
+  not clear if reachability without path existence is ever useful.}
+\end{enumerate}
+
+While doing inference there are two kinds of search procedures we can use:
+That basically represent two kinds of assumptions we make during
+inference.
+\begin{enumerate}
+\item Model can faithfully represent the transitive closure.
+\item The model requires search for representing the transitive closure.
+\end{enumerate}
+
+
+One method for training the model is as follows:
+We can vary the number of things sampled so that the number of edges samples is
+\begin{enumerate}
+\item O(E)
+ \item Constant where the constant is varied from
+   \begin{itemize}
+   \item 1000
+   \item 100
+   \item  10
+   \item  1
+   \item  0
+   \end{itemize}
+ \end{enumerate}
+}
+
+\note{We note that during training based on search there might be a case for
+doing search and then not updating the representations in case we can
+already make the desired inferences. The only problem is that our
+criteria of derired inference would just be that we can infer the
+knowledge that this example is giving us, but what about the knowledge
+for other inferences that we can glean from the example?}
+
+\question{What are all the experiments that you plan to do, give me a
+  list.}
+\answer{
+It is difficult to enumerate the list of experiments that I would
+perform because the experiments are designed through a combination of
+factors. Let's list the factors and their order. By multiplying the
+orders of the factors we would be able to compute the total number of
+experiments.
+\begin{description}
+\item [Chromaticity of Graphs]
+  By chromaticity of Graphs we mean the number of edge types in a
+  graph. Consider the example that \cite{guha} talked about where he
+  said that the majority of information in Cyc could be summarized
+  through rules that could be represented as the composition of edges
+  of two types. The istype edge and the hasProperty Edge. and there is
+  only one type of composition happening in that graph. Therefore
+  these graphs can be said to be two colored graphs. Similarly natural
+  logic can be said to be 7 colored or rainbow colored.
+\item [Symmetry/Transitivity] The majority of rules can be summarized
+  as either encoding symmetry of a relation or transitivity of a relation.
+\item [Multi-Graph versus Uni-Graph] The graphs can either allow more
+  than one edge between nodes or they might constrain the graphs to
+  have only one type of edge.
+\item[On-line versus Batch Input] We can have a randomly sampled
+  subset of $\tilde{I}$ available to us and use that as training data
+  and only test ourselves on predicting the edges we did not see
+  during training. Or we might use expanding filtrations and use the
+  complements of those filtrations as the test data.
+\item [The Filtration Types] We can either give subset of edges as
+  filtrations and that too from a skeletal tree input or from the
+  transitive closure or we can give compositional rules in the
+  filtrations along with the seeds.
+\item [Emphasis of the experiments] The emphasis of the experiments
+  could be on showing that adding the constraints of symmetry and
+  transititivty explicitly helps improve performance or it can be that
+  to see the performance of different models for on-line learning.
+\item [Search versus No Search during inference] The inference methds
+  can be augmented through search based strategies. In case we don;t
+  use search then some way of maintaining the transitive closure would
+  have to be devised.
+  \begin{enumerate}
+  \item Either an explicit datastructure representing
+    the rules presented so far can be kept in memory
+  \item an explicit data structure representing the transitive closure
+    can be grown.
+  \item Just a model with vector representations can be trained.
+  \end{enumerate}
+\end{description}
+}
+
+\question{You enumerated goals for your project in
+  \ref{q:purpose}~\ref{q:importance}. Tell me exactly how each
+  experiment would help you reach those goals?}
+\answer{We said that an intelligent machine should have the following
+  abilities:
+  \begin{description}
+  \item[Quickly update representations with increasing knowledge] Our
+    experiments on on-line learning would help test how well and how
+    quickly the vector based methods are able to learn when provided a
+    single example of a new edge that might make a number of other
+    edges possible. Therefore our on-line learning experiment would be
+    useful for this task.
+  \item [Compact representation of knowledge] If we are able to train
+  our model to predict the edges in the transitive closure without
+  explicitly maintaining a transitive closure then we would have
+  essentially represented a graph with $O(E)$ edges with $O(V)$
+  space. Therefore our representations would be compact.
+\item [Making Educated guesses about unseen data] That is essentially
+  our performance metric for all the tasks. We are checking that we
+  are able to guess the edge labels for unseen edges. Which means that
+  all our experiments help us achieve this goal.
+\item [Investigate methods for, benefits of symmetry, transitivity]
+  We would use both neural and tensor based models for doing this
+  task. Also see section~\ref{sec:enforc-symm-trans} for details on how I would
+  encode symmetry and transitivity.
+  \end{description}
+}
+
+\question{What is the timeline for completing all these experiments?}
+\answer{
+  Tentatively the timeline in units of weeks is the following:
+  \begin{enumerate}[A)]
+  \item Run experiments for investigating the benefits of symmetry and
+    transitivity on different types of
+    graphs(chromatic,multi-uni,symmetric/transitive) for batch
+    training of edge prediction.
+  \item Run experiments for investigating the effect of different
+    filtrations provided as input during training and testing.
+  \item Run experiments for the importance of search during inference.
+  \item Put final touches on these experiments.
+  \end{enumerate}
+  \begin{chronology}[1]{1}{8}{\textwidth}[10cm]
+    \event{2}{\large{A}}
+    \event{4}{\large{B}}
+    \event{6}{\large{C}}
+    \event{8}{\large{D}}
+  \end{chronology}
+}
+
+\question{How do you encode transitivity in your vector space
+    models?}
+\answer{See section~\ref{sec:enforc-symm-trans}}
+
+\question{What are the different ways of doing this online learning
+    task? How will you make sure that you can represent
+    min$(O(E), O(V^2))$ graph in O(V) space?}
+\answer{Well if while learning I never consrtuct a transitive closure of
+  the graph  and at all points of time I only represent the graph by
+  vectors that represent nodes and use some fixed number of parameters
+to parameterize a predicate function that tells me whether an edge
+exists between two vertices or not then I have essentially reduced the
+space requirement from $O(E)$ to $O(V)$.}
+
+\question{What is your experimental setup? How would you actually
+  add the edges in your representation of the graph? How do you plan
+  on ensuring that errors don't propagate egregiously?}
+\answer{}
+
+\question{How do you grow the ontology organically?}
+\answer{}
+
+\question{How are you encoding this thing called omnicience?}
+\answer{ If we model the knowledge about the world as graph then one
+    important ability that humans demonstrate and that has practical
+    applications is the ability to predict relations and connections
+    in an unseen part of the graph based only on the representations
+    learnt to represent one part of the graph.
+
+    This is omniscience.  }
+
+\question{Do you plans for handling larger rule sets? More forms of
+  rules? How would you test whether you will need to add those rules
+  sets or not?}
+\answer{}
+
+\question{What about the fact that we can basically refer to any
+  conjunction of properties or a clause as a type and then assign
+  arbitrary properties to the entities referred to by that clause?}
+\answer{}
+
+\question{What is the rationale of the experiment where you keep
+  adding 1 edge at a time and then see how far up the ladder
+  transitivity holds?}
+\answer{}
+
+\end{questions}
+
+\remove{
+\section{Enforcing Symmetry and Transitivity}
+\label{sec:enforc-symm-trans}
+%\begin{lstlisting}[basicstyle=\normalsize\ttfamily]
+\begin{Verbatim}[fontsize=\small]
+Sam Bowman's conducted experiments on manually constructed models [1]
+to test the NN/NTN models abilities to learn inferential patterns in
+Natural Logic. Each model was created as follows
+a. Create 80 sets by drawing from 7 entities (randomly)
+b. Based on these 80 sets, one can ask 6400 pair wise questions about
+   which natural logic relation can hold between the two sets. It is
+   interesting to note that the natlog relations are mutually exclusive.
+c. Split the 6400 formulaes, each formula is a 3-tuple, (S1, S2, Relation)
+   Note, Bowman only feeds positive experiences into the net. He doesn't
+   need to feed in negative experiences but that type of knowledge may
+   actually be important.
+d. He also had a prop logic proof system, that he needed to weed out test
+   instances that could not be proved from the training instances and the axioms.
+   Actually looking at this shows that there is a very strong structure that the
+   axioms introduce. (Rocktaschel/Sameer's methods?)
+   * The work can be done simply through forward induction by starting from
+     existing knowledge and enumerating all possible theorems in the language.
+     No need for backward chaining.
+e. After weeding out the system's he trained the system. I wonder if adagrad etc.
+   are really needed or if basic cvxopt methods could be used?
+f. Now the training was done by varying the models, drawing the sets many times,
+   changing the embedding sizes etc.
+   [TORCH] I could wrap "Torch objects" for the training and testing.
+       Basically write some code in Torch, wrap it with
+       cython, expose it as a python class/object.
+       The separation is maintained using.
+       https://github.com/soumith/torch-ship-binaries
+g. The goal is to reproduce the accuracy that bowman et.al reported of
+   |     | Provable         | UnProvable       |
+   | NTN | 98.1% (SE 0.67%) | 87.7% (SE 3.59%) |
+   | NN  | 84.8% (SE 0.84%) | 68.7% (SE 1.58%) |
+h. After that I would optimize the representations subject to constraints of symmetry, reflexivity, transitivity
+   | SNo | Name     | Symm | Refl | Tran | Remarks                                                              |
+   |   1 | entails  | NO   |      | ✓    | A subtype entails supertypes, More attributes entail Less attributes |
+   |   2 | rentails | NO   |      | ✓    | Reverse of entails                                                   |
+   |   3 | equiv    | ✓    | ✓    | ✓    | x = y                                                                |
+   |   4 | altern   | ✓    |      | ✓    | x ∩ y = Φ ∧ x ∪ y ≠ D                                                |
+   |   5 | negation | ✓    |      |      | x ∩ y = Φ ∧ x ∪ y = D                                                |
+   |   6 | cover    | ✓    |      |      | x ∩ y ≠ Φ ∧ x ∪ y = D                                                |
+   |   7 | indep    | ✓    |      | ✓    | (else)                                                               | > 0
+   X^T R y > 0
+   x^T R y > 0 and y^T R z > 0 then x^T R z > 0
+   R = uu^T
+i. The method to enforce these constraints would be:
+   # NOTE: It is not possible to enforce transitivity without symmetry in plain bilinear models.
+   #  therefore plain bilinear is only useful for equiv, altern, indep.
+   #  but not for entailment.
+   # NOTE: The activations that a R_i b produce actually only have to compete against other {R_i}
+   # The constraints in my mind make sure that the activation of (a R_i b = b R_i a)
+   # but they don't say how I would perform against (b R_i a) for other {R_i}
+   # NOTE: entailment/rentailment are almost anti-symmetric in their nature.
+   # a entails b
+   # ==> a) b rentails a
+   # ==> b) b "does not entail" a
+   | Model                    | Symm                                   | Refl | Tran                   |
+   | NTN                      | Symmetric Mode-3-Slice                 |      | TODO                   |
+   | NN                       | Independent sum of NN activations(ISN) |      | TODO                   |
+   | Plain Bilinear (useless) | symmetric W                            |      | Rank 1, symmetric, PSD |
+   | Plain Linear             | v1 equals v2                           |      |                        |
+   | Tensor Factorization     | TODO                                   |      | TODO                   |
+j. Model the relations as follows:
+   # NOTE: Actually remember that what we really want is that
+   # If a R_3 b > (a R_1 b)  (a R_2 b) ...
+   # Then b R_3 a > (b R_1 a) (b R_2 a)
+   # Also note that the entails and rentails relations are impossible to formulate
+   # Since they need to be anti-symmetric with entailment.
+   # ISN is independent sum of neural network activations : score(a, b) = W(a + b)
+   # IDN is independent difference of neural network activations : score(a, b) = W(a - b)
+   | SNo | Name      | Approach 1           | Approach 2 | Approach 3                      |
+   |   1 | entails   | BilinForm/Impossible | NN/IDN     | NTN/AntiSymmetric Mode-3-slices |
+   |   2 | rentails  | BilinForm/Impossible | NN/IDN     | NTN/AntiSymmetric Mode-3-slices |
+   |   3 | equiv     | Rank 1, PSD          | NN/ISN     | NTN/Symmetric Mode-3-Slice      |
+   |   4 | exclusion | Rank 1, PSD          | NN/ISN     | NTN/Symmetric Mode-3-Slice      |
+   |   5 | negation  | Symmetric            | NN/ISN     | NTN/Symmetric Mode-3-Slice      |
+   |   6 | cover     | Symmetric            | NN/ISN     | NTN/Symmetric Mode-3-Slice      |
+   |   7 | indep     | Rank 1, PSD          | NN/ISN     | NTN/Symmetric Mode-3-Slice      |
+k. I would hope to achieve that the numbers in the unprovable case would go up:
+   |     | Provable            | UnProvable         |
+   | NTN | >= 98.1% (SE 0.67%) | > 87.7% (SE 3.59%) |
+   | NN  | >  84.8% (SE 0.84%) | > 68.7% (SE 1.58%) |
+l. If the numbers don't go up by introducing these hard constraints. then I can revert to the
+   full NN / NTN case and then one by one add constraints of being ISN / IDN to the relations
+   For example:
+   | Sno | Ap-2(Original) | Ap-2(Constrained) | Ap-2(Entailment) | Ap-2(Others) | Ap-2(Other-1) | Ap-2(Others-[2345]) |
+   |   1 | NN             | IDN               | IDN              | NN           | NN            | NN                  |
+   |   2 | NN             | IDN               | IDN              | NN           | NN            | NN                  |
+   |   3 | NN             | ISN               | NN               | ISN          | ISN           | NN                  |
+   |   4 | NN             | ISN               | NN               | ISN          | NN            | ISN                 |
+   |   5 | NN             | ISN               | NN               | ISN          | NN            | NN                  |
+   |   6 | NN             | ISN               | NN               | ISN          | NN            | NN                  |
+   |   7 | NN             | ISN               | NN               | ISN          | NN            | NN                  |
+m. In order to make sure that the changes I see are really important changes I would need to do experiments
+   on large enough sets, but for now just do it on artificial data, later on use other hierarchies:
+   # prf means performance
+   |     | Ap-2(Original) | AP-2(Constrained) | Ap-2(Entailment) | Ap-2(Others) | Ap-2(Other-1) | Ap-2(Others-[2345]) |
+   | Prf |           87.7 |                97 |               90 |           93 |            88 |                  89 |
+n. Bowman extracted 3 types of relations from wordnet, and they actively discard
+   equivalent/synonyms by choosing only 1 term out of a cluster of synonyms/equivalents,
+   also they remove antonyms and anything else.
+   | hypernym     | entails   |
+   | hyponym      | rentails  |
+   | coordination | exclusion |
+   * They limit the size of the vocabulary and extract all of the instances
+     of these three relations for single word nouns in WordNet
+     that are hyponyms of the node organism.n.01.
+   * They balance the distribution of the classes, by slightly downsampling
+     instances of the coordinate relation,
+   * They had a total of 36,772 relations among 3,217 terms.
+   * Embeddings were fixed at 25 dimensions and were initialized randomly or
+     using distributional vectors from GloVe.
+   * The feature vector produced by the comparison layer was fixed at 80 dimensions.
+   * Results were reported using crossvalidation, choosing a disjoint 10% test sample
+     for each of five runs.
+   Now on the first look their results look incredibly impressive
+   Remember this is a 3 class classification problem with 3677 test instances
+   and
+   |                       <r> |                  |                   |
+   |          Portion of Train | NN (Random init) | NTN (Random Init) |
+   |---------------------------+------------------+-------------------|
+   | (#Train=#Test) (3677) 11% |               91 |                91 |
+   |               (11031) 33% |               95 |                95 |
+   |              (33094) 100% |               99 |                99 |
+   Infact these results are so good that one has to ask what good is it to try and
+   improve these results?
+o. One can use this to improve the SICK textual entailment challenge?
+   For example bowman et. al.'s model reached 76.9% acc. perhaps by adding
+   this prior one could improve performance on that task.
+   To be honest, I didn't even know about the SICK entailment challenge till bowman
+   used it and I don't know if this is a useful task or not? TODO
+p. Why am I writing this paper? Really all I want to find out is whether enforcing
+   this constraint is a useful guaranteed way to mimic the logical behavior of
+   symmetry and transitivity? And also I want to compare different optimization
+   techniques for doing so. I am not interested in the SICK challenge. In the end
+   I would have a classifier that could predict entailment between two terms. This
+   method could be compares with the two vector based distance measures produced
+   by mccallum. His method is one of introducing anti-symmetry in the scoring function.
+   Once I have those two measures then I'd be able to use these optimization methods to
+   learn entailment between phrases. Also I'd be able to credibly talk about sentential
+   logic and how to embed it. But not really. I mean this is just the natural logic
+   task. The important part is the optimization procedure that incorporates symmetry
+   and asymmetry of predicates.
+   What other tasks is this type of prior useful for?
+   * Well the problem is that I am not learning these constraints of symmetry, This is sort
+     just (generic knowledge/a rule) that I am trying to use. Some body tells me that a
+     particular relation type is symmetric or asymmetric and I want to learn it.
+     The best way to utilize such a knowledge short of changing the representation of
+     all the entities in a knowledge base is to just learn a special type of representation
+     for the predicate.
+   * This is basically learning with a very specific kind of generic knowledge.
+   * This could be used in QA over KB or in embedding KB relationships or in updating the embeddings of a KB.
+     So some experiments would have to be over freebase / multi-relational data.
+     Related work was:
+     - Low dimensional embeddings of logic
+     - Reasoning with neural networks for KB completion
+     - Injecting Logical Background Knowledge into Embeddings for Relation Extraction
+     -
+q. There are three entailment datasets that I can use
+   1. How we blessed distributional semantic evaluation; Baroni
+   2. Entailment above the word level in distributional semantics.; Baroni
+   3. SICK; Semeval-2014 task 1: Evaluation of compositional distributional
+      semantic models on full sentences through semantic relatedness and
+      textual entailment. The entailment dataset by Ellie; Baroni.
+   But really beyond the idea of phrasal entailment the important idea is of
+[1] @proceedings{bowman2014learning,
+    Author = {Bowman, Samuel R and Potts, Christopher and Manning, Christopher D},
+    Booktitle = {Proceedings of the AAAI Spring Symposium on Knowledge Representation and Reasoning},
+    Title = {Learning Distributed Word Representations for Natural Logic Reasoning},
+    Year = {2015}}
+[2] Bowman Model
+    1. Say we have words w1, w2
+    2. Find their embeddings e1, e2
+       * Optionally transform these embeddings through a tanh layer to get good results.
+         Bowman did it for the wordnet data. But it's just crap shoot.
+    3. Feed the two into a comparison function. f(e1, e2, Relation)
+       Here f(x) is either leaky-relu or tanh
+          * f(x) = max(x, 0) + 0.01 min(x, 0).
+          * f(x) = tanh(x)
+       a. [NN Comparator]  Just uses a v_r.f(W_r[e1, e2] + b_r)
+       b. [NTN Comparator] Just uses a v_r.f(e1 . T_r . e2 + W_r[e1, e2] + b_r) or v_r.(f(e1 . T_r . e2) + f(W_r[e1, e2] + b_r))
+       c. Bilinear  e1^T W_R e2
+       d. Linear    v1 . e1 + v2 . e2
+    4. Then feed this into a softmax classifier
+    5. Regularize with L2
+    6. Train with AdaGrad
+\end{Verbatim}
+}
+\newpage
+\printglossaries
+
+\bibliographystyle{plain}
+\bibliography{references.bib}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
