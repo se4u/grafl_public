@@ -16,17 +16,11 @@
 \maketitle
 \section{Introduction}
 \label{sec:introduction} Over the course of their lives humans learn
-an encoding of the world.  If we model the knowledge about the world
-as graph then one important ability that humans demonstrate and that
-has practical applications is the ability to predict relations and
-connections in an unseen part of the graph based only on the
-representations learnt to represent one part of the graph. See
+an encoding of the world.   See
 \ref{sec:exampl-form-probl} for concrete examples.
 
 \section{Notation}
-\label{sec:notation} {\huge Very important to nail down the
-notation. Do not proceed with experiments without nailing down the
-notation.}
+
 
 \section{Examples of the Formal Problem}
 \label{sec:exampl-form-probl}
@@ -45,7 +39,7 @@ Imagine that we have chain of entailments going from $x_1$ to $x_n$ as follows:
     \   /        \     /          \   /       \     /
      ---          -----            ---         -----
 \end{verbatim}
-
+               .
 For instance $(x_1, x_2, x_3)$ may be (rover, dog, animal). Now if we
 acquire new knowledge about ``animals'' then we can instantly answer
 questions about ``rover'' that use that new knowledge, without having
@@ -196,3 +190,142 @@ There are a large number of problems that we want to solve:
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
+\remove{
+\begin{verbatim}
+The experiments that I want to run are on artificial graphs and also
+real graphs. Well the pre XYZ post AB stuff is sort of higher level.
+We don't even know much about single entailment grahs and their
+colored variants.
+
+then the question becomes well why not just a an adjacent matrix?
+Because we want to be fast and we want to make educated guesses for
+unseen unprovable relations.  Well then why not always just try and
+encode everything in just length 1 paths?  Well that's not so clearn
+there might be reasons why that would not be a good thing but it not
+clear that that's always true.
+
+There are two types of applications in our mind maybe we wnat to add
+rule online and in a streaming fashion or we might want to not add
+rules but just have a high accuracy. If we just need a high accuracy
+then maybe bowman's experiments together with the theory of guillame
+bouchard suggests that just doing the logistic decomposition of the
+rank matrices is good enough or just learning the neural embeddings is
+good enough but maybe by doing some sort of search we can improve upon
+the performance of these methods? Now it would seem that it would have
+to be checked on some special types of graphs. For example, extreme
+hourglasses with a narrow waist and a high fanout. might not be
+possible to encode using bowman;s methods and it might be that adding
+search would help us.  Also there is the case that we don't ``not
+observe'' edges between components of a graph completely. We see some
+of the edges , a low sample of the background knowledge that helps us
+figure out highly ``low frequency regions''. Graphs with components
+with low frequency connectivity.
+
+
+There are two types of applications in our mind maybe we wnat to add
+rule online and in a streaming fashion or we might want to not add
+rules but just have a high accuracy. May be we do want to add rules in
+a streming fashion like we add a new rule, and then we want to
+immediately ask questions boaut it without subsampling edges from the
+knowledge graph or without keeping the gigantic stream in memory. and
+one set of experiments would just be what fraction of edges do we need
+to sample? so now if we do this online subsampling thing that might be
+too slow and therefore we might need to keep a representation that
+allows for hopping ?  .  The search problem and the answer that he is
+talking about is that if you are llowed to do multi-hops search then
+while earlier in a binary entailment graph we wouldn't have been able
+to find an entailment path now we would be able to find a path by
+searching by allowing for some metric but it's not clear how we would
+ensure that the search is faster than the subsampling. or keeping the
+closure built in our head.
+
+one thing he said was that well we have entailement and we have
+reverse entailment and when we don't have either then we have
+exclusion but the problem is really of building the parameters and the
+trees in such a way that we are able to answer the questions in the
+face of updating knowledge. I still don't see a search based method
+for doing that.
+
+well one method would be to update the representation of the single
+eneity so that the topology was locally updated and then to search
+over the entities instead of propagating the change in the topology to
+all nodes in the graph. That way search could be useful to feel the
+effects of the change in the topology. I want a global constraint to
+be enforced on the gaph but in stead of updating the graph at every
+step of the way for everything I do some earch soemtimes.
+
+
+                            ....B      Now instead of propagating
+                     ..........        the change and updating
+             ...A.......               the whole graph you just search.
+          . .........                  Search is a way of getting over
+      ....   ..  ..   ...              stale caches , lazy updates in you
+    ...     ..    ..     ....           graph.
+   ..      ...     .        ...
+   C       D.       E         ....
+                                 .F
+
+
+So lets try and see how we can encode the natural logic relations or some other relations
+
+Come up with 50 questions that a neural net should not be able to solve
+train neural net and try to solve them
+
+How would you encode a new rule you will have to retrain
+Can we recover entailment graphs with small mincut then how well can you recover that graph?
+how not to store the whole entailment graph. If add one rule how much do I have to sample the closure?
+so now you have either meory or you have time problems
+
+
+Talk to ben that I want to move ahead with extremem connected graphs, wordnet graphs, freebase graphs and other applications and edge prediction in those ontologies and use that as the clsp talk.
+
+take a look at strips
+searching via NN
+The frame problem
+
+x1 to xn are in a chain.
+pushind specifics up the hierarchy.
+have two vectors r, l for each entity
+which ever update causes the least change in parameters in the right parameters
+
+in acl 2015 willy cohen published a paper
+
+A good incremental update task.
+joint informaiton extraction witll cohen 15
+I have a series of arcs and I want to be able to guess things that are unsee and I dont want to run unification.
+There are two reasons why we want to move to the vector based representation we dont have to run unification an we can guess unprovable things wiht high accuracy.
+
+But then why not always length 1 paths?
+ why not just mash everything in batch
+
+Ben's definition of batch vs online is different from batch and online training
+
+BenBatch means that we have a knowledge graph and we are trying to predict edges and we always grow the entire graph.
+BenSampleBatch means that we subsample the edges and we might need to keep the entire knowledge graph in the memory or at least keep the entire closure in the memory.
+
+The graph may be toooo big.
+
+I need to contrast with wordnet and that at a very small dimensionality if you allow for a hierrachy of objects and their parts. Experiments need to be conducted.
+
+
+You can thing of varying the dimensionality and making the chain large.
+How would bowman encode additions to the graph? by randomly sampleing edges that are enabled by the new rule, but we don't want to do that.
+
+
+Imagine that we have a multi-edged relations and rule acquisition that we need to do.
+Pre X Y Z         | X_1 -> X_2
+Post A B          | X_2 -> X_3
+and then a goal G.|
+
+X_1 -> X_2 -> X_3 .... x_{n-1}
+
+#########################################################################
+
+\#4 Complete ruleset  + Search means perfect retrieval. Unfortunately, this breaks when the rules are not present.
+
+X -> Z -> Y
+all of these things would implicitly depend on being able to find out
+Z -> Y accurately for any Z and these problem also has relations to
+inframetric learning.
+\end{verbatim}
+}
