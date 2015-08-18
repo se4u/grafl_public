@@ -1,0 +1,52 @@
+!obj:pylearn2.cross_validation.TrainCV {
+    dataset_iterator:
+        !obj:pylearn2.cross_validation.dataset_iterators.DatasetKFold {
+        dataset:
+            !obj:edge_dataset.load_data {
+                start: None,
+                stop: None,
+                filename: 'toy_synset_relations.tsv',
+                header :  False,
+            },
+    },
+    model: !obj:lib_vsm_edge_predict.SingleNodeEmbeddingEdgePredictor {
+        score_builder_list:
+          [ !obj:lib_score_builder.AntiSymmetricScoreBuilder {
+
+            },
+            !obj:lib_score_builder.AntiSymmetricScoreBuilder {
+
+            },
+            !obj:lib_score_builder.SymmetricScoreBuilder {
+
+            },
+            !obj:lib_score_builder.SymmetricScoreBuilder {
+
+            },
+            !obj:lib_score_builder.SymmetricScoreBuilder {
+
+            },
+            !obj:lib_score_builder.SymmetricScoreBuilder {
+
+            },
+            !obj:lib_score_builder.SymmetricScoreBuilder {
+
+            },
+          ],
+        node_count: 10,
+        chromaticity: 7,
+        node_embedding_dim: 80,
+    },
+    algorithm: !obj:pylearn2.training_algorithms.bgd.BGD {
+        batch_size: 50,
+        line_search_mode: 'exhaustive',
+        conjugate: 1,
+        termination_criterion: !obj:pylearn2.termination_criteria.EpochCounter {
+            max_epochs: 1,
+        },
+        cost: !obj:MultiClassSoftmaxCrossEntropyCost {
+
+        },
+    },
+    save_path: %(save_path)s,
+}

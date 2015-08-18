@@ -1,5 +1,5 @@
 BOWDIR = ~/data/vector-entailment/
-
+FN_TO_PARAM = $(foreach var,$(subst ~, ,$*),--$(subst :, ,$(var)))
 # Run experiments for investigating the benefits of symmetry and transitivity
 # on different types of graphs (chromatic,multi-uni,symmetric/transitive)
 # for batch training of edge prediction.
@@ -36,14 +36,14 @@ b experiment_reproduce_bowman:
 	$(MAKE) batch_edgeprediction_architecture:partsymmetric_nn~input:longer_shuffled_synset_relations.tsv
 
 t small_experiment:
-	$(MAKE) batch_edgeprediction_architecture:nn~input:toy_synset_relations.tsv
+	$(MAKE) batch_edgeprediction_architecture:nn~input:toy_synset_relations.tsv~fold:1
+
 #########################################################################################################
-# EXAMPLE:
-#  batch_edgeprediction_architecture:partsymmetric_nn~input:longer_shuffled_synset_relations.tsv
-#  batch_edgeprediction_architecture:partsymmetric_nn~input:longer_shuffled_synset_relations.tsv
+# EXAMPLE: See experiment_reproduce_bowman and small_experiment
+# --fold 5 --test_percentage 10 --train_percentage 90
 #########################################################################################################
 batch_edgeprediction_%:
-	./cross_validate --fold 5 --test_percentage 10 --train_percentage 90 $(foreach var,$(subst ~, ,$*),--$(subst :, ,$(var)))
+	python cross_validate.py $(FN_TO_PARAM)
 
 ########################################################################
 # TARGET: Examples of a library that can learn the model parameters of
@@ -55,7 +55,6 @@ batch_edgeprediction_%:
 #   4. Gaussian Embeddings : McCallum
 #  At present assume that there is only type of edge between two
 #   nodes. No multi-relational graphs/rulesets.
-#  A
 ########################################################################
 
 
@@ -77,7 +76,7 @@ test_graph_creation_library:
 # have created the `default.output` dot file?
 ######################################################################
 example_graph_creation_library:
-	./create_closed_graph --rules default.ruleset --input default.input --stop_after 0 --output default.output
+	python create_closed_graph.py --rules default.ruleset --input default.input --stop_after 0 --output default.output
 
 
 
