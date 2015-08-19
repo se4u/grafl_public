@@ -3,9 +3,9 @@
 | Description : Lasagne extensions for the neural tensor network activation.
 | Author      : Pushpendre Rastogi
 | Created     : Mon Aug 17 01:57:13 2015 (-0400)
-| Last-Updated: Mon Aug 17 21:19:56 2015 (-0400)
+| Last-Updated: Wed Aug 19 03:03:26 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 64
+|     Update #: 68
 '''
 import lasagne
 import unittest
@@ -40,7 +40,8 @@ class GlorotBilinearForm(lasagne.init.Initializer):
     """
     SYMMETRIC = 'sym'
     ANTISYMMETRIC = 'antisym'
-    SYMMETRY_FLAGS = [None, SYMMETRIC, ANTISYMMETRIC]
+    NEITHERSYMMETRIC = None
+    SYMMETRY_FLAGS = [NEITHERSYMMETRIC, SYMMETRIC, ANTISYMMETRIC]
 
     def __init__(self, initializer=lasagne.init.Uniform, gain=1.0, symmetry=None):
         self.gain = (np.sqrt(2) if gain == 'relu' else gain)
@@ -146,9 +147,20 @@ class NeuralTensorNetworkLayer(lasagne.layers.Layer):
                   if b is None
                   else process_fnc(self.add_param(
                       b, (num_units,), name="b", regularizable=False)))
-        T_shape = (
-            bifurcation_point, num_inputs - bifurcation_point, num_units)
-        self.T = process_fnc(self.add_param(T, T_shape, name="T"))
+        self.T = (None
+                  if T is None
+                  else process_fnc(
+                          self.add_param(
+                              T,
+                              (bifurcation_point,
+                               num_inputs - bifurcation_point,
+                               num_units),
+                              name="T")))
+
+    def get_params(self):
+        return [e
+                for e in [self.W, self.b, self.T]
+                if e is not None]
 
     def get_output_shape_for(self, input_shape):
         return (input_shape[0], self.num_units)
@@ -182,11 +194,15 @@ class NeuralTensorNetworkLayer(lasagne.layers.Layer):
         bp = self.bifurcation_point
         intermediate = tensor_module.tensordot(
             input_var[:, :bp], self.T, axes=[1, 0])
-        activation = self.tensor_matrix_elemwise_per_slice(
-            intermediate, input_var[:, bp:]).sum(axis=1)
-
+        activation = None
+        if self.T is not None:
+            activation = self.tensor_matrix_elemwise_per_slice(
+                intermediate, input_var[:, bp:]).sum(axis=1)
         if self.W is not None:
-            activation += tensor_module.dot(input_var, self.W)
+            if activation is None:
+                activation = tensor_module.dot(input_var, self.W)
+            else:
+                activation += tensor_module.dot(input_var, self.W)
         if self.b is not None:
             activation += self.b.dimshuffle('x', 0)
 
