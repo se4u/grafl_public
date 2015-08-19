@@ -1,0 +1,10 @@
+digraph {
+     livingBeing -> animal [type=hypernymOf];
+     animal -> pet [type=hypernymOf];
+     pet -> dog [type=hypernymOf];
+     dog -> rover [type=hypernymOf];
+     dogear -> dog [type=partOf];
+     heart -> animal [type=partOf];
+     brain -> animal [type=partOf];
+     soul -> livingBeing [type=partOf];
+}

@@ -1,0 +1,9 @@
+# These are natural logic entailment relations.
+|          | equiv    | entail | rentail | negation | altern  | cover  | indep |
+| equiv    | equiv    | entail | rentail | negation | altern  | cover  | indep |
+| entail   | entail   | entail |         | altern   | altern  |        |       |
+| rentail  | rentail  |        | rentail | cover    |         | cover  |       |
+| negation | negation | cover  | altern  | equiv    | rentail | entail | indep |
+| altern   | altern   |        | altern  | entail   |         | entail |       |
+| cover    | cover    | cover  |         | rentail  | rentail |        |       |
+| indep    | indep    |        |         | indep    |         |        |       |

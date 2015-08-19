@@ -1,0 +1,8 @@
+# If A partOf B and B hypernymOf C     ==> A partOf C
+# If A hypernymOf B and B hypernymOf C ==> A hypernymOf C
+# If A partOf B and B partOf C         ==> A partOf C
+# Both relations are independently transitive
+# And they interact as well.
+|            | hypernymOf | partOf |
+| hypernymOf | hypernymOf |        |
+| partOf     | partOf     | partOf |

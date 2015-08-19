@@ -3,33 +3,31 @@
         !obj:pylearn2.cross_validation.dataset_iterators.DatasetKFold {
         dataset:
             !obj:edge_dataset.load_data {
-                start: None,
-                stop: None,
-                filename: 'toy_synset_relations.tsv',
-                header :  False,
+                filename: 'res/hypernymOf_partOf.default.input.tsv',
+                token_map: 'res/hypernymOf_partOf.default.input.map',
             },
     },
     model: !obj:lib_vsm_edge_predict.SingleNodeEmbeddingEdgePredictor {
         score_builder_list:
-          [ !obj:lib_score_builder.AntiSymmetricScoreBuilder {
+          [ !obj:lib_score_builder.AntiSymmetricNNScoreBuilder {
 
             },
-            !obj:lib_score_builder.AntiSymmetricScoreBuilder {
+            !obj:lib_score_builder.AntiSymmetricNNScoreBuilder {
 
             },
-            !obj:lib_score_builder.SymmetricScoreBuilder {
+            !obj:lib_score_builder.SymmetricNNScoreBuilder {
 
             },
-            !obj:lib_score_builder.SymmetricScoreBuilder {
+            !obj:lib_score_builder.SymmetricNNScoreBuilder {
 
             },
-            !obj:lib_score_builder.SymmetricScoreBuilder {
+            !obj:lib_score_builder.SymmetricNNScoreBuilder {
 
             },
-            !obj:lib_score_builder.SymmetricScoreBuilder {
+            !obj:lib_score_builder.SymmetricNNScoreBuilder {
 
             },
-            !obj:lib_score_builder.SymmetricScoreBuilder {
+            !obj:lib_score_builder.SymmetricNNScoreBuilder {
 
             },
           ],
@@ -44,7 +42,7 @@
         termination_criterion: !obj:pylearn2.termination_criteria.EpochCounter {
             max_epochs: 1,
         },
-        cost: !obj:MultiClassSoftmaxCrossEntropyCost {
+        cost: !obj:lib_vsm_edge_predict.MultiClassSoftmaxCrossEntropyCost {
 
         },
     },
