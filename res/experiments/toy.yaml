@@ -1,49 +1,27 @@
-!obj:pylearn2.cross_validation.TrainCV {
-    dataset_iterator:
-        !obj:pylearn2.cross_validation.dataset_iterators.DatasetKFold {
-        dataset:
-            !obj:edge_dataset.load_data {
-                filename: 'res/hypernymOf_partOf.default.input.tsv',
-                token_map: 'res/hypernymOf_partOf.default.input.map',
-            },
+!obj:pylearn2.train.Train {
+    dataset: !obj:edge_dataset.load_data {
+        filename: 'res/hypernymOf_partOf.default.input.tsv',
+        token_map: 'res/hypernymOf_partOf.default.input.map',
     },
-    model: !obj:lib_vsm_edge_predict.SingleNodeEmbeddingEdgePredictor {
-        score_builder_list:
-          [ !obj:lib_score_builder.AntiSymmetricNNScoreBuilder {
-
-            },
-            !obj:lib_score_builder.AntiSymmetricNNScoreBuilder {
-
-            },
-            !obj:lib_score_builder.SymmetricNNScoreBuilder {
-
-            },
-            !obj:lib_score_builder.SymmetricNNScoreBuilder {
-
-            },
-            !obj:lib_score_builder.SymmetricNNScoreBuilder {
-
-            },
-            !obj:lib_score_builder.SymmetricNNScoreBuilder {
-
-            },
-            !obj:lib_score_builder.SymmetricNNScoreBuilder {
-
-            },
-          ],
-        node_count: 10,
-        chromaticity: 7,
-        node_embedding_dim: 80,
+    model: !obj:lib_score_builder.ScoreBuilder {
+        input_categories: 9,
+        input_dim: 25,
+        activation_units: 80,
+        dropout_p: 0,
+        nonlinearity: !import 'lasagne.nonlinearities.leaky_rectify',
+        optional_layer_num_units: 80,
+        optional_layer_nonlinearity: !import 'lasagne.nonlinearities.tanh',
+        final_chromaticity: 2,
+        symmetry_flag: !!null '',
+        add_optional_layer: False,
+        add_tensor_activation: False,
     },
-    algorithm: !obj:pylearn2.training_algorithms.bgd.BGD {
-        batch_size: 50,
-        line_search_mode: 'exhaustive',
-        conjugate: 1,
+    algorithm: !obj:pylearn2.training_algorithms.sgd.SGD {
+        batch_size: 3,
+        learning_rate: 1e-4,
+        cost: !obj:lib_score_builder.MultiClassSoftmaxCrossEntropyCost { },
         termination_criterion: !obj:pylearn2.termination_criteria.EpochCounter {
-            max_epochs: 1,
-        },
-        cost: !obj:lib_vsm_edge_predict.MultiClassSoftmaxCrossEntropyCost {
-
+            max_epochs: 30
         },
     },
     save_path: %(save_path)s,

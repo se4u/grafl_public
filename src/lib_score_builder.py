@@ -3,18 +3,22 @@
 | Description : Library of Score Builder Objects.
 | Author      : Pushpendre Rastogi
 | Created     : Sun Aug 16 17:28:50 2015 (-0400)
-| Last-Updated: Wed Aug 19 03:08:46 2015 (-0400)
+| Last-Updated: Wed Aug 19 21:39:43 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 30
+|     Update #: 93
 The guiding principle for this library is that classes should be closed
 for modification but open for extension.
 '''
-import abc, re
-import pylearn2
+from pylearn2.models import Model
+import pylearn2.space
 import lasagne.init
 import theano.tensor
 import lasagne.nonlinearities
+from lasagne.layers import EmbeddingLayer
 from lasagne_extension import NeuralTensorNetworkLayer, GlorotBilinearForm
+import numpy
+from pylearn2.costs.cost import Cost, DefaultDataSpecsMixin
+
 
 def score_builder_to_glorot_convert(symmetry):
     assert symmetry in ScoreBuilder.SYMMETRY_FLAGS
@@ -23,6 +27,7 @@ def score_builder_to_glorot_convert(symmetry):
             else (GlorotBilinearForm.ANTISYMMETRIC
                   if symmetry == ScoreBuilder.ANTISYMMETRIC
                   else GlorotBilinearForm.NEITHERSYMMETRIC))
+
 
 def get_ntn_activation(input_shape, bifurcation_point, num_output_units, symmetry):
     """
@@ -37,6 +42,7 @@ def get_ntn_activation(input_shape, bifurcation_point, num_output_units, symmetr
         A member of the lasagne.nonlinearities module.
     """
     assert isinstance(input_shape, tuple)
+    assert symmetry in ScoreBuilder.SYMMETRY_FLAGS
     symmetry = score_builder_to_glorot_convert(symmetry)
     return NeuralTensorNetworkLayer(
         incoming=input_shape,
@@ -46,6 +52,7 @@ def get_ntn_activation(input_shape, bifurcation_point, num_output_units, symmetr
         W=None,
         b=None,
         T=GlorotBilinearForm(symmetry=symmetry))
+
 
 def get_nn_layer(input_shape, num_output_units, nonlinearity):
     """
@@ -71,11 +78,14 @@ def get_nn_layer(input_shape, num_output_units, nonlinearity):
 
 
 class PassThroughLayer(object):
+
     @staticmethod
     def get_output_for(*args):
         return (args[0] if len(args) == 1 else args)
 
+
 class OptionalLayer(object):
+
     def __init__(self, input_dim, nonlinearity, num_output_units):
         self.layer_left_vertex = get_nn_layer(
             (None, input_dim),
@@ -97,7 +107,9 @@ class OptionalLayer(object):
     def __call__(self):
         raise NotImplementedError
 
+
 class ComparatorActivation(object):
+
     def __init__(self, left_input_dim, right_input_dim,
                  symmetry_flag, add_tensor_activation, num_output_units):
         """
@@ -109,7 +121,7 @@ class ComparatorActivation(object):
         """
         assert symmetry_flag in ScoreBuilder.SYMMETRY_FLAGS
         assert left_input_dim == right_input_dim
-        if symmetry_flag == '':
+        if symmetry_flag == ScoreBuilder.NEITHERSYMMETRIC:
             nn_input_dim = left_input_dim + right_input_dim
         else:
             nn_input_dim = left_input_dim
@@ -138,7 +150,6 @@ class ComparatorActivation(object):
         elif self.symmetry_flag == ScoreBuilder.ANTISYMMETRIC:
             activation = self.nn_activation.get_output_for(
                 left_input - right_input)
-            pass
         else:
             activation = self.nn_activation.get_output_for(
                 theano.tensor.concatenate([left_input, right_input], axis=1))
@@ -150,7 +161,8 @@ class ComparatorActivation(object):
     def __call__(self):
         raise NotImplementedError
 
-class ScoreBuilder(pylearn2.models.model.Model):
+
+class ScoreBuilder(Model):
 
     ''' Create computational graphs representing the following sequential
     operations.
@@ -175,20 +187,23 @@ class ScoreBuilder(pylearn2.models.model.Model):
     - Load
     the parameters necessary for the models.
     '''
-    __metaclass__ = abc.ABCMeta
     SYMMETRIC = 'Symmetric'
     ANTISYMMETRIC = 'AntiSymmetric'
-    SYMMETRY_FLAGS = [SYMMETRIC, ANTISYMMETRIC, '']
+    NEITHERSYMMETRIC = None
+    SYMMETRY_FLAGS = [SYMMETRIC, ANTISYMMETRIC, NEITHERSYMMETRIC]
 
-    @abc.abstractmethod
     def __init__(self,
+                 input_categories=10,
                  input_dim=25,
                  activation_units=80,
-                 dropout_p=0, # 0.2,
+                 dropout_p=0,  # 0.2,
                  nonlinearity=lasagne.nonlinearities.leaky_rectify,
                  optional_layer_num_units=80,
                  optional_layer_nonlinearity=lasagne.nonlinearities.tanh,
                  final_chromaticity=1,
+                 symmetry_flag=None,
+                 add_optional_layer=False,
+                 add_tensor_activation=False,
                  **kwargs):
         """
         Params
@@ -216,25 +231,34 @@ class ScoreBuilder(pylearn2.models.model.Model):
         self.nonlinearity = nonlinearity
         self.optional_layer_num_units = optional_layer_num_units
         self.optional_layer_nonlinearity = optional_layer_nonlinearity
-        #---------------------------------------------------------------#
-        # Parse the derived class name to convert it actionable options #
-        #---------------------------------------------------------------#
-        (symmetry_flag, optional_layer_flag, score_function_flag) = (
-            self.parse_class_name_for_flags())
-        assert optional_layer_flag in ['OptionalLayer', '']
-        assert score_function_flag in ['NN', 'NTN']
+        assert symmetry_flag in self.SYMMETRY_FLAGS
+        self.symmetry_flag = symmetry_flag
+        self.add_optional_layer = add_optional_layer
         self._params = []
-        add_tensor_activation = (True
-                                 if score_function_flag == 'NTN'
-                                 else False)
+        self.add_tensor_activation = add_tensor_activation
+        #---------------------------------------------------#
+        # Declare the input and output spaces of this model #
+        #---------------------------------------------------#
+        import pdb
+        # pdb.set_trace()
+        self.input_space = pylearn2.space.IndexSpace(
+            max_labels=input_categories, dim=2, dtype='int32')
+        self.output_space = pylearn2.space.IndexSpace(
+            max_labels=final_chromaticity, dim=2, dtype='int32')
+        #-----------------------------#
+        # Instantiate Embedding Layer #
+        #-----------------------------#
+        self.embedding_layer = EmbeddingLayer(
+            (None, None), input_categories, input_dim)
+        self._params.extend(self.embedding_layer.get_params())
         #-----------------------------------#
         # Control addition of OptionalLayer #
         #-----------------------------------#
-        if optional_layer_flag == 'OptionalLayer':
+        if add_optional_layer:
             self.optional_layer = OptionalLayer(
-                input_dim,
-                optional_layer_nonlinearity,
-                optional_layer_num_units)
+                input_dim=input_dim,
+                nonlinearity=optional_layer_nonlinearity,
+                num_output_units=optional_layer_num_units)
             self._params.extend(self.optional_layer.get_params())
             dim_after_optional_layer = optional_layer_num_units
         else:
@@ -244,8 +268,11 @@ class ScoreBuilder(pylearn2.models.model.Model):
         # Build comparator based on score_function and symmetry #
         #-------------------------------------------------------#
         self.comparator_activation_layer = ComparatorActivation(
-            dim_after_optional_layer, dim_after_optional_layer,
-            symmetry_flag, add_tensor_activation, activation_units)
+            left_input_dim=dim_after_optional_layer,
+            right_input_dim=dim_after_optional_layer,
+            symmetry_flag=symmetry_flag,
+            add_tensor_activation=add_tensor_activation,
+            num_output_units=activation_units)
         self._params.extend(self.comparator_activation_layer.get_params())
         #-----------------------------------------------------#
         # Dropout -> Nonlinearity -> Score through Projection #
@@ -268,14 +295,11 @@ class ScoreBuilder(pylearn2.models.model.Model):
     def get_params(self):
         return self._params
 
-    def parse_class_name_for_flags(self):
-        derived_class_name = self.__class__.__name__
-        (symmetry_flag, optional_layer_flag, score_function_flag) = re.findall(
-            '(Symmetric|AntiSymmetric)?(OptionalLayer)?(NN|NTN)ScoreBuilder',
-            derived_class_name)[0]
-        return (symmetry_flag, optional_layer_flag, score_function_flag)
-
-    def get_output_for(self, node1_batch, node2_batch):
+    def get_output_for(self, input_batch):
+        node1_batch = input_batch[:, 0]
+        node2_batch = input_batch[:, 1]
+        node1_batch = self.embedding_layer.get_output_for(node1_batch)
+        node2_batch = self.embedding_layer.get_output_for(node2_batch)
         (node1_batch, node2_batch) = self.optional_layer.get_output_for(
             node1_batch, node2_batch)
         activation = self.comparator_activation_layer.get_output_for(
@@ -285,70 +309,113 @@ class ScoreBuilder(pylearn2.models.model.Model):
         activation = self.final_score_layer.get_output_for(activation)
         return activation
 
-class NNScoreBuilder(ScoreBuilder):
-    def __init__(self, *args, **kwargs):
-        super(NNScoreBuilder, self).__init__(*args, **kwargs)
+    def __setattr__(self, name, value):
+        if name == 'monitor':
+            import pdb
+            # pdb.set_trace()
+        super(ScoreBuilder, self).__setattr__(name, value)
 
 
-class OptionalLayerNNScoreBuilder(ScoreBuilder):
-    def __init__(self, *args, **kwargs):
-        super(OptionalLayerNNScoreBuilder, self).__init__(*args, **kwargs)
+class MultiClassSoftmaxCrossEntropyCost(DefaultDataSpecsMixin, Cost):
+    supervised = True
 
-
-class NTNScoreBuilder(ScoreBuilder):
-    def __init__(self, *args, **kwargs):
-        super(NTNScoreBuilder, self).__init__(*args, **kwargs)
-
-
-class OptionalLayerNTNScoreBuilder(ScoreBuilder):
-    def __init__(self, *args, **kwargs):
-        super(OptionalLayerNTNScoreBuilder, self).__init__(*args, **kwargs)
-
-
-class SymmetricNNScoreBuilder(ScoreBuilder):
-    def __init__(self, *args, **kwargs):
-        super(SymmetricNNScoreBuilder, self).__init__(*args, **kwargs)
-
-
-class AntiSymmetricNNScoreBuilder(ScoreBuilder):
-    def __init__(self, *args, **kwargs):
-        super(AntiSymmetricNNScoreBuilder, self).__init__(*args, **kwargs)
-
-
-class SymmetricNTNScoreBuilder(ScoreBuilder):
-    def __init__(self, *args, **kwargs):
-        super(SymmetricNTNScoreBuilder, self).__init__(*args, **kwargs)
-
-
-class AntiSymmetricNTNScoreBuilder(ScoreBuilder):
-    def __init__(self, *args, **kwargs):
-        super(AntiSymmetricNTNScoreBuilder, self).__init__(*args, **kwargs)
+    def expr(self, model, data, **kwargs):
+        space, source = self.get_data_specs(model)
+        space.validate(data)
+        # Compute the Cross-Entropy Cost
+        inputs, targets = data
+        output_predicted_prob = theano.tensor.nnet.softmax(
+            model.get_output_for(inputs))
+        loss = - ((targets * theano.tensor.log(output_predicted_prob)
+                   ).astype('float32')).sum(axis=1, acc_dtype='float32')
+        return loss.mean()
 
 import unittest
-class TestNNScoreBuilder(unittest.TestCase):
-    def test_circuit(self):
 
-        pass
 
-class TestOptionalLayerNNScoreBuilder(unittest.TestCase):
-    def test_circuit(self):
-        pass
+class TestModuleFunctions(unittest.TestCase):
 
-class TestSymmetricNNScoreBuilder(unittest.TestCase):
-    def test_circuit(self):
-        pass
+    def test_score_builder_to_glorot_convert(self):
+        self.assertEqual(
+            score_builder_to_glorot_convert(ScoreBuilder.ANTISYMMETRIC),
+            GlorotBilinearForm.ANTISYMMETRIC)
+        self.assertEqual(
+            score_builder_to_glorot_convert(ScoreBuilder.SYMMETRIC),
+            GlorotBilinearForm.SYMMETRIC)
+        self.assertEqual(
+            score_builder_to_glorot_convert(ScoreBuilder.NEITHERSYMMETRIC),
+            GlorotBilinearForm.NEITHERSYMMETRIC)
 
-class TestNTNScoreBuilder(unittest.TestCase):
-    def test_circuit(self):
-        pass
+    def test_get_ntn_activation(self):
+        obj = get_ntn_activation(
+            (None, 10), 6, 3, ScoreBuilder.NEITHERSYMMETRIC)
+        obj_params = obj.get_params()
+        self.assertEqual(len(obj_params), 1)
+        T = obj_params[0].eval()
+        self.assertEqual(T.shape, (6, 4, 3))
+        test_input = numpy.array([range(10)])
+        output = obj.get_output_for(test_input).eval()
+        expected_activation = NeuralTensorNetworkLayer.tensor_matrix_activation(
+            T, test_input, 6, numpy.tensordot)
+        numpy.testing.assert_array_almost_equal(output, expected_activation)
 
-class TestSymmetricNTNScoreBuilder(unittest.TestCase):
-    def test_circuit(self):
-        pass
+    def test_get_nn_layer(self):
+        obj = get_nn_layer((None, 10), 3, lasagne.nonlinearities.identity)
+        obj_params = obj.get_params()
+        self.assertEqual(len(obj_params), 2)
+        W = obj_params[0].eval()
+        b = obj_params[1].eval()
+        self.assertEqual(W.shape, (10, 3))
+        test_input = numpy.array([range(10)])
+        output = obj.get_output_for(test_input).eval()
+        expected_activation = numpy.dot(test_input, W) + b
+        numpy.testing.assert_array_almost_equal(output, expected_activation)
 
-class TestAntiSymmetricNTNScoreBuilder(unittest.TestCase):
-    def test_circuit(self):
-        pass
+
+class TestPassThroughLayer(unittest.TestCase):
+
+    def test_get_output_for(self):
+        obj = PassThroughLayer()
+        self.assertEqual(1, obj.get_output_for(1))
+        self.assertEqual((1, 2), obj.get_output_for(1, 2))
+
+
+class TestComparatorActivation(unittest.TestCase):
+
+    def obj_param_helper(self, symmetry, add_tensor):
+        obj = ComparatorActivation(3, 3, symmetry, add_tensor, 2)
+        params = obj.get_params()
+        return (obj, params)
+
+    def test_get_output_for(self):
+        # Tensor, Symmetry
+        (obj, params) = self.obj_param_helper(ScoreBuilder.SYMMETRIC, True)
+        self.assertEqual(len(params), 3)
+        self.assertEqual(params[-1].eval().shape, (3, 3, 2))
+        self.assertEqual(params[0].eval().shape, (3, 2))
+        # Tensor, No Symmetry
+        (obj, params) = self.obj_param_helper(
+            ScoreBuilder.NEITHERSYMMETRIC, True)
+        self.assertEqual(len(params), 3)
+        self.assertEqual(params[-1].eval().shape, (3, 3, 2))
+        self.assertEqual(params[0].eval().shape, (6, 2))
+        self.assertEqual(params[1].eval().shape, (2,))
+        # No Tensor, Symmetry
+        (obj, params) = self.obj_param_helper(ScoreBuilder.SYMMETRIC, False)
+        self.assertEqual(len(params), 2)
+        self.assertEqual(params[0].eval().shape, (3, 2))
+        self.assertEqual(params[1].eval().shape, (2,))
+        random_input = numpy.array([[1, 2, 3]], dtype='float32')
+        numpy.testing.assert_array_equal(
+            obj.get_output_for(random_input, -random_input).eval(),
+            numpy.zeros((1, 2), dtype='float32'))
+
+        # No Tensor, No Symmetry
+        (obj, params) = self.obj_param_helper(
+            ScoreBuilder.NEITHERSYMMETRIC, False)
+        self.assertEqual(len(params), 2)
+        self.assertEqual(params[0].eval().shape, (6, 2))
+        self.assertEqual(params[1].eval().shape, (2,))
 
 if __name__ == '__main__':
     unittest.main()

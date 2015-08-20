@@ -36,14 +36,14 @@ b experiment_reproduce_bowman:
 	$(MAKE) batch_edgeprediction_architecture:partsymmetric_nn~input:longer_shuffled_synset_relations.tsv
 
 t small_experiment:
-	$(MAKE) batch_edgeprediction_architecture:nn~input:toy_synset_relations.tsv~fold:1
+	$(MAKE) batch_edgeprediction_architecture:nn~input:hypernymOf_partOf.default.input.tsv~fold:1
 
-#########################################################################################################
+#########################################################################
 # EXAMPLE: See experiment_reproduce_bowman and small_experiment
 # --fold 5 --test_percentage 10 --train_percentage 90
-#########################################################################################################
+#########################################################################
 batch_edgeprediction_%:
-	python cross_validate.py $(FN_TO_PARAM)
+	python src/cross_validate.py $(FN_TO_PARAM)
 
 ########################################################################
 # TARGET: Examples of a library that can learn the model parameters of
@@ -64,7 +64,6 @@ batch_edgeprediction_%:
 test_graph_creation_library:
 
 
-
 ######################################################################
 # TARGET: Examples of the capabilities of the graph creation library
 # Given a ruleset; R
@@ -76,8 +75,10 @@ test_graph_creation_library:
 # have created the `default.output` dot file?
 ######################################################################
 example_graph_creation_library:
-	python create_closed_graph.py --rules default.ruleset --input default.input --stop_after 0 --output default.output
+	python src/util_make_toy_graph.py --rules default.ruleset --input default_input.dot --stop_after 0 --output default_output.dot
 
+example_convert_dot_to_tsv:
+	python src/util_make_toy_graph.py --output res/hypernymOf_partOf.default.input.tsv
 
 
 ###########################################################################

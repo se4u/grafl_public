@@ -3,9 +3,9 @@
 | Description : Lasagne extensions for the neural tensor network activation.
 | Author      : Pushpendre Rastogi
 | Created     : Mon Aug 17 01:57:13 2015 (-0400)
-| Last-Updated: Wed Aug 19 03:03:26 2015 (-0400)
+| Last-Updated: Wed Aug 19 17:27:26 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 68
+|     Update #: 82
 '''
 import lasagne
 import unittest
@@ -128,9 +128,9 @@ class NeuralTensorNetworkLayer(lasagne.layers.Layer):
                  use_numpy=False,
                  **kwargs):
         super(NeuralTensorNetworkLayer, self).__init__(incoming, **kwargs)
-        process_fnc = (lambda x: x.eval()
-                       if use_numpy
-                       else lambda x: x)
+        process_fnc = lambda x: (x.eval()
+                                 if use_numpy
+                                 else x)
         self.nonlinearity = (lasagne.nonlinearities.identity
                              if nonlinearity is None
                              else nonlinearity)
@@ -150,16 +150,16 @@ class NeuralTensorNetworkLayer(lasagne.layers.Layer):
         self.T = (None
                   if T is None
                   else process_fnc(
-                          self.add_param(
-                              T,
-                              (bifurcation_point,
-                               num_inputs - bifurcation_point,
-                               num_units),
-                              name="T")))
+                      self.add_param(
+                          T,
+                          (bifurcation_point,
+                           num_inputs - bifurcation_point,
+                           num_units),
+                          name="T")))
 
     def get_params(self):
         return [e
-                for e in [self.W, self.b, self.T]
+                for e in [self.T, self.W, self.b]
                 if e is not None]
 
     def get_output_shape_for(self, input_shape):
@@ -181,6 +181,13 @@ class NeuralTensorNetworkLayer(lasagne.layers.Layer):
         else:
             raise RuntimeError(str(type(T)))
 
+    @classmethod
+    def tensor_matrix_activation(cls, T, input_var, bp, tensordot_f):
+        intermediate = tensordot_f(input_var[:, :bp], T, axes=[1, 0])
+        activation = cls.tensor_matrix_elemwise_per_slice(
+            intermediate, input_var[:, bp:]).sum(axis=1)
+        return activation
+
     def get_output_for(self, input_var, use_numpy=False, **kwargs):
         tensor_module = (np
                          if use_numpy
@@ -190,19 +197,12 @@ class NeuralTensorNetworkLayer(lasagne.layers.Layer):
             # if the input_var has more than two dimensions, flatten it into a
             # batch of feature vectors.
             input_var = input_var.flatten(2)
-
-        bp = self.bifurcation_point
-        intermediate = tensor_module.tensordot(
-            input_var[:, :bp], self.T, axes=[1, 0])
-        activation = None
+        activation = 0
         if self.T is not None:
-            activation = self.tensor_matrix_elemwise_per_slice(
-                intermediate, input_var[:, bp:]).sum(axis=1)
+            activation += self.tensor_matrix_activation(
+                self.T, input_var, self.bifurcation_point, tensor_module.tensordot)
         if self.W is not None:
-            if activation is None:
-                activation = tensor_module.dot(input_var, self.W)
-            else:
-                activation += tensor_module.dot(input_var, self.W)
+            activation += tensor_module.dot(input_var, self.W)
         if self.b is not None:
             activation += self.b.dimshuffle('x', 0)
 
@@ -222,10 +222,10 @@ class TestNeuralTensorNetworkLayer(unittest.TestCase):
             bifurcation_point=3,
             W=None,
             b=None,
-            T=(GlorotBilinearForm(
-                symmetry=GlorotBilinearForm.SYMMETRIC)
+            T=(T
                if use_numpy
-               else T),
+               else GlorotBilinearForm(
+                   symmetry=GlorotBilinearForm.SYMMETRIC)),
             nonlinearity=None,
             use_numpy=use_numpy)
         if use_numpy:
@@ -233,11 +233,12 @@ class TestNeuralTensorNetworkLayer(unittest.TestCase):
             self.assertEqual(obj.T.shape, (3, 3, num_units))
             self.assertEqual(np.sum(obj.T[:, :, 0] - obj.T[:, :, 0].T), 0.0)
             self.assertEqual(np.sum(obj.T[:, :, 1] - obj.T[:, :, 1].T), 0.0)
+            obj.T = T
+        else:
+            obj.T.set_value(T.astype('float32'))
         #------------------------------------------------------------#
         # Test output when the tensor is Symmetric and vec_a = vec_b #
         #------------------------------------------------------------#
-        # np.expand_dims(T, axis=2).repeat(repeats=num_units, axis=2)
-        obj.T = T
         input_var = np.array([[1,  2,  3, 0, 1, 2],
                               [-1, -2, -3, -0, -1, -2]],
                              dtype=np.int32)
