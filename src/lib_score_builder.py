@@ -3,9 +3,9 @@
 | Description : Library of Score Builder Objects.
 | Author      : Pushpendre Rastogi
 | Created     : Sun Aug 16 17:28:50 2015 (-0400)
-| Last-Updated: Thu Aug 20 00:31:00 2015 (-0400)
+| Last-Updated: Thu Aug 20 01:27:42 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 102
+|     Update #: 103
 The guiding principle for this library is that classes should be closed
 for modification but open for extension.
 '''
@@ -249,7 +249,7 @@ class ScoreBuilder(Model):
         self.input_space = pylearn2.space.IndexSpace(
             max_labels=input_categories, dim=2, dtype='int32')
         self.output_space = pylearn2.space.IndexSpace(
-            max_labels=final_chromaticity, dim=2, dtype='int32')
+            max_labels=final_chromaticity, dim=final_chromaticity, dtype='int32')
         #-----------------------------#
         # Instantiate Embedding Layer #
         #-----------------------------#

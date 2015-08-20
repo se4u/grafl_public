@@ -3,9 +3,9 @@
 | Description : pylearn2 compatible dense_design_matrix objects that wrap Edge prediction data in csv files.
 | Author      : Pushpendre Rastogi
 | Created     : Tue Aug 18 00:45:47 2015 (-0400)
-| Last-Updated: Thu Aug 20 01:08:24 2015 (-0400)
+| Last-Updated: Thu Aug 20 01:28:01 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 22
+|     Update #: 26
 '''
 import csv
 import numpy as np
@@ -22,22 +22,22 @@ def convert_to_one_hot(y, y_labels):
 
 def load_data(start=0, stop=None, filename='', token_map='', header=False,
               first_column_has_y_label=False, first_column_of_map_file_has_index=False):
+    token_map = dict(((c1, int(c0)) if first_column_of_map_file_has_index else (c0, int(c1)))
+                     for (c0, c1)
+                     in [e.strip().split()
+                         for e
+                         in open(token_map)])
+
     with open(filename, 'r') as f:
-        reader = csv.reader(f, delimiter=' ')
-        token_map = dict((t, int(idx))
-                         for (t, idx)
-                         in [e.strip().split()
-                             for e
-                             in open(token_map)])
+
         X = []
         y = []
-        for row in reader:
-            # Skip the first row containing the string names of each attribute
+        for row in f:
             if header:
                 header = False
                 continue
             # Convert the row into numbers
-            row = [float(token_map[elem]) for elem in row]
+            row = [float(token_map[elem]) for elem in row.strip().split()]
             if first_column_has_y_label:
                 X.append(row[1:])
                 y.append(row[0])
