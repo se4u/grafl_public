@@ -3,9 +3,9 @@
 | Description : pylearn2 compatible dense_design_matrix objects that wrap Edge prediction data in csv files.
 | Author      : Pushpendre Rastogi
 | Created     : Tue Aug 18 00:45:47 2015 (-0400)
-| Last-Updated: Wed Aug 19 21:38:07 2015 (-0400)
+| Last-Updated: Thu Aug 20 01:08:24 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 20
+|     Update #: 22
 '''
 import csv
 import numpy as np
@@ -20,7 +20,8 @@ def convert_to_one_hot(y, y_labels):
     return arr
 
 
-def load_data(start=0, stop=None, filename='', token_map='', header=False):
+def load_data(start=0, stop=None, filename='', token_map='', header=False,
+              first_column_has_y_label=False, first_column_of_map_file_has_index=False):
     with open(filename, 'r') as f:
         reader = csv.reader(f, delimiter=' ')
         token_map = dict((t, int(idx))
@@ -37,8 +38,12 @@ def load_data(start=0, stop=None, filename='', token_map='', header=False):
                 continue
             # Convert the row into numbers
             row = [float(token_map[elem]) for elem in row]
-            X.append(row[:-1])
-            y.append(row[-1])
+            if first_column_has_y_label:
+                X.append(row[1:])
+                y.append(row[0])
+            else:
+                X.append(row[:-1])
+                y.append(row[-1])
     X = np.asarray(X, dtype='int32')[start:, :]
     y = np.asarray(y, dtype='int32')
     y = y.reshape(y.shape[0], 1)[start:, :]

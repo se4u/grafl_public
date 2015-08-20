@@ -1,5 +1,8 @@
 BOWDIR = ~/data/vector-entailment/
 FN_TO_PARAM = $(foreach var,$(subst ~, ,$*),--$(subst :, ,$(var)))
+
+all: res/bowman_wordnet_longer_shuffled_synset_relations.tsv
+	echo $(basename $<)
 # Run experiments for investigating the benefits of symmetry and transitivity
 # on different types of graphs (chromatic,multi-uni,symmetric/transitive)
 # for batch training of edge prediction.
@@ -35,6 +38,7 @@ FN_TO_PARAM = $(foreach var,$(subst ~, ,$*),--$(subst :, ,$(var)))
 b experiment_reproduce_bowman:
 	$(MAKE) batch_edgeprediction_architecture:partsymmetric_nn~input:longer_shuffled_synset_relations.tsv
 
+# src/train.py --yaml res/experiments/crossvalidate.yaml
 t small_experiment:
 	$(MAKE) batch_edgeprediction_architecture:nn~input:hypernymOf_partOf.default.input.tsv~fold:1
 
@@ -76,6 +80,10 @@ test_graph_creation_library:
 ######################################################################
 example_graph_creation_library:
 	python src/util_make_toy_graph.py --rules default.ruleset --input default_input.dot --stop_after 0 --output default_output.dot
+
+example_convert_tsv_to_map: res/bowman_wordnet_longer_shuffled_synset_relations.tsv
+	awk '{print $$1}' $< | sort | uniq > $(basename $<).map; \
+	awk '{print $$2; print $$3}' $< | sort | uniq | nl -v 0  >> $(basename $<).map
 
 example_convert_dot_to_tsv:
 	python src/util_make_toy_graph.py --output res/hypernymOf_partOf.default.input.tsv
