@@ -5,11 +5,11 @@
     },
     model: !obj:lib_score_builder.ScoreBuilder {
         input_categories: 9,
-        input_dim: 25,
-        activation_units: 80,
+        input_dim: 20,
+        activation_units: 20,
         dropout_p: 0,
         nonlinearity: !import 'lasagne.nonlinearities.leaky_rectify',
-        optional_layer_num_units: 80,
+        optional_layer_num_units: 20,
         optional_layer_nonlinearity: !import 'lasagne.nonlinearities.tanh',
         final_chromaticity: 2,
         symmetry_flag: !!null '',
@@ -17,12 +17,13 @@
         add_tensor_activation: False,
     },
     algorithm: !obj:pylearn2.training_algorithms.sgd.SGD {
-        batch_size: 3,
-        learning_rate: 1e-4,
+        batch_size: 2,
+        learning_rate: 1e-2,
         cost: !obj:lib_score_builder.MultiClassSoftmaxCrossEntropyCost { },
         termination_criterion: !obj:pylearn2.termination_criteria.EpochCounter {
-            max_epochs: 30
+            max_epochs: 10
         },
     },
     save_path: %(save_path)s,
+    save_freq: 10,
 }

@@ -4,9 +4,9 @@
 | Description : Invoke this script from command line to cross-validate the performance of a model.
 | Author      : Pushpendre Rastogi
 | Created     : Mon Aug 17 23:36:23 2015 (-0400)
-| Last-Updated: Wed Aug 19 22:23:47 2015 (-0400)
+| Last-Updated: Thu Aug 20 00:46:36 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 23
+|     Update #: 29
 '''
 import config
 from config import open
@@ -20,6 +20,13 @@ import traceback
 import sys
 
 
+def get_acc(model, X, y):
+    predicted_output = model.get_output_for(X).eval().argmax(axis=1)
+    actual_output = y.argmax(axis=1)
+    fold_acc = (predicted_output == actual_output).mean()
+    return fold_acc
+
+
 def test():
     import cPickle as pickle
     import lib_score_builder
@@ -29,19 +36,16 @@ def test():
                      token_map='res/hypernymOf_partOf.default.input.map')
     X = data.X
     y = data.y
-    accuracy = []
-    for m in models:
-        predicted_output = m.get_output_for(X).eval().argmax(axis=1)
-        actual_output = y.argmax(axis=1)
-        fold_acc = (predicted_output == actual_output).mean()
-        accuracy.append(fold_acc)
+    accuracy = ([get_acc(m, X, y) for m in models]
+                if isinstance(models, list)
+                else [get_acc(models, X, y)])
     print "Final Accuracy", float(sum(accuracy)) / len(accuracy)
 
 
 def train():
-    config_yaml = open(config.args.yaml).read()
-    trainer = yaml_parse.load(
-        config_yaml % dict(save_path=config.args.save_path))
+    config_yaml = (open(config.args.yaml).read()) % dict(
+        save_path=config.args.save_path)
+    trainer = yaml_parse.load(config_yaml)
     trainer.main_loop()
 
 
@@ -66,7 +70,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('--input', default='toy_synset_relations.tsv',
                             type=str, help='Default={toy_synset_relations.tsv}')
     arg_parser.add_argument(
-        '--yaml', default='toy.yaml', type=str, help='Default={toy.yaml}')
+        '--yaml', default='train.yaml', type=str, help='Default={toy.yaml}')
     arg_parser.add_argument(
         '--save_path', default='tmp.tmp', type=str, help='Default={tmp.tmp}')
     arg_parser.add_argument(

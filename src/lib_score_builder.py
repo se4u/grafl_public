@@ -3,9 +3,9 @@
 | Description : Library of Score Builder Objects.
 | Author      : Pushpendre Rastogi
 | Created     : Sun Aug 16 17:28:50 2015 (-0400)
-| Last-Updated: Wed Aug 19 21:39:43 2015 (-0400)
+| Last-Updated: Thu Aug 20 00:31:00 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 93
+|     Update #: 102
 The guiding principle for this library is that classes should be closed
 for modification but open for extension.
 '''
@@ -29,7 +29,7 @@ def score_builder_to_glorot_convert(symmetry):
                   else GlorotBilinearForm.NEITHERSYMMETRIC))
 
 
-def get_ntn_activation(input_shape, bifurcation_point, num_output_units, symmetry):
+def get_ntn_activation(input_shape, bifurcation_point, num_output_units, symmetry, name):
     """
     Params
     ------
@@ -46,6 +46,7 @@ def get_ntn_activation(input_shape, bifurcation_point, num_output_units, symmetr
     symmetry = score_builder_to_glorot_convert(symmetry)
     return NeuralTensorNetworkLayer(
         incoming=input_shape,
+        name=name,
         num_units=num_output_units,
         bifurcation_point=bifurcation_point,
         nonlinearity=lasagne.nonlinearities.identity,
@@ -54,7 +55,7 @@ def get_ntn_activation(input_shape, bifurcation_point, num_output_units, symmetr
         T=GlorotBilinearForm(symmetry=symmetry))
 
 
-def get_nn_layer(input_shape, num_output_units, nonlinearity):
+def get_nn_layer(input_shape, num_output_units, nonlinearity, name):
     """
     Params
     ------
@@ -68,8 +69,9 @@ def get_nn_layer(input_shape, num_output_units, nonlinearity):
     """
     assert isinstance(input_shape, tuple)
     return NeuralTensorNetworkLayer(
-        input_shape,
-        num_output_units,
+        incoming=input_shape,
+        name=name,
+        num_units=num_output_units,
         bifurcation_point=None,
         nonlinearity=nonlinearity,
         W=lasagne.init.GlorotUniform(),
@@ -86,15 +88,17 @@ class PassThroughLayer(object):
 
 class OptionalLayer(object):
 
-    def __init__(self, input_dim, nonlinearity, num_output_units):
+    def __init__(self, input_dim, nonlinearity, num_output_units, name):
         self.layer_left_vertex = get_nn_layer(
             (None, input_dim),
             num_output_units,
-            nonlinearity)
+            nonlinearity,
+            name + '_left')
         self.layer_right_vertex = get_nn_layer(
             (None, input_dim),
             num_output_units,
-            nonlinearity)
+            nonlinearity,
+            name + 'right')
 
     def get_params(self):
         return (self.layer_left_vertex.get_params()
@@ -111,7 +115,7 @@ class OptionalLayer(object):
 class ComparatorActivation(object):
 
     def __init__(self, left_input_dim, right_input_dim,
-                 symmetry_flag, add_tensor_activation, num_output_units):
+                 symmetry_flag, add_tensor_activation, num_output_units, name):
         """
         Params
         ------
@@ -128,14 +132,16 @@ class ComparatorActivation(object):
         self.nn_activation = get_nn_layer(
             (None, nn_input_dim),
             num_output_units,
-            lasagne.nonlinearities.identity)
+            lasagne.nonlinearities.identity,
+            name + '_nn')
         self._params = self.nn_activation.get_params()
         if add_tensor_activation:
             self.ntn_activation = get_ntn_activation(
                 (None, left_input_dim + right_input_dim),
                 left_input_dim,
                 num_output_units,
-                symmetry_flag)
+                symmetry_flag,
+                name + '_ntn')
             self._params.extend(self.ntn_activation.get_params())
         self.symmetry_flag = symmetry_flag
         self.add_tensor_activation = add_tensor_activation
@@ -193,6 +199,7 @@ class ScoreBuilder(Model):
     SYMMETRY_FLAGS = [SYMMETRIC, ANTISYMMETRIC, NEITHERSYMMETRIC]
 
     def __init__(self,
+                 name='',
                  input_categories=10,
                  input_dim=25,
                  activation_units=80,
@@ -239,8 +246,6 @@ class ScoreBuilder(Model):
         #---------------------------------------------------#
         # Declare the input and output spaces of this model #
         #---------------------------------------------------#
-        import pdb
-        # pdb.set_trace()
         self.input_space = pylearn2.space.IndexSpace(
             max_labels=input_categories, dim=2, dtype='int32')
         self.output_space = pylearn2.space.IndexSpace(
@@ -249,7 +254,7 @@ class ScoreBuilder(Model):
         # Instantiate Embedding Layer #
         #-----------------------------#
         self.embedding_layer = EmbeddingLayer(
-            (None, None), input_categories, input_dim)
+            (None, None), input_categories, input_dim, name + '_embedding')
         self._params.extend(self.embedding_layer.get_params())
         #-----------------------------------#
         # Control addition of OptionalLayer #
@@ -258,7 +263,8 @@ class ScoreBuilder(Model):
             self.optional_layer = OptionalLayer(
                 input_dim=input_dim,
                 nonlinearity=optional_layer_nonlinearity,
-                num_output_units=optional_layer_num_units)
+                num_output_units=optional_layer_num_units,
+                name=name + '_optional')
             self._params.extend(self.optional_layer.get_params())
             dim_after_optional_layer = optional_layer_num_units
         else:
@@ -272,18 +278,21 @@ class ScoreBuilder(Model):
             right_input_dim=dim_after_optional_layer,
             symmetry_flag=symmetry_flag,
             add_tensor_activation=add_tensor_activation,
-            num_output_units=activation_units)
+            num_output_units=activation_units,
+            name=name + '_comparator')
         self._params.extend(self.comparator_activation_layer.get_params())
         #-----------------------------------------------------#
         # Dropout -> Nonlinearity -> Score through Projection #
         #-----------------------------------------------------#
         self.dropout_layer = (
-            lasagne.layers.DropoutLayer((None, ), p=self.dropout_p)
+            lasagne.layers.DropoutLayer(
+                (None, ), p=self.dropout_p, name=name + '_dropout')
             if self.dropout_p > 0
             else PassThroughLayer())
         self.nonlinearity = nonlinearity
         self.final_score_layer = NeuralTensorNetworkLayer(
             (None, activation_units),
+            name + '_finalscore',
             final_chromaticity,
             bifurcation_point=None,
             nonlinearity=lasagne.nonlinearities.identity,
@@ -309,12 +318,6 @@ class ScoreBuilder(Model):
         activation = self.final_score_layer.get_output_for(activation)
         return activation
 
-    def __setattr__(self, name, value):
-        if name == 'monitor':
-            import pdb
-            # pdb.set_trace()
-        super(ScoreBuilder, self).__setattr__(name, value)
-
 
 class MultiClassSoftmaxCrossEntropyCost(DefaultDataSpecsMixin, Cost):
     supervised = True
@@ -326,8 +329,8 @@ class MultiClassSoftmaxCrossEntropyCost(DefaultDataSpecsMixin, Cost):
         inputs, targets = data
         output_predicted_prob = theano.tensor.nnet.softmax(
             model.get_output_for(inputs))
-        loss = - ((targets * theano.tensor.log(output_predicted_prob)
-                   ).astype('float32')).sum(axis=1, acc_dtype='float32')
+        loss = - (targets * theano.tensor.log(output_predicted_prob)).astype(
+            'float32').sum(axis=1, acc_dtype='float32')
         return loss.mean()
 
 import unittest
@@ -348,7 +351,7 @@ class TestModuleFunctions(unittest.TestCase):
 
     def test_get_ntn_activation(self):
         obj = get_ntn_activation(
-            (None, 10), 6, 3, ScoreBuilder.NEITHERSYMMETRIC)
+            (None, 10), 6, 3, ScoreBuilder.NEITHERSYMMETRIC, 'test_ntn')
         obj_params = obj.get_params()
         self.assertEqual(len(obj_params), 1)
         T = obj_params[0].eval()
@@ -360,7 +363,8 @@ class TestModuleFunctions(unittest.TestCase):
         numpy.testing.assert_array_almost_equal(output, expected_activation)
 
     def test_get_nn_layer(self):
-        obj = get_nn_layer((None, 10), 3, lasagne.nonlinearities.identity)
+        obj = get_nn_layer(
+            (None, 10), 3, lasagne.nonlinearities.identity, 'test_nn')
         obj_params = obj.get_params()
         self.assertEqual(len(obj_params), 2)
         W = obj_params[0].eval()
@@ -383,7 +387,8 @@ class TestPassThroughLayer(unittest.TestCase):
 class TestComparatorActivation(unittest.TestCase):
 
     def obj_param_helper(self, symmetry, add_tensor):
-        obj = ComparatorActivation(3, 3, symmetry, add_tensor, 2)
+        obj = ComparatorActivation(
+            3, 3, symmetry, add_tensor, 2, 'test_comparator')
         params = obj.get_params()
         return (obj, params)
 

@@ -3,9 +3,9 @@
 | Description : Lasagne extensions for the neural tensor network activation.
 | Author      : Pushpendre Rastogi
 | Created     : Mon Aug 17 01:57:13 2015 (-0400)
-| Last-Updated: Wed Aug 19 17:27:26 2015 (-0400)
+| Last-Updated: Thu Aug 20 00:05:50 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 82
+|     Update #: 86
 '''
 import lasagne
 import unittest
@@ -120,14 +120,15 @@ class NeuralTensorNetworkLayer(lasagne.layers.Layer):
            completion. NIPS (2013)
     """
 
-    def __init__(self, incoming, num_units, bifurcation_point,
+    def __init__(self, incoming, name, num_units, bifurcation_point,
                  W=lasagne.init.GlorotUniform(),
                  b=lasagne.init.Constant(0.),
                  T=GlorotBilinearForm(symmetry=None),
                  nonlinearity=lasagne.nonlinearities.rectify,
                  use_numpy=False,
                  **kwargs):
-        super(NeuralTensorNetworkLayer, self).__init__(incoming, **kwargs)
+        super(NeuralTensorNetworkLayer, self).__init__(
+            incoming, name, **kwargs)
         process_fnc = lambda x: (x.eval()
                                  if use_numpy
                                  else x)
@@ -218,6 +219,7 @@ class TestNeuralTensorNetworkLayer(unittest.TestCase):
                       [[1, 1], [3, 3], [1, 1]]])
         obj = NeuralTensorNetworkLayer(
             incoming=(None, 3 + 3),
+            name='test_obj',
             num_units=num_units,
             bifurcation_point=3,
             W=None,
@@ -273,6 +275,7 @@ class TestNeuralTensorNetworkLayer(unittest.TestCase):
         num_units = 1
         obj = NeuralTensorNetworkLayer(
             incoming=(None, 3 + 2),
+            name='test_obj',
             num_units=num_units,
             bifurcation_point=3,
             W=None,
