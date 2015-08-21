@@ -3,9 +3,9 @@
 | Description : pylearn2 compatible dense_design_matrix objects that wrap Edge prediction data in csv files.
 | Author      : Pushpendre Rastogi
 | Created     : Tue Aug 18 00:45:47 2015 (-0400)
-| Last-Updated: Thu Aug 20 01:28:01 2015 (-0400)
+| Last-Updated: Thu Aug 20 22:56:32 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 26
+|     Update #: 32
 '''
 import csv
 import numpy as np
@@ -21,7 +21,9 @@ def convert_to_one_hot(y, y_labels):
 
 
 def load_data(start=0, stop=None, filename='', token_map='', header=False,
-              first_column_has_y_label=False, first_column_of_map_file_has_index=False):
+              first_column_has_y_label=False,
+              first_column_of_map_file_has_index=False,
+              return_composite_space_tuples=False):
     token_map = dict(((c1, int(c0)) if first_column_of_map_file_has_index else (c0, int(c1)))
                      for (c0, c1)
                      in [e.strip().split()
@@ -53,9 +55,12 @@ def load_data(start=0, stop=None, filename='', token_map='', header=False,
 
     X_labels = int(X.max()) + 1
     y_labels = int(y.max()) + 1
-    y = convert_to_one_hot(y, y_labels)
     import pdb
     # pdb.set_trace()
-    ddm = DenseDesignMatrix(
-        X=X, y=y, X_labels=X_labels, y_labels=y_labels)
+    if return_composite_space_tuples:
+        ddm = (X[:, 0:1], X[:, 1:2], y)
+    else:
+        y = convert_to_one_hot(y, y_labels)
+        ddm = DenseDesignMatrix(
+            X=X, y=y, X_labels=X_labels, y_labels=y_labels)
     return ddm
