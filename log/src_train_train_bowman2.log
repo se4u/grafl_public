@@ -1,0 +1,1879 @@
+Opened file  res/experiments/train_bowman2.yaml
+Opened file  res/bowman_wordnet_longer_shuffled_synset_relations.map
+Opened file  res/bowman_wordnet_longer_shuffled_synset_relations.tsv
+Opened file  src/train.py
+Parameter and initial learning rate summary:
+	projection_W: 0.00999999977648
+	optional_right_W: 0.00999999977648
+	optional_right_b: 0.00999999977648
+	optional_left_W: 0.00999999977648
+	optional_left_b: 0.00999999977648
+	comparator_W: 0.00999999977648
+	comparator_b: 0.00999999977648
+	softmax_b: 0.00999999977648
+	softmax_W: 0.00999999977648
+Compiling sgd_update...
+Compiling sgd_update done. Time elapsed: 3.164491 seconds
+compiling begin_record_entry...
+compiling begin_record_entry done. Time elapsed: 0.284554 seconds
+Monitored channels:
+	learning_rate
+	total_seconds_last_epoch
+	training_seconds_this_epoch
+	valid_comparator_col_norms_max
+	valid_comparator_col_norms_mean
+	valid_comparator_col_norms_min
+	valid_comparator_max_x_max_u
+	valid_comparator_max_x_mean_u
+	valid_comparator_max_x_min_u
+	valid_comparator_mean_x_max_u
+	valid_comparator_mean_x_mean_u
+	valid_comparator_mean_x_min_u
+	valid_comparator_min_x_max_u
+	valid_comparator_min_x_mean_u
+	valid_comparator_min_x_min_u
+	valid_comparator_range_x_max_u
+	valid_comparator_range_x_mean_u
+	valid_comparator_range_x_min_u
+	valid_comparator_row_norms_max
+	valid_comparator_row_norms_mean
+	valid_comparator_row_norms_min
+	valid_objective
+	valid_optional_layer_optional_left_col_norms_max
+	valid_optional_layer_optional_left_col_norms_mean
+	valid_optional_layer_optional_left_col_norms_min
+	valid_optional_layer_optional_left_max_x_max_u
+	valid_optional_layer_optional_left_max_x_mean_u
+	valid_optional_layer_optional_left_max_x_min_u
+	valid_optional_layer_optional_left_mean_x_max_u
+	valid_optional_layer_optional_left_mean_x_mean_u
+	valid_optional_layer_optional_left_mean_x_min_u
+	valid_optional_layer_optional_left_min_x_max_u
+	valid_optional_layer_optional_left_min_x_mean_u
+	valid_optional_layer_optional_left_min_x_min_u
+	valid_optional_layer_optional_left_range_x_max_u
+	valid_optional_layer_optional_left_range_x_mean_u
+	valid_optional_layer_optional_left_range_x_min_u
+	valid_optional_layer_optional_left_row_norms_max
+	valid_optional_layer_optional_left_row_norms_mean
+	valid_optional_layer_optional_left_row_norms_min
+	valid_optional_layer_optional_right_col_norms_max
+	valid_optional_layer_optional_right_col_norms_mean
+	valid_optional_layer_optional_right_col_norms_min
+	valid_optional_layer_optional_right_max_x_max_u
+	valid_optional_layer_optional_right_max_x_mean_u
+	valid_optional_layer_optional_right_max_x_min_u
+	valid_optional_layer_optional_right_mean_x_max_u
+	valid_optional_layer_optional_right_mean_x_mean_u
+	valid_optional_layer_optional_right_mean_x_min_u
+	valid_optional_layer_optional_right_min_x_max_u
+	valid_optional_layer_optional_right_min_x_mean_u
+	valid_optional_layer_optional_right_min_x_min_u
+	valid_optional_layer_optional_right_range_x_max_u
+	valid_optional_layer_optional_right_range_x_mean_u
+	valid_optional_layer_optional_right_range_x_min_u
+	valid_optional_layer_optional_right_row_norms_max
+	valid_optional_layer_optional_right_row_norms_mean
+	valid_optional_layer_optional_right_row_norms_min
+	valid_projection_col_norms_max
+	valid_projection_col_norms_mean
+	valid_projection_col_norms_min
+	valid_projection_row_norms_max
+	valid_projection_row_norms_mean
+	valid_projection_row_norms_min
+	valid_term_0
+	valid_term_1_weight_decay
+	valid_y_col_norms_max
+	valid_y_col_norms_mean
+	valid_y_col_norms_min
+	valid_y_max_max_class
+	valid_y_mean_max_class
+	valid_y_min_max_class
+	valid_y_misclass
+	valid_y_nll
+	valid_y_row_norms_max
+	valid_y_row_norms_mean
+	valid_y_row_norms_min
+Compiling accum...
+graph size: 281
+Compiling accum done. Time elapsed: 7.881775 seconds
+Monitoring step:
+	Epochs seen: 0
+	Batches seen: 0
+	Examples seen: 0
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 0.0
+	training_seconds_this_epoch: 0.0
+	valid_comparator_col_norms_max: 0.0800885185599
+	valid_comparator_col_norms_mean: 0.0731726288795
+	valid_comparator_col_norms_min: 0.0662670135498
+	valid_comparator_max_x_max_u: 4.98471854371e-05
+	valid_comparator_max_x_mean_u: 3.14012031595e-05
+	valid_comparator_max_x_min_u: 1.92358347704e-05
+	valid_comparator_mean_x_max_u: 8.4485654952e-06
+	valid_comparator_mean_x_mean_u: 5.15547435498e-06
+	valid_comparator_mean_x_min_u: 2.87033253699e-06
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 4.98471854371e-05
+	valid_comparator_range_x_mean_u: 3.14012031595e-05
+	valid_comparator_range_x_min_u: 1.92358347704e-05
+	valid_comparator_row_norms_max: 0.0579189099371
+	valid_comparator_row_norms_mean: 0.0517288036644
+	valid_comparator_row_norms_min: 0.0451457053423
+	valid_objective: 1.09876787663
+	valid_optional_layer_optional_left_col_norms_max: 0.0352356396616
+	valid_optional_layer_optional_left_col_norms_mean: 0.0291678123176
+	valid_optional_layer_optional_left_col_norms_min: 0.0220795106143
+	valid_optional_layer_optional_left_max_x_max_u: 0.000620017410256
+	valid_optional_layer_optional_left_max_x_mean_u: 0.000402495148592
+	valid_optional_layer_optional_left_max_x_min_u: 0.000247685238719
+	valid_optional_layer_optional_left_mean_x_max_u: 5.40490000276e-05
+	valid_optional_layer_optional_left_mean_x_mean_u: -7.84547296462e-07
+	valid_optional_layer_optional_left_mean_x_min_u: -7.31032778276e-05
+	valid_optional_layer_optional_left_min_x_max_u: -0.000247643765761
+	valid_optional_layer_optional_left_min_x_mean_u: -0.000410893640947
+	valid_optional_layer_optional_left_min_x_min_u: -0.000716512266081
+	valid_optional_layer_optional_left_range_x_max_u: 0.00118174206
+	valid_optional_layer_optional_left_range_x_mean_u: 0.000813388731331
+	valid_optional_layer_optional_left_range_x_min_u: 0.000546808936633
+	valid_optional_layer_optional_left_row_norms_max: 0.0568756759167
+	valid_optional_layer_optional_left_row_norms_mean: 0.0523202456534
+	valid_optional_layer_optional_left_row_norms_min: 0.0465543828905
+	valid_optional_layer_optional_right_col_norms_max: 0.0374201275408
+	valid_optional_layer_optional_right_col_norms_mean: 0.0293528940529
+	valid_optional_layer_optional_right_col_norms_min: 0.0221655797213
+	valid_optional_layer_optional_right_max_x_max_u: 0.000654909934383
+	valid_optional_layer_optional_right_max_x_mean_u: 0.000408732477808
+	valid_optional_layer_optional_right_max_x_min_u: 0.000250898418017
+	valid_optional_layer_optional_right_mean_x_max_u: 5.33508173248e-05
+	valid_optional_layer_optional_right_mean_x_mean_u: -9.80139247986e-07
+	valid_optional_layer_optional_right_mean_x_min_u: -6.24481981504e-05
+	valid_optional_layer_optional_right_min_x_max_u: -0.000247800751822
+	valid_optional_layer_optional_right_min_x_mean_u: -0.00040805854951
+	valid_optional_layer_optional_right_min_x_min_u: -0.000644769868813
+	valid_optional_layer_optional_right_range_x_max_u: 0.00117829511873
+	valid_optional_layer_optional_right_range_x_mean_u: 0.000816791609395
+	valid_optional_layer_optional_right_range_x_min_u: 0.000550404132809
+	valid_optional_layer_optional_right_row_norms_max: 0.0603863373399
+	valid_optional_layer_optional_right_row_norms_mean: 0.0526750646532
+	valid_optional_layer_optional_right_row_norms_min: 0.0466725975275
+	valid_projection_col_norms_max: 0.334107637405
+	valid_projection_col_norms_mean: 0.327879905701
+	valid_projection_col_norms_min: 0.322516471148
+	valid_projection_row_norms_max: 0.0369761623442
+	valid_projection_row_norms_mean: 0.0287869982421
+	valid_projection_row_norms_min: 0.0188516639173
+	valid_term_0: 1.09860992432
+	valid_term_1_weight_decay: 0.000155838104547
+	valid_y_col_norms_max: 0.0527726523578
+	valid_y_col_norms_mean: 0.0504177473485
+	valid_y_col_norms_min: 0.0468461662531
+	valid_y_max_max_class: 0.333333909512
+	valid_y_mean_max_class: 0.333333879709
+	valid_y_min_max_class: 0.333333849907
+	valid_y_misclass: 0.723238766193
+	valid_y_nll: 1.09860992432
+	valid_y_row_norms_max: 0.0157047975808
+	valid_y_row_norms_mean: 0.00933799147606
+	valid_y_row_norms_min: 0.00119532132521
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.084229 seconds
+Time this epoch: 2.504006 seconds
+Monitoring step:
+	Epochs seen: 1
+	Batches seen: 368
+	Examples seen: 36772
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 0.0
+	training_seconds_this_epoch: 2.50400614738
+	valid_comparator_col_norms_max: 2.33088088036
+	valid_comparator_col_norms_mean: 0.5977409482
+	valid_comparator_col_norms_min: 9.82696047785e-19
+	valid_comparator_max_x_max_u: 5.75216388702
+	valid_comparator_max_x_mean_u: 2.41608309746
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 1.50904965401
+	valid_comparator_mean_x_mean_u: 0.589730918407
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 5.75216388702
+	valid_comparator_range_x_mean_u: 2.41608309746
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.687629401684
+	valid_comparator_row_norms_mean: 0.61959528923
+	valid_comparator_row_norms_min: 0.566349208355
+	valid_objective: 0.140055343509
+	valid_optional_layer_optional_left_col_norms_max: 0.843155324459
+	valid_optional_layer_optional_left_col_norms_mean: 0.783781170845
+	valid_optional_layer_optional_left_col_norms_min: 0.750862181187
+	valid_optional_layer_optional_left_max_x_max_u: 0.480274766684
+	valid_optional_layer_optional_left_max_x_mean_u: 0.341153562069
+	valid_optional_layer_optional_left_max_x_min_u: 0.168961629272
+	valid_optional_layer_optional_left_mean_x_max_u: 0.0897961482406
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00399797223508
+	valid_optional_layer_optional_left_mean_x_min_u: -0.0895449519157
+	valid_optional_layer_optional_left_min_x_max_u: -0.169963091612
+	valid_optional_layer_optional_left_min_x_mean_u: -0.330495357513
+	valid_optional_layer_optional_left_min_x_min_u: -0.478651612997
+	valid_optional_layer_optional_left_range_x_max_u: 0.72649627924
+	valid_optional_layer_optional_left_range_x_mean_u: 0.671649038792
+	valid_optional_layer_optional_left_range_x_min_u: 0.641833305359
+	valid_optional_layer_optional_left_row_norms_max: 1.48002362251
+	valid_optional_layer_optional_left_row_norms_mean: 1.40227293968
+	valid_optional_layer_optional_left_row_norms_min: 1.32113182545
+	valid_optional_layer_optional_right_col_norms_max: 0.91114538908
+	valid_optional_layer_optional_right_col_norms_mean: 0.869376540184
+	valid_optional_layer_optional_right_col_norms_min: 0.84307384491
+	valid_optional_layer_optional_right_max_x_max_u: 0.52433013916
+	valid_optional_layer_optional_right_max_x_mean_u: 0.358298957348
+	valid_optional_layer_optional_right_max_x_min_u: 0.192525818944
+	valid_optional_layer_optional_right_mean_x_max_u: 0.0922612771392
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.0060253655538
+	valid_optional_layer_optional_right_mean_x_min_u: -0.0959214791656
+	valid_optional_layer_optional_right_min_x_max_u: -0.196455225348
+	valid_optional_layer_optional_right_min_x_mean_u: -0.376989066601
+	valid_optional_layer_optional_right_min_x_min_u: -0.524359881878
+	valid_optional_layer_optional_right_range_x_max_u: 0.777298092842
+	valid_optional_layer_optional_right_range_x_mean_u: 0.735287904739
+	valid_optional_layer_optional_right_range_x_min_u: 0.711291134357
+	valid_optional_layer_optional_right_row_norms_max: 1.62595427036
+	valid_optional_layer_optional_right_row_norms_mean: 1.55521404743
+	valid_optional_layer_optional_right_row_norms_min: 1.50251066685
+	valid_projection_col_norms_max: 1.383202672
+	valid_projection_col_norms_mean: 1.3580878973
+	valid_projection_col_norms_min: 1.34579706192
+	valid_projection_row_norms_max: 0.672087490559
+	valid_projection_row_norms_mean: 0.0904521197081
+	valid_projection_row_norms_min: 1.07435064991e-16
+	valid_term_0: 0.134669542313
+	valid_term_1_weight_decay: 0.00538578955457
+	valid_y_col_norms_max: 0.693792700768
+	valid_y_col_norms_mean: 0.614122569561
+	valid_y_col_norms_min: 0.474093586206
+	valid_y_max_max_class: 0.999996483326
+	valid_y_mean_max_class: 0.946624100208
+	valid_y_min_max_class: 0.492377310991
+	valid_y_misclass: 0.0544164292514
+	valid_y_nll: 0.134669542313
+	valid_y_row_norms_max: 0.370867788792
+	valid_y_row_norms_mean: 0.0851515457034
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.477813 seconds
+Time this epoch: 4.856525 seconds
+Monitoring step:
+	Epochs seen: 2
+	Batches seen: 736
+	Examples seen: 73544
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 4.85219573975
+	training_seconds_this_epoch: 4.85652112961
+	valid_comparator_col_norms_max: 2.35836625099
+	valid_comparator_col_norms_mean: 0.594968318939
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 6.74054670334
+	valid_comparator_max_x_mean_u: 2.58915138245
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 1.72700166702
+	valid_comparator_mean_x_mean_u: 0.614876449108
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 6.74054670334
+	valid_comparator_range_x_mean_u: 2.58915138245
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.680747270584
+	valid_comparator_row_norms_mean: 0.617931306362
+	valid_comparator_row_norms_min: 0.573302447796
+	valid_objective: 0.123602882028
+	valid_optional_layer_optional_left_col_norms_max: 0.885628640652
+	valid_optional_layer_optional_left_col_norms_mean: 0.827727854252
+	valid_optional_layer_optional_left_col_norms_min: 0.795178413391
+	valid_optional_layer_optional_left_max_x_max_u: 0.518137931824
+	valid_optional_layer_optional_left_max_x_mean_u: 0.376482397318
+	valid_optional_layer_optional_left_max_x_min_u: 0.203137025237
+	valid_optional_layer_optional_left_mean_x_max_u: 0.0874363407493
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00391883263364
+	valid_optional_layer_optional_left_mean_x_min_u: -0.0879404246807
+	valid_optional_layer_optional_left_min_x_max_u: -0.20421923697
+	valid_optional_layer_optional_left_min_x_mean_u: -0.365849345922
+	valid_optional_layer_optional_left_min_x_min_u: -0.515726864338
+	valid_optional_layer_optional_left_range_x_max_u: 0.798145055771
+	valid_optional_layer_optional_left_range_x_mean_u: 0.74233174324
+	valid_optional_layer_optional_left_range_x_min_u: 0.711801707745
+	valid_optional_layer_optional_left_row_norms_max: 1.57089114189
+	valid_optional_layer_optional_left_row_norms_mean: 1.48076486588
+	valid_optional_layer_optional_left_row_norms_min: 1.3920006752
+	valid_optional_layer_optional_right_col_norms_max: 0.957326173782
+	valid_optional_layer_optional_right_col_norms_mean: 0.917371809483
+	valid_optional_layer_optional_right_col_norms_min: 0.891732275486
+	valid_optional_layer_optional_right_max_x_max_u: 0.564178705215
+	valid_optional_layer_optional_right_max_x_mean_u: 0.395205289125
+	valid_optional_layer_optional_right_max_x_min_u: 0.226706713438
+	valid_optional_layer_optional_right_mean_x_max_u: 0.0919321924448
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.00605133920908
+	valid_optional_layer_optional_right_mean_x_min_u: -0.0959070250392
+	valid_optional_layer_optional_right_min_x_max_u: -0.230631053448
+	valid_optional_layer_optional_right_min_x_mean_u: -0.414195924997
+	valid_optional_layer_optional_right_min_x_min_u: -0.563395559788
+	valid_optional_layer_optional_right_range_x_max_u: 0.851317882538
+	valid_optional_layer_optional_right_range_x_mean_u: 0.809401094913
+	valid_optional_layer_optional_right_range_x_min_u: 0.784463822842
+	valid_optional_layer_optional_right_row_norms_max: 1.7009575367
+	valid_optional_layer_optional_right_row_norms_mean: 1.64110553265
+	valid_optional_layer_optional_right_row_norms_min: 1.57912147045
+	valid_projection_col_norms_max: 1.55862283707
+	valid_projection_col_norms_mean: 1.52026450634
+	valid_projection_col_norms_min: 1.50423109531
+	valid_projection_row_norms_max: 0.698767960072
+	valid_projection_row_norms_mean: 0.102438613772
+	valid_projection_row_norms_min: 7.28136983856e-17
+	valid_term_0: 0.117652192712
+	valid_term_1_weight_decay: 0.00595068885013
+	valid_y_col_norms_max: 0.745642781258
+	valid_y_col_norms_mean: 0.648900687695
+	valid_y_col_norms_min: 0.464022219181
+	valid_y_max_max_class: 0.99999922514
+	valid_y_mean_max_class: 0.948422431946
+	valid_y_min_max_class: 0.476924389601
+	valid_y_misclass: 0.0500109009445
+	valid_y_nll: 0.117652192712
+	valid_y_row_norms_max: 0.382878810167
+	valid_y_row_norms_mean: 0.0908155962825
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.142595 seconds
+Time this epoch: 0:01:03.917135
+Monitoring step:
+	Epochs seen: 3
+	Batches seen: 1104
+	Examples seen: 110316
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 10.0060958862
+	training_seconds_this_epoch: 63.9172477722
+	valid_comparator_col_norms_max: 2.29202675819
+	valid_comparator_col_norms_mean: 0.614435791969
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 7.48226499557
+	valid_comparator_max_x_mean_u: 2.80645465851
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 1.8853328228
+	valid_comparator_mean_x_mean_u: 0.647857904434
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 7.48226499557
+	valid_comparator_range_x_mean_u: 2.80645465851
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.732588350773
+	valid_comparator_row_norms_mean: 0.63123267889
+	valid_comparator_row_norms_min: 0.575636684895
+	valid_objective: 0.110148519278
+	valid_optional_layer_optional_left_col_norms_max: 0.911475598812
+	valid_optional_layer_optional_left_col_norms_mean: 0.875070512295
+	valid_optional_layer_optional_left_col_norms_min: 0.853199839592
+	valid_optional_layer_optional_left_max_x_max_u: 0.548857986927
+	valid_optional_layer_optional_left_max_x_mean_u: 0.415598571301
+	valid_optional_layer_optional_left_max_x_min_u: 0.256267905235
+	valid_optional_layer_optional_left_mean_x_max_u: 0.0889111161232
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.0041814702563
+	valid_optional_layer_optional_left_mean_x_min_u: -0.0909238085151
+	valid_optional_layer_optional_left_min_x_max_u: -0.257464259863
+	valid_optional_layer_optional_left_min_x_mean_u: -0.405005306005
+	valid_optional_layer_optional_left_min_x_min_u: -0.546158254147
+	valid_optional_layer_optional_left_range_x_max_u: 0.860979616642
+	valid_optional_layer_optional_left_range_x_mean_u: 0.820603370667
+	valid_optional_layer_optional_left_range_x_min_u: 0.797390222549
+	valid_optional_layer_optional_left_row_norms_max: 1.67364144325
+	valid_optional_layer_optional_left_row_norms_mean: 1.56507456303
+	valid_optional_layer_optional_left_row_norms_min: 1.46793532372
+	valid_optional_layer_optional_right_col_norms_max: 0.970231533051
+	valid_optional_layer_optional_right_col_norms_mean: 0.939173877239
+	valid_optional_layer_optional_right_col_norms_min: 0.904394865036
+	valid_optional_layer_optional_right_max_x_max_u: 0.577690243721
+	valid_optional_layer_optional_right_max_x_mean_u: 0.426597326994
+	valid_optional_layer_optional_right_max_x_min_u: 0.277878314257
+	valid_optional_layer_optional_right_mean_x_max_u: 0.0865546315908
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.00595343438908
+	valid_optional_layer_optional_right_mean_x_min_u: -0.0933056026697
+	valid_optional_layer_optional_right_min_x_max_u: -0.281681835651
+	valid_optional_layer_optional_right_min_x_mean_u: -0.444068938494
+	valid_optional_layer_optional_right_min_x_min_u: -0.577059924603
+	valid_optional_layer_optional_right_range_x_max_u: 0.904264032841
+	valid_optional_layer_optional_right_range_x_mean_u: 0.870666503906
+	valid_optional_layer_optional_right_range_x_min_u: 0.849740564823
+	valid_optional_layer_optional_right_row_norms_max: 1.74054813385
+	valid_optional_layer_optional_right_row_norms_mean: 1.67996954918
+	valid_optional_layer_optional_right_row_norms_min: 1.60670685768
+	valid_projection_col_norms_max: 1.65005862713
+	valid_projection_col_norms_mean: 1.6084946394
+	valid_projection_col_norms_min: 1.59180629253
+	valid_projection_row_norms_max: 0.710482239723
+	valid_projection_row_norms_mean: 0.10710889101
+	valid_projection_row_norms_min: 8.76302911901e-16
+	valid_term_0: 0.103713780642
+	valid_term_1_weight_decay: 0.00643476098776
+	valid_y_col_norms_max: 0.812977433205
+	valid_y_col_norms_mean: 0.695701301098
+	valid_y_col_norms_min: 0.475690662861
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.951573729515
+	valid_y_min_max_class: 0.464301377535
+	valid_y_misclass: 0.0400032810867
+	valid_y_nll: 0.103713780642
+	valid_y_row_norms_max: 0.385578334332
+	valid_y_row_norms_mean: 0.0986638814211
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.175880 seconds
+Time this epoch: 0:01:08.926821
+Monitoring step:
+	Epochs seen: 4
+	Batches seen: 1472
+	Examples seen: 147088
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 98.5319900513
+	training_seconds_this_epoch: 68.9267959595
+	valid_comparator_col_norms_max: 2.26017308235
+	valid_comparator_col_norms_mean: 0.658229708672
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 8.41740226746
+	valid_comparator_max_x_mean_u: 3.20038414001
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 2.11551427841
+	valid_comparator_mean_x_mean_u: 0.71420943737
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 8.41740226746
+	valid_comparator_range_x_mean_u: 3.20038414001
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.803338646889
+	valid_comparator_row_norms_mean: 0.669180691242
+	valid_comparator_row_norms_min: 0.61882597208
+	valid_objective: 0.0907362774014
+	valid_optional_layer_optional_left_col_norms_max: 0.955156981945
+	valid_optional_layer_optional_left_col_norms_mean: 0.925677359104
+	valid_optional_layer_optional_left_col_norms_min: 0.84074062109
+	valid_optional_layer_optional_left_max_x_max_u: 0.59033459425
+	valid_optional_layer_optional_left_max_x_mean_u: 0.451287895441
+	valid_optional_layer_optional_left_max_x_min_u: 0.302920997143
+	valid_optional_layer_optional_left_mean_x_max_u: 0.095192052424
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00476660393178
+	valid_optional_layer_optional_left_mean_x_min_u: -0.0999408513308
+	valid_optional_layer_optional_left_min_x_max_u: -0.304159611464
+	valid_optional_layer_optional_left_min_x_mean_u: -0.439923346043
+	valid_optional_layer_optional_left_min_x_min_u: -0.589477419853
+	valid_optional_layer_optional_left_range_x_max_u: 0.909896910191
+	valid_optional_layer_optional_left_range_x_mean_u: 0.891211509705
+	valid_optional_layer_optional_left_range_x_min_u: 0.832148134708
+	valid_optional_layer_optional_left_row_norms_max: 1.77691209316
+	valid_optional_layer_optional_left_row_norms_mean: 1.65562748909
+	valid_optional_layer_optional_left_row_norms_min: 1.55395936966
+	valid_optional_layer_optional_right_col_norms_max: 1.01531684399
+	valid_optional_layer_optional_right_col_norms_mean: 0.994871854782
+	valid_optional_layer_optional_right_col_norms_min: 0.899095833302
+	valid_optional_layer_optional_right_max_x_max_u: 0.610294818878
+	valid_optional_layer_optional_right_max_x_mean_u: 0.465279281139
+	valid_optional_layer_optional_right_max_x_min_u: 0.332897871733
+	valid_optional_layer_optional_right_mean_x_max_u: 0.0842771977186
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.00603833328933
+	valid_optional_layer_optional_right_mean_x_min_u: -0.0982420518994
+	valid_optional_layer_optional_right_min_x_max_u: -0.336568892002
+	valid_optional_layer_optional_right_min_x_mean_u: -0.482254862785
+	valid_optional_layer_optional_right_min_x_min_u: -0.61099421978
+	valid_optional_layer_optional_right_range_x_max_u: 0.962052047253
+	valid_optional_layer_optional_right_range_x_mean_u: 0.947534322739
+	valid_optional_layer_optional_right_range_x_min_u: 0.883701682091
+	valid_optional_layer_optional_right_row_norms_max: 1.83056509495
+	valid_optional_layer_optional_right_row_norms_mean: 1.77962946892
+	valid_optional_layer_optional_right_row_norms_min: 1.70125865936
+	valid_projection_col_norms_max: 1.70429623127
+	valid_projection_col_norms_mean: 1.66291570663
+	valid_projection_col_norms_min: 1.64683043957
+	valid_projection_row_norms_max: 0.72323846817
+	valid_projection_row_norms_mean: 0.108594767749
+	valid_projection_row_norms_min: 3.76896393358e-19
+	valid_term_0: 0.0836825817823
+	valid_term_1_weight_decay: 0.00705372542143
+	valid_y_col_norms_max: 0.89493149519
+	valid_y_col_norms_mean: 0.767621994019
+	valid_y_col_norms_min: 0.530104458332
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.960657656193
+	valid_y_min_max_class: 0.489098906517
+	valid_y_misclass: 0.0270858388394
+	valid_y_nll: 0.0836825817823
+	valid_y_row_norms_max: 0.39664593339
+	valid_y_row_norms_mean: 0.109482102096
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.276203 seconds
+Time this epoch: 0:01:08.570627
+Monitoring step:
+	Epochs seen: 5
+	Batches seen: 1840
+	Examples seen: 183860
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 103.284446716
+	training_seconds_this_epoch: 68.5705108643
+	valid_comparator_col_norms_max: 2.226375103
+	valid_comparator_col_norms_mean: 0.695809006691
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 9.21327495575
+	valid_comparator_max_x_mean_u: 3.55284667015
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 2.32775092125
+	valid_comparator_mean_x_mean_u: 0.774478912354
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 9.21327495575
+	valid_comparator_range_x_mean_u: 3.55284667015
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.889299750328
+	valid_comparator_row_norms_mean: 0.702402234077
+	valid_comparator_row_norms_min: 0.650387406349
+	valid_objective: 0.0750025585294
+	valid_optional_layer_optional_left_col_norms_max: 1.02404332161
+	valid_optional_layer_optional_left_col_norms_mean: 0.967914164066
+	valid_optional_layer_optional_left_col_norms_min: 0.81179857254
+	valid_optional_layer_optional_left_max_x_max_u: 0.629990577698
+	valid_optional_layer_optional_left_max_x_mean_u: 0.477793693542
+	valid_optional_layer_optional_left_max_x_min_u: 0.338542371988
+	valid_optional_layer_optional_left_mean_x_max_u: 0.101952552795
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00534233963117
+	valid_optional_layer_optional_left_mean_x_min_u: -0.111060164869
+	valid_optional_layer_optional_left_min_x_max_u: -0.339794665575
+	valid_optional_layer_optional_left_min_x_mean_u: -0.46543431282
+	valid_optional_layer_optional_left_min_x_min_u: -0.630588948727
+	valid_optional_layer_optional_left_range_x_max_u: 0.980371773243
+	valid_optional_layer_optional_left_range_x_mean_u: 0.943227231503
+	valid_optional_layer_optional_left_range_x_min_u: 0.82290571928
+	valid_optional_layer_optional_left_row_norms_max: 1.87024748325
+	valid_optional_layer_optional_left_row_norms_mean: 1.73242902756
+	valid_optional_layer_optional_left_row_norms_min: 1.62622487545
+	valid_optional_layer_optional_right_col_norms_max: 1.0743188858
+	valid_optional_layer_optional_right_col_norms_mean: 1.0427852869
+	valid_optional_layer_optional_right_col_norms_min: 0.889879286289
+	valid_optional_layer_optional_right_max_x_max_u: 0.644916296005
+	valid_optional_layer_optional_right_max_x_mean_u: 0.492399692535
+	valid_optional_layer_optional_right_max_x_min_u: 0.363801240921
+	valid_optional_layer_optional_right_mean_x_max_u: 0.0900356918573
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.0065525569953
+	valid_optional_layer_optional_right_mean_x_min_u: -0.109512574971
+	valid_optional_layer_optional_right_min_x_max_u: -0.367406219244
+	valid_optional_layer_optional_right_min_x_mean_u: -0.5101557374
+	valid_optional_layer_optional_right_min_x_min_u: -0.647480785847
+	valid_optional_layer_optional_right_range_x_max_u: 1.02211105824
+	valid_optional_layer_optional_right_range_x_mean_u: 1.00255525112
+	valid_optional_layer_optional_right_range_x_min_u: 0.892630159855
+	valid_optional_layer_optional_right_row_norms_max: 1.91676795483
+	valid_optional_layer_optional_right_row_norms_mean: 1.86577403545
+	valid_optional_layer_optional_right_row_norms_min: 1.78459572792
+	valid_projection_col_norms_max: 1.70769286156
+	valid_projection_col_norms_mean: 1.66804683208
+	valid_projection_col_norms_min: 1.65278172493
+	valid_projection_row_norms_max: 0.737226366997
+	valid_projection_row_norms_mean: 0.106730803847
+	valid_projection_row_norms_min: 1.64442245618e-20
+	valid_term_0: 0.0675563514233
+	valid_term_1_weight_decay: 0.00744620291516
+	valid_y_col_norms_max: 0.967195272446
+	valid_y_col_norms_mean: 0.836707770824
+	valid_y_col_norms_min: 0.597647666931
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.968154430389
+	valid_y_min_max_class: 0.522162854671
+	valid_y_misclass: 0.0173773597926
+	valid_y_nll: 0.0675563514233
+	valid_y_row_norms_max: 0.405059874058
+	valid_y_row_norms_mean: 0.119337230921
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.627742 seconds
+Time this epoch: 0:01:07.869622
+Monitoring step:
+	Epochs seen: 6
+	Batches seen: 2208
+	Examples seen: 220632
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 103.27040863
+	training_seconds_this_epoch: 67.8698806763
+	valid_comparator_col_norms_max: 2.20466947556
+	valid_comparator_col_norms_mean: 0.727056384087
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 9.98931980133
+	valid_comparator_max_x_mean_u: 3.91468691826
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 2.52934861183
+	valid_comparator_mean_x_mean_u: 0.843046784401
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 9.98931980133
+	valid_comparator_range_x_mean_u: 3.91468691826
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.926526069641
+	valid_comparator_row_norms_mean: 0.731594860554
+	valid_comparator_row_norms_min: 0.678511977196
+	valid_objective: 0.064423032105
+	valid_optional_layer_optional_left_col_norms_max: 1.09608161449
+	valid_optional_layer_optional_left_col_norms_mean: 1.0198597908
+	valid_optional_layer_optional_left_col_norms_min: 0.813134610653
+	valid_optional_layer_optional_left_max_x_max_u: 0.675491929054
+	valid_optional_layer_optional_left_max_x_mean_u: 0.506043195724
+	valid_optional_layer_optional_left_max_x_min_u: 0.363113850355
+	valid_optional_layer_optional_left_mean_x_max_u: 0.110341012478
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00582714984193
+	valid_optional_layer_optional_left_mean_x_min_u: -0.121184706688
+	valid_optional_layer_optional_left_min_x_max_u: -0.365907847881
+	valid_optional_layer_optional_left_min_x_mean_u: -0.492704898119
+	valid_optional_layer_optional_left_min_x_min_u: -0.676639258862
+	valid_optional_layer_optional_left_range_x_max_u: 1.04842507839
+	valid_optional_layer_optional_left_range_x_mean_u: 0.998747944832
+	valid_optional_layer_optional_left_range_x_min_u: 0.839045763016
+	valid_optional_layer_optional_left_row_norms_max: 1.96993255615
+	valid_optional_layer_optional_left_row_norms_mean: 1.82711029053
+	valid_optional_layer_optional_left_row_norms_min: 1.72156906128
+	valid_optional_layer_optional_right_col_norms_max: 1.13212370872
+	valid_optional_layer_optional_right_col_norms_mean: 1.08627486229
+	valid_optional_layer_optional_right_col_norms_min: 0.887150645256
+	valid_optional_layer_optional_right_max_x_max_u: 0.679261624813
+	valid_optional_layer_optional_right_max_x_mean_u: 0.516212105751
+	valid_optional_layer_optional_right_max_x_min_u: 0.386497080326
+	valid_optional_layer_optional_right_mean_x_max_u: 0.0942885056138
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.00686429673806
+	valid_optional_layer_optional_right_mean_x_min_u: -0.117627047002
+	valid_optional_layer_optional_right_min_x_max_u: -0.390443980694
+	valid_optional_layer_optional_right_min_x_mean_u: -0.534871816635
+	valid_optional_layer_optional_right_min_x_min_u: -0.683192849159
+	valid_optional_layer_optional_right_range_x_max_u: 1.07665812969
+	valid_optional_layer_optional_right_range_x_mean_u: 1.05108356476
+	valid_optional_layer_optional_right_range_x_min_u: 0.906021237373
+	valid_optional_layer_optional_right_row_norms_max: 2.00924968719
+	valid_optional_layer_optional_right_row_norms_mean: 1.94429469109
+	valid_optional_layer_optional_right_row_norms_min: 1.85807228088
+	valid_projection_col_norms_max: 1.68955397606
+	valid_projection_col_norms_mean: 1.65207839012
+	valid_projection_col_norms_min: 1.63765847683
+	valid_projection_row_norms_max: 0.7577226758
+	valid_projection_row_norms_mean: 0.104550793767
+	valid_projection_row_norms_min: 2.68948001869e-20
+	valid_term_0: 0.0567072220147
+	valid_term_1_weight_decay: 0.00771579844877
+	valid_y_col_norms_max: 1.03553068638
+	valid_y_col_norms_mean: 0.901177763939
+	valid_y_col_norms_min: 0.669019639492
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.974389910698
+	valid_y_min_max_class: 0.550671339035
+	valid_y_misclass: 0.0130806108937
+	valid_y_nll: 0.0567072220147
+	valid_y_row_norms_max: 0.414139688015
+	valid_y_row_norms_mean: 0.12819519639
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.221205 seconds
+Time this epoch: 0:01:14.746559
+Monitoring step:
+	Epochs seen: 7
+	Batches seen: 2576
+	Examples seen: 257404
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 105.101905823
+	training_seconds_this_epoch: 74.7464523315
+	valid_comparator_col_norms_max: 2.18900680542
+	valid_comparator_col_norms_mean: 0.748836934566
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 10.7533245087
+	valid_comparator_max_x_mean_u: 4.2142829895
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 2.73634362221
+	valid_comparator_mean_x_mean_u: 0.898582220078
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 10.7533245087
+	valid_comparator_range_x_mean_u: 4.2142829895
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.938149869442
+	valid_comparator_row_norms_mean: 0.75280547142
+	valid_comparator_row_norms_min: 0.703693926334
+	valid_objective: 0.053952191025
+	valid_optional_layer_optional_left_col_norms_max: 1.16950631142
+	valid_optional_layer_optional_left_col_norms_mean: 1.06422591209
+	valid_optional_layer_optional_left_col_norms_min: 0.805326581001
+	valid_optional_layer_optional_left_max_x_max_u: 0.71929949522
+	valid_optional_layer_optional_left_max_x_mean_u: 0.529924452305
+	valid_optional_layer_optional_left_max_x_min_u: 0.377686738968
+	valid_optional_layer_optional_left_mean_x_max_u: 0.118863500655
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00630622031167
+	valid_optional_layer_optional_left_mean_x_min_u: -0.130689740181
+	valid_optional_layer_optional_left_min_x_max_u: -0.384873837233
+	valid_optional_layer_optional_left_min_x_mean_u: -0.515493690968
+	valid_optional_layer_optional_left_min_x_min_u: -0.7208532691
+	valid_optional_layer_optional_left_range_x_max_u: 1.10739195347
+	valid_optional_layer_optional_left_range_x_mean_u: 1.04541754723
+	valid_optional_layer_optional_left_range_x_min_u: 0.846718966961
+	valid_optional_layer_optional_left_row_norms_max: 2.0638718605
+	valid_optional_layer_optional_left_row_norms_mean: 1.90904188156
+	valid_optional_layer_optional_left_row_norms_min: 1.79971587658
+	valid_optional_layer_optional_right_col_norms_max: 1.19329023361
+	valid_optional_layer_optional_right_col_norms_mean: 1.12780296803
+	valid_optional_layer_optional_right_col_norms_min: 0.878246665001
+	valid_optional_layer_optional_right_max_x_max_u: 0.715806424618
+	valid_optional_layer_optional_right_max_x_mean_u: 0.537485063076
+	valid_optional_layer_optional_right_max_x_min_u: 0.402083009481
+	valid_optional_layer_optional_right_mean_x_max_u: 0.0991570204496
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.0072053684853
+	valid_optional_layer_optional_right_mean_x_min_u: -0.125343248248
+	valid_optional_layer_optional_right_min_x_max_u: -0.407667756081
+	valid_optional_layer_optional_right_min_x_mean_u: -0.557397723198
+	valid_optional_layer_optional_right_min_x_min_u: -0.720416367054
+	valid_optional_layer_optional_right_range_x_max_u: 1.12978672981
+	valid_optional_layer_optional_right_range_x_mean_u: 1.09488260746
+	valid_optional_layer_optional_right_range_x_min_u: 0.913415670395
+	valid_optional_layer_optional_right_row_norms_max: 2.09680247307
+	valid_optional_layer_optional_right_row_norms_mean: 2.01977014542
+	valid_optional_layer_optional_right_row_norms_min: 1.92969942093
+	valid_projection_col_norms_max: 1.66325259209
+	valid_projection_col_norms_mean: 1.62786710262
+	valid_projection_col_norms_min: 1.61231851578
+	valid_projection_row_norms_max: 0.782314479351
+	valid_projection_row_norms_mean: 0.10233899951
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.0460872910917
+	valid_term_1_weight_decay: 0.00786490272731
+	valid_y_col_norms_max: 1.0942966938
+	valid_y_col_norms_mean: 0.958143115044
+	valid_y_col_norms_min: 0.736242949963
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.978095054626
+	valid_y_min_max_class: 0.59037643671
+	valid_y_misclass: 0.00856630410999
+	valid_y_nll: 0.0460872910917
+	valid_y_row_norms_max: 0.423003584146
+	valid_y_row_norms_mean: 0.135847270489
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.144371 seconds
+Time this epoch: 0:01:06.924756
+Monitoring step:
+	Epochs seen: 8
+	Batches seen: 2944
+	Examples seen: 294176
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 109.643966675
+	training_seconds_this_epoch: 66.9247589111
+	valid_comparator_col_norms_max: 2.19968056679
+	valid_comparator_col_norms_mean: 0.769870400429
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 11.3128604889
+	valid_comparator_max_x_mean_u: 4.54115390778
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 2.93249678612
+	valid_comparator_mean_x_mean_u: 0.965126752853
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 11.3128604889
+	valid_comparator_range_x_mean_u: 4.54115390778
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.949342727661
+	valid_comparator_row_norms_mean: 0.773764431477
+	valid_comparator_row_norms_min: 0.724302053452
+	valid_objective: 0.0439183115959
+	valid_optional_layer_optional_left_col_norms_max: 1.24697899818
+	valid_optional_layer_optional_left_col_norms_mean: 1.11263644695
+	valid_optional_layer_optional_left_col_norms_min: 0.807823777199
+	valid_optional_layer_optional_left_max_x_max_u: 0.763352453709
+	valid_optional_layer_optional_left_max_x_mean_u: 0.554625093937
+	valid_optional_layer_optional_left_max_x_min_u: 0.39160656929
+	valid_optional_layer_optional_left_mean_x_max_u: 0.129303961992
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.0068606887944
+	valid_optional_layer_optional_left_mean_x_min_u: -0.140901595354
+	valid_optional_layer_optional_left_min_x_max_u: -0.400743722916
+	valid_optional_layer_optional_left_min_x_mean_u: -0.539052963257
+	valid_optional_layer_optional_left_min_x_min_u: -0.76512748003
+	valid_optional_layer_optional_left_range_x_max_u: 1.16657328606
+	valid_optional_layer_optional_left_range_x_mean_u: 1.09367799759
+	valid_optional_layer_optional_left_range_x_min_u: 0.865437984467
+	valid_optional_layer_optional_left_row_norms_max: 2.15622615814
+	valid_optional_layer_optional_left_row_norms_mean: 1.99860870838
+	valid_optional_layer_optional_left_row_norms_min: 1.88773572445
+	valid_optional_layer_optional_right_col_norms_max: 1.25144648552
+	valid_optional_layer_optional_right_col_norms_mean: 1.16760158539
+	valid_optional_layer_optional_right_col_norms_min: 0.878176212311
+	valid_optional_layer_optional_right_max_x_max_u: 0.752094984055
+	valid_optional_layer_optional_right_max_x_mean_u: 0.55754327774
+	valid_optional_layer_optional_right_max_x_min_u: 0.413766205311
+	valid_optional_layer_optional_right_mean_x_max_u: 0.106278806925
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.00768445665017
+	valid_optional_layer_optional_right_mean_x_min_u: -0.133020237088
+	valid_optional_layer_optional_right_min_x_max_u: -0.420074760914
+	valid_optional_layer_optional_right_min_x_mean_u: -0.578885197639
+	valid_optional_layer_optional_right_min_x_min_u: -0.75717151165
+	valid_optional_layer_optional_right_range_x_max_u: 1.17832612991
+	valid_optional_layer_optional_right_range_x_mean_u: 1.13642859459
+	valid_optional_layer_optional_right_range_x_min_u: 0.930382072926
+	valid_optional_layer_optional_right_row_norms_max: 2.17433786392
+	valid_optional_layer_optional_right_row_norms_mean: 2.0922832489
+	valid_optional_layer_optional_right_row_norms_min: 2.00030517578
+	valid_projection_col_norms_max: 1.63121211529
+	valid_projection_col_norms_mean: 1.59863078594
+	valid_projection_col_norms_min: 1.58197057247
+	valid_projection_row_norms_max: 0.811106026173
+	valid_projection_row_norms_mean: 0.0998979955912
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.0359168872237
+	valid_term_1_weight_decay: 0.00800140574574
+	valid_y_col_norms_max: 1.14932286739
+	valid_y_col_norms_mean: 1.01337087154
+	valid_y_col_norms_min: 0.804689466953
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.983222603798
+	valid_y_min_max_class: 0.663658082485
+	valid_y_misclass: 0.00617317808792
+	valid_y_nll: 0.0359168872237
+	valid_y_row_norms_max: 0.434224098921
+	valid_y_row_norms_mean: 0.143128857017
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.105890 seconds
+Time this epoch: 0:01:08.965330
+Monitoring step:
+	Epochs seen: 9
+	Batches seen: 3312
+	Examples seen: 330948
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 103.427719116
+	training_seconds_this_epoch: 68.965385437
+	valid_comparator_col_norms_max: 2.20869278908
+	valid_comparator_col_norms_mean: 0.786800324917
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 12.1568145752
+	valid_comparator_max_x_mean_u: 4.82884073257
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 3.19358515739
+	valid_comparator_mean_x_mean_u: 1.02268648148
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 12.1568145752
+	valid_comparator_range_x_mean_u: 4.82884073257
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.956712722778
+	valid_comparator_row_norms_mean: 0.791337251663
+	valid_comparator_row_norms_min: 0.748924612999
+	valid_objective: 0.036059435457
+	valid_optional_layer_optional_left_col_norms_max: 1.31384205818
+	valid_optional_layer_optional_left_col_norms_mean: 1.14894998074
+	valid_optional_layer_optional_left_col_norms_min: 0.796236038208
+	valid_optional_layer_optional_left_max_x_max_u: 0.799502849579
+	valid_optional_layer_optional_left_max_x_mean_u: 0.573490381241
+	valid_optional_layer_optional_left_max_x_min_u: 0.398935556412
+	valid_optional_layer_optional_left_mean_x_max_u: 0.138231992722
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00738355098292
+	valid_optional_layer_optional_left_mean_x_min_u: -0.150205522776
+	valid_optional_layer_optional_left_min_x_max_u: -0.412599086761
+	valid_optional_layer_optional_left_min_x_mean_u: -0.556805551052
+	valid_optional_layer_optional_left_min_x_min_u: -0.801424741745
+	valid_optional_layer_optional_left_range_x_max_u: 1.21507489681
+	valid_optional_layer_optional_left_range_x_mean_u: 1.13029611111
+	valid_optional_layer_optional_left_range_x_min_u: 0.870175480843
+	valid_optional_layer_optional_left_row_norms_max: 2.22592496872
+	valid_optional_layer_optional_left_row_norms_mean: 2.06741881371
+	valid_optional_layer_optional_left_row_norms_min: 1.95537352562
+	valid_optional_layer_optional_right_col_norms_max: 1.31688213348
+	valid_optional_layer_optional_right_col_norms_mean: 1.21436095238
+	valid_optional_layer_optional_right_col_norms_min: 0.884598493576
+	valid_optional_layer_optional_right_max_x_max_u: 0.788609743118
+	valid_optional_layer_optional_right_max_x_mean_u: 0.578327059746
+	valid_optional_layer_optional_right_max_x_min_u: 0.425645262003
+	valid_optional_layer_optional_right_mean_x_max_u: 0.113960839808
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.00821492634714
+	valid_optional_layer_optional_right_mean_x_min_u: -0.140303403139
+	valid_optional_layer_optional_right_min_x_max_u: -0.432060450315
+	valid_optional_layer_optional_right_min_x_mean_u: -0.601100206375
+	valid_optional_layer_optional_right_min_x_min_u: -0.793870329857
+	valid_optional_layer_optional_right_range_x_max_u: 1.22707188129
+	valid_optional_layer_optional_right_range_x_mean_u: 1.17942798138
+	valid_optional_layer_optional_right_range_x_min_u: 0.952853798866
+	valid_optional_layer_optional_right_row_norms_max: 2.26372170448
+	valid_optional_layer_optional_right_row_norms_mean: 2.17753148079
+	valid_optional_layer_optional_right_row_norms_min: 2.08066892624
+	valid_projection_col_norms_max: 1.60200631618
+	valid_projection_col_norms_mean: 1.57203090191
+	valid_projection_col_norms_min: 1.55427694321
+	valid_projection_row_norms_max: 0.839469492435
+	valid_projection_row_norms_mean: 0.097898863256
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.0279470086098
+	valid_term_1_weight_decay: 0.00811237283051
+	valid_y_col_norms_max: 1.19576597214
+	valid_y_col_norms_mean: 1.06350064278
+	valid_y_col_norms_min: 0.869063556194
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.987105190754
+	valid_y_min_max_class: 0.736421108246
+	valid_y_misclass: 0.00519417179748
+	valid_y_nll: 0.0279470086098
+	valid_y_row_norms_max: 0.443871229887
+	valid_y_row_norms_mean: 0.149689927697
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.099741 seconds
+Time this epoch: 0:01:08.432041
+Monitoring step:
+	Epochs seen: 10
+	Batches seen: 3680
+	Examples seen: 367720
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 104.563934326
+	training_seconds_this_epoch: 68.4322738647
+	valid_comparator_col_norms_max: 2.27729058266
+	valid_comparator_col_norms_mean: 0.797442913055
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 12.9137544632
+	valid_comparator_max_x_mean_u: 5.05438899994
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 3.4116024971
+	valid_comparator_mean_x_mean_u: 1.06759953499
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 12.9137544632
+	valid_comparator_range_x_mean_u: 5.05438899994
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.959869384766
+	valid_comparator_row_norms_mean: 0.802566170692
+	valid_comparator_row_norms_min: 0.761112809181
+	valid_objective: 0.0284905359149
+	valid_optional_layer_optional_left_col_norms_max: 1.37695288658
+	valid_optional_layer_optional_left_col_norms_mean: 1.18218481541
+	valid_optional_layer_optional_left_col_norms_min: 0.784957826138
+	valid_optional_layer_optional_left_max_x_max_u: 0.829063057899
+	valid_optional_layer_optional_left_max_x_mean_u: 0.589183986187
+	valid_optional_layer_optional_left_max_x_min_u: 0.403438925743
+	valid_optional_layer_optional_left_mean_x_max_u: 0.146887749434
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00790223386139
+	valid_optional_layer_optional_left_mean_x_min_u: -0.159012898803
+	valid_optional_layer_optional_left_min_x_max_u: -0.422735065222
+	valid_optional_layer_optional_left_min_x_mean_u: -0.57152312994
+	valid_optional_layer_optional_left_min_x_min_u: -0.831052899361
+	valid_optional_layer_optional_left_range_x_max_u: 1.25548279285
+	valid_optional_layer_optional_left_range_x_mean_u: 1.16070747375
+	valid_optional_layer_optional_left_range_x_min_u: 0.872165381908
+	valid_optional_layer_optional_left_row_norms_max: 2.28856348991
+	valid_optional_layer_optional_left_row_norms_mean: 2.13114500046
+	valid_optional_layer_optional_left_row_norms_min: 2.01691055298
+	valid_optional_layer_optional_right_col_norms_max: 1.3726221323
+	valid_optional_layer_optional_right_col_norms_mean: 1.25145924091
+	valid_optional_layer_optional_right_col_norms_min: 0.884423196316
+	valid_optional_layer_optional_right_max_x_max_u: 0.816838681698
+	valid_optional_layer_optional_right_max_x_mean_u: 0.593956291676
+	valid_optional_layer_optional_right_max_x_min_u: 0.434248626232
+	valid_optional_layer_optional_right_mean_x_max_u: 0.121260538697
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.00871719699353
+	valid_optional_layer_optional_right_mean_x_min_u: -0.147375583649
+	valid_optional_layer_optional_right_min_x_max_u: -0.441204220057
+	valid_optional_layer_optional_right_min_x_mean_u: -0.617895126343
+	valid_optional_layer_optional_right_min_x_min_u: -0.822247087955
+	valid_optional_layer_optional_right_range_x_max_u: 1.26469862461
+	valid_optional_layer_optional_right_range_x_mean_u: 1.21185171604
+	valid_optional_layer_optional_right_range_x_min_u: 0.966568648815
+	valid_optional_layer_optional_right_row_norms_max: 2.33918738365
+	valid_optional_layer_optional_right_row_norms_mean: 2.24569988251
+	valid_optional_layer_optional_right_row_norms_min: 2.14338731766
+	valid_projection_col_norms_max: 1.57798469067
+	valid_projection_col_norms_mean: 1.54911911488
+	valid_projection_col_norms_min: 1.53050994873
+	valid_projection_row_norms_max: 0.863042354584
+	valid_projection_row_norms_mean: 0.096314445138
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.0203262679279
+	valid_term_1_weight_decay: 0.00816425774246
+	valid_y_col_norms_max: 1.23487627506
+	valid_y_col_norms_mean: 1.10617625713
+	valid_y_col_norms_min: 0.924515902996
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.990267038345
+	valid_y_min_max_class: 0.809562504292
+	valid_y_misclass: 0.00282824016176
+	valid_y_nll: 0.0203262679279
+	valid_y_row_norms_max: 0.473328500986
+	valid_y_row_norms_mean: 0.155269131064
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.154166 seconds
+Time this epoch: 0:01:07.542255
+Monitoring step:
+	Epochs seen: 11
+	Batches seen: 4048
+	Examples seen: 404492
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 102.362762451
+	training_seconds_this_epoch: 67.5420379639
+	valid_comparator_col_norms_max: 2.3535656929
+	valid_comparator_col_norms_mean: 0.803601324558
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 13.0107917786
+	valid_comparator_max_x_mean_u: 5.21520423889
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 3.52091693878
+	valid_comparator_mean_x_mean_u: 1.10115253925
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 13.0107917786
+	valid_comparator_range_x_mean_u: 5.21520423889
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.962279856205
+	valid_comparator_row_norms_mean: 0.809298753738
+	valid_comparator_row_norms_min: 0.766241252422
+	valid_objective: 0.0215033441782
+	valid_optional_layer_optional_left_col_norms_max: 1.43484270573
+	valid_optional_layer_optional_left_col_norms_mean: 1.2145100832
+	valid_optional_layer_optional_left_col_norms_min: 0.779872894287
+	valid_optional_layer_optional_left_max_x_max_u: 0.855106949806
+	valid_optional_layer_optional_left_max_x_mean_u: 0.603938221931
+	valid_optional_layer_optional_left_max_x_min_u: 0.408364325762
+	valid_optional_layer_optional_left_mean_x_max_u: 0.155749469995
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00842302665114
+	valid_optional_layer_optional_left_mean_x_min_u: -0.167754560709
+	valid_optional_layer_optional_left_min_x_max_u: -0.429760783911
+	valid_optional_layer_optional_left_min_x_mean_u: -0.585391759872
+	valid_optional_layer_optional_left_min_x_min_u: -0.857080817223
+	valid_optional_layer_optional_left_range_x_max_u: 1.28910493851
+	valid_optional_layer_optional_left_range_x_mean_u: 1.1893286705
+	valid_optional_layer_optional_left_range_x_min_u: 0.880739748478
+	valid_optional_layer_optional_left_row_norms_max: 2.35073709488
+	valid_optional_layer_optional_left_row_norms_mean: 2.19295239449
+	valid_optional_layer_optional_left_row_norms_min: 2.07615160942
+	valid_optional_layer_optional_right_col_norms_max: 1.41554367542
+	valid_optional_layer_optional_right_col_norms_mean: 1.2795227766
+	valid_optional_layer_optional_right_col_norms_min: 0.88633620739
+	valid_optional_layer_optional_right_max_x_max_u: 0.839830040932
+	valid_optional_layer_optional_right_max_x_mean_u: 0.606311380863
+	valid_optional_layer_optional_right_max_x_min_u: 0.439707487822
+	valid_optional_layer_optional_right_mean_x_max_u: 0.12796959281
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.00915793608874
+	valid_optional_layer_optional_right_mean_x_min_u: -0.154018089175
+	valid_optional_layer_optional_right_min_x_max_u: -0.446250349283
+	valid_optional_layer_optional_right_min_x_mean_u: -0.631307482719
+	valid_optional_layer_optional_right_min_x_min_u: -0.845266819
+	valid_optional_layer_optional_right_range_x_max_u: 1.29263293743
+	valid_optional_layer_optional_right_range_x_mean_u: 1.23761940002
+	valid_optional_layer_optional_right_range_x_min_u: 0.98285228014
+	valid_optional_layer_optional_right_row_norms_max: 2.39644169807
+	valid_optional_layer_optional_right_row_norms_mean: 2.29746365547
+	valid_optional_layer_optional_right_row_norms_min: 2.19072961807
+	valid_projection_col_norms_max: 1.55514359474
+	valid_projection_col_norms_mean: 1.52672207355
+	valid_projection_col_norms_min: 1.50725650787
+	valid_projection_row_norms_max: 0.888133227825
+	valid_projection_row_norms_mean: 0.0946961194277
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.0133387893438
+	valid_term_1_weight_decay: 0.00816456694156
+	valid_y_col_norms_max: 1.2673279047
+	valid_y_col_norms_mean: 1.14330673218
+	valid_y_col_norms_min: 0.973221242428
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.992720723152
+	valid_y_min_max_class: 0.847061872482
+	valid_y_misclass: 0.00163167703431
+	valid_y_nll: 0.0133387893438
+	valid_y_row_norms_max: 0.495340138674
+	valid_y_row_norms_mean: 0.160104334354
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.169558 seconds
+Time this epoch: 0:01:08.002856
+Monitoring step:
+	Epochs seen: 12
+	Batches seen: 4416
+	Examples seen: 441264
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 102.094474792
+	training_seconds_this_epoch: 68.0030593872
+	valid_comparator_col_norms_max: 2.40032243729
+	valid_comparator_col_norms_mean: 0.807590723038
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 12.7327060699
+	valid_comparator_max_x_mean_u: 5.32587814331
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 3.56197142601
+	valid_comparator_mean_x_mean_u: 1.1264744997
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 12.7327060699
+	valid_comparator_range_x_mean_u: 5.32587814331
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.963205039501
+	valid_comparator_row_norms_mean: 0.813627004623
+	valid_comparator_row_norms_min: 0.765678942204
+	valid_objective: 0.0175987668335
+	valid_optional_layer_optional_left_col_norms_max: 1.49102830887
+	valid_optional_layer_optional_left_col_norms_mean: 1.2478518486
+	valid_optional_layer_optional_left_col_norms_min: 0.779505848885
+	valid_optional_layer_optional_left_max_x_max_u: 0.874236166477
+	valid_optional_layer_optional_left_max_x_mean_u: 0.615917682648
+	valid_optional_layer_optional_left_max_x_min_u: 0.412458389997
+	valid_optional_layer_optional_left_mean_x_max_u: 0.164219424129
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00892000924796
+	valid_optional_layer_optional_left_mean_x_min_u: -0.175905719399
+	valid_optional_layer_optional_left_min_x_max_u: -0.436816841364
+	valid_optional_layer_optional_left_min_x_mean_u: -0.596713006496
+	valid_optional_layer_optional_left_min_x_min_u: -0.876169919968
+	valid_optional_layer_optional_left_range_x_max_u: 1.31562590599
+	valid_optional_layer_optional_left_range_x_mean_u: 1.21262919903
+	valid_optional_layer_optional_left_range_x_min_u: 0.887629270554
+	valid_optional_layer_optional_left_row_norms_max: 2.41143274307
+	valid_optional_layer_optional_left_row_norms_mean: 2.25634455681
+	valid_optional_layer_optional_left_row_norms_min: 2.14013409615
+	valid_optional_layer_optional_right_col_norms_max: 1.45103240013
+	valid_optional_layer_optional_right_col_norms_mean: 1.300735116
+	valid_optional_layer_optional_right_col_norms_min: 0.883640050888
+	valid_optional_layer_optional_right_max_x_max_u: 0.854766726494
+	valid_optional_layer_optional_right_max_x_mean_u: 0.614295125008
+	valid_optional_layer_optional_right_max_x_min_u: 0.443731665611
+	valid_optional_layer_optional_right_mean_x_max_u: 0.133633956313
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.00952759664506
+	valid_optional_layer_optional_right_mean_x_min_u: -0.16015766561
+	valid_optional_layer_optional_right_min_x_max_u: -0.450750231743
+	valid_optional_layer_optional_right_min_x_mean_u: -0.63999247551
+	valid_optional_layer_optional_right_min_x_min_u: -0.860296308994
+	valid_optional_layer_optional_right_range_x_max_u: 1.31210947037
+	valid_optional_layer_optional_right_range_x_mean_u: 1.25428855419
+	valid_optional_layer_optional_right_range_x_min_u: 0.988423585892
+	valid_optional_layer_optional_right_row_norms_max: 2.44734358788
+	valid_optional_layer_optional_right_row_norms_mean: 2.33699393272
+	valid_optional_layer_optional_right_row_norms_min: 2.22672581673
+	valid_projection_col_norms_max: 1.53460967541
+	valid_projection_col_norms_mean: 1.50638222694
+	valid_projection_col_norms_min: 1.48624360561
+	valid_projection_row_norms_max: 0.902467429638
+	valid_projection_row_norms_mean: 0.0931049063802
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.00945431739092
+	valid_term_1_weight_decay: 0.00814448576421
+	valid_y_col_norms_max: 1.29668617249
+	valid_y_col_norms_mean: 1.17720496655
+	valid_y_col_norms_min: 1.0171854496
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.994817137718
+	valid_y_min_max_class: 0.884506464005
+	valid_y_misclass: 0.00122375774663
+	valid_y_nll: 0.00945431739092
+	valid_y_row_norms_max: 0.513082802296
+	valid_y_row_norms_mean: 0.164555504918
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.091093 seconds
+Time this epoch: 0:01:07.858857
+Monitoring step:
+	Epochs seen: 13
+	Batches seen: 4784
+	Examples seen: 478036
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 106.515739441
+	training_seconds_this_epoch: 67.8589477539
+	valid_comparator_col_norms_max: 2.44099783897
+	valid_comparator_col_norms_mean: 0.806604087353
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 12.731004715
+	valid_comparator_max_x_mean_u: 5.37343931198
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 3.63643169403
+	valid_comparator_mean_x_mean_u: 1.13873791695
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 12.731004715
+	valid_comparator_range_x_mean_u: 5.37343931198
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.961385965347
+	valid_comparator_row_norms_mean: 0.813392341137
+	valid_comparator_row_norms_min: 0.767627894878
+	valid_objective: 0.0148871932179
+	valid_optional_layer_optional_left_col_norms_max: 1.52862501144
+	valid_optional_layer_optional_left_col_norms_mean: 1.26686394215
+	valid_optional_layer_optional_left_col_norms_min: 0.772188127041
+	valid_optional_layer_optional_left_max_x_max_u: 0.885196506977
+	valid_optional_layer_optional_left_max_x_mean_u: 0.621483147144
+	valid_optional_layer_optional_left_max_x_min_u: 0.408728659153
+	valid_optional_layer_optional_left_mean_x_max_u: 0.170099437237
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00929008517414
+	valid_optional_layer_optional_left_mean_x_min_u: -0.181924656034
+	valid_optional_layer_optional_left_min_x_max_u: -0.439793437719
+	valid_optional_layer_optional_left_min_x_mean_u: -0.601713836193
+	valid_optional_layer_optional_left_min_x_min_u: -0.887123346329
+	valid_optional_layer_optional_left_range_x_max_u: 1.32986938953
+	valid_optional_layer_optional_left_range_x_mean_u: 1.22319626808
+	valid_optional_layer_optional_left_range_x_min_u: 0.883037924767
+	valid_optional_layer_optional_left_row_norms_max: 2.4480471611
+	valid_optional_layer_optional_left_row_norms_mean: 2.29370594025
+	valid_optional_layer_optional_left_row_norms_min: 2.1771903038
+	valid_optional_layer_optional_right_col_norms_max: 1.48975718021
+	valid_optional_layer_optional_right_col_norms_mean: 1.32867157459
+	valid_optional_layer_optional_right_col_norms_min: 0.890735507011
+	valid_optional_layer_optional_right_max_x_max_u: 0.867183625698
+	valid_optional_layer_optional_right_max_x_mean_u: 0.621886074543
+	valid_optional_layer_optional_right_max_x_min_u: 0.447764605284
+	valid_optional_layer_optional_right_mean_x_max_u: 0.138946563005
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.00987771432847
+	valid_optional_layer_optional_right_mean_x_min_u: -0.164963826537
+	valid_optional_layer_optional_right_min_x_max_u: -0.454785257578
+	valid_optional_layer_optional_right_min_x_mean_u: -0.648110628128
+	valid_optional_layer_optional_right_min_x_min_u: -0.872637629509
+	valid_optional_layer_optional_right_range_x_max_u: 1.32832992077
+	valid_optional_layer_optional_right_range_x_mean_u: 1.26999747753
+	valid_optional_layer_optional_right_range_x_min_u: 0.998076379299
+	valid_optional_layer_optional_right_row_norms_max: 2.5011742115
+	valid_optional_layer_optional_right_row_norms_mean: 2.38824415207
+	valid_optional_layer_optional_right_row_norms_min: 2.27569079399
+	valid_projection_col_norms_max: 1.51254951954
+	valid_projection_col_norms_mean: 1.48478603363
+	valid_projection_col_norms_min: 1.46408069134
+	valid_projection_row_norms_max: 0.910182833672
+	valid_projection_row_norms_mean: 0.0914384499192
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.00682782009244
+	valid_term_1_weight_decay: 0.00805938616395
+	valid_y_col_norms_max: 1.32006561756
+	valid_y_col_norms_mean: 1.20506751537
+	valid_y_col_norms_min: 1.05253267288
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.995971977711
+	valid_y_min_max_class: 0.906418383121
+	valid_y_misclass: 0.000707059924025
+	valid_y_nll: 0.00682782009244
+	valid_y_row_norms_max: 0.529138028622
+	valid_y_row_norms_mean: 0.168210327625
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.140354 seconds
+Time this epoch: 0:01:07.536493
+Monitoring step:
+	Epochs seen: 14
+	Batches seen: 5152
+	Examples seen: 514808
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 102.016532898
+	training_seconds_this_epoch: 67.5363693237
+	valid_comparator_col_norms_max: 2.4530339241
+	valid_comparator_col_norms_mean: 0.803239107132
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 12.5590047836
+	valid_comparator_max_x_mean_u: 5.38449668884
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 3.6489982605
+	valid_comparator_mean_x_mean_u: 1.14411473274
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 12.5590047836
+	valid_comparator_range_x_mean_u: 5.38449668884
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.957218110561
+	valid_comparator_row_norms_mean: 0.810542464256
+	valid_comparator_row_norms_min: 0.764997720718
+	valid_objective: 0.0124190207571
+	valid_optional_layer_optional_left_col_norms_max: 1.56405842304
+	valid_optional_layer_optional_left_col_norms_mean: 1.28894400597
+	valid_optional_layer_optional_left_col_norms_min: 0.774224698544
+	valid_optional_layer_optional_left_max_x_max_u: 0.894647657871
+	valid_optional_layer_optional_left_max_x_mean_u: 0.627627134323
+	valid_optional_layer_optional_left_max_x_min_u: 0.409902274609
+	valid_optional_layer_optional_left_mean_x_max_u: 0.176042348146
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00963193457574
+	valid_optional_layer_optional_left_mean_x_min_u: -0.187472507358
+	valid_optional_layer_optional_left_min_x_max_u: -0.442550063133
+	valid_optional_layer_optional_left_min_x_mean_u: -0.607465207577
+	valid_optional_layer_optional_left_min_x_min_u: -0.896526575089
+	valid_optional_layer_optional_left_range_x_max_u: 1.34194159508
+	valid_optional_layer_optional_left_range_x_mean_u: 1.23509144783
+	valid_optional_layer_optional_left_range_x_min_u: 0.887169420719
+	valid_optional_layer_optional_left_row_norms_max: 2.49197721481
+	valid_optional_layer_optional_left_row_norms_mean: 2.3355910778
+	valid_optional_layer_optional_left_row_norms_min: 2.21881699562
+	valid_optional_layer_optional_right_col_norms_max: 1.51493012905
+	valid_optional_layer_optional_right_col_norms_mean: 1.34620547295
+	valid_optional_layer_optional_right_col_norms_min: 0.894920647144
+	valid_optional_layer_optional_right_max_x_max_u: 0.875075101852
+	valid_optional_layer_optional_right_max_x_mean_u: 0.626936137676
+	valid_optional_layer_optional_right_max_x_min_u: 0.45060223341
+	valid_optional_layer_optional_right_mean_x_max_u: 0.142735019326
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.0101146576926
+	valid_optional_layer_optional_right_mean_x_min_u: -0.168810680509
+	valid_optional_layer_optional_right_min_x_max_u: -0.457734793425
+	valid_optional_layer_optional_right_min_x_mean_u: -0.653492033482
+	valid_optional_layer_optional_right_min_x_min_u: -0.880504488945
+	valid_optional_layer_optional_right_range_x_max_u: 1.33889532089
+	valid_optional_layer_optional_right_range_x_mean_u: 1.28042769432
+	valid_optional_layer_optional_right_range_x_min_u: 1.00472247601
+	valid_optional_layer_optional_right_row_norms_max: 2.53888130188
+	valid_optional_layer_optional_right_row_norms_mean: 2.42051386833
+	valid_optional_layer_optional_right_row_norms_min: 2.30484938622
+	valid_projection_col_norms_max: 1.49242734909
+	valid_projection_col_norms_mean: 1.46498799324
+	valid_projection_col_norms_min: 1.44376707077
+	valid_projection_row_norms_max: 0.916247785091
+	valid_projection_row_norms_mean: 0.0899532362819
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.00446961214766
+	valid_term_1_weight_decay: 0.00794944632798
+	valid_y_col_norms_max: 1.34006881714
+	valid_y_col_norms_mean: 1.22904920578
+	valid_y_col_norms_min: 1.08293926716
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.996641397476
+	valid_y_min_max_class: 0.90563839674
+	valid_y_misclass: 0.00032633531373
+	valid_y_nll: 0.00446961214766
+	valid_y_row_norms_max: 0.540425300598
+	valid_y_row_norms_mean: 0.17137183249
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.142622 seconds
+Time this epoch: 0:01:07.458668
+Monitoring step:
+	Epochs seen: 15
+	Batches seen: 5520
+	Examples seen: 551580
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 101.320663452
+	training_seconds_this_epoch: 67.4588546753
+	valid_comparator_col_norms_max: 2.44734573364
+	valid_comparator_col_norms_mean: 0.800103545189
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 12.4218645096
+	valid_comparator_max_x_mean_u: 5.40103197098
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 3.64314222336
+	valid_comparator_mean_x_mean_u: 1.15085446835
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 12.4218645096
+	valid_comparator_range_x_mean_u: 5.40103197098
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.954829335213
+	valid_comparator_row_norms_mean: 0.807649314404
+	valid_comparator_row_norms_min: 0.760307610035
+	valid_objective: 0.011122148484
+	valid_optional_layer_optional_left_col_norms_max: 1.59630823135
+	valid_optional_layer_optional_left_col_norms_mean: 1.31138813496
+	valid_optional_layer_optional_left_col_norms_min: 0.781854152679
+	valid_optional_layer_optional_left_max_x_max_u: 0.902176618576
+	valid_optional_layer_optional_left_max_x_mean_u: 0.633373081684
+	valid_optional_layer_optional_left_max_x_min_u: 0.413656294346
+	valid_optional_layer_optional_left_mean_x_max_u: 0.180849686265
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.00989662762731
+	valid_optional_layer_optional_left_mean_x_min_u: -0.19177365303
+	valid_optional_layer_optional_left_min_x_max_u: -0.445189595222
+	valid_optional_layer_optional_left_min_x_mean_u: -0.612971305847
+	valid_optional_layer_optional_left_min_x_min_u: -0.903995811939
+	valid_optional_layer_optional_left_range_x_max_u: 1.35183882713
+	valid_optional_layer_optional_left_range_x_mean_u: 1.24634492397
+	valid_optional_layer_optional_left_range_x_min_u: 0.895705342293
+	valid_optional_layer_optional_left_row_norms_max: 2.53446102142
+	valid_optional_layer_optional_left_row_norms_mean: 2.37741041183
+	valid_optional_layer_optional_left_row_norms_min: 2.26028490067
+	valid_optional_layer_optional_right_col_norms_max: 1.53653848171
+	valid_optional_layer_optional_right_col_norms_mean: 1.36210393906
+	valid_optional_layer_optional_right_col_norms_min: 0.90154081583
+	valid_optional_layer_optional_right_max_x_max_u: 0.881266951561
+	valid_optional_layer_optional_right_max_x_mean_u: 0.630745708942
+	valid_optional_layer_optional_right_max_x_min_u: 0.452120959759
+	valid_optional_layer_optional_right_mean_x_max_u: 0.146086513996
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.0103222876787
+	valid_optional_layer_optional_right_mean_x_min_u: -0.171962112188
+	valid_optional_layer_optional_right_min_x_max_u: -0.459203273058
+	valid_optional_layer_optional_right_min_x_mean_u: -0.657587468624
+	valid_optional_layer_optional_right_min_x_min_u: -0.886640310287
+	valid_optional_layer_optional_right_range_x_max_u: 1.34623932838
+	valid_optional_layer_optional_right_range_x_mean_u: 1.2883336544
+	valid_optional_layer_optional_right_range_x_min_u: 1.01203989983
+	valid_optional_layer_optional_right_row_norms_max: 2.56821656227
+	valid_optional_layer_optional_right_row_norms_mean: 2.44962239265
+	valid_optional_layer_optional_right_row_norms_min: 2.33345937729
+	valid_projection_col_norms_max: 1.47313702106
+	valid_projection_col_norms_mean: 1.44612622261
+	valid_projection_col_norms_min: 1.42447113991
+	valid_projection_row_norms_max: 0.920410990715
+	valid_projection_row_norms_mean: 0.0885114148259
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.00327805383131
+	valid_term_1_weight_decay: 0.00784405320883
+	valid_y_col_norms_max: 1.35907614231
+	valid_y_col_norms_mean: 1.25146341324
+	valid_y_col_norms_min: 1.1112344265
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.997435510159
+	valid_y_min_max_class: 0.932645916939
+	valid_y_misclass: 0.000244751456194
+	valid_y_nll: 0.00327805383131
+	valid_y_row_norms_max: 0.548714518547
+	valid_y_row_norms_mean: 0.17435786128
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.142713 seconds
+Time this epoch: 0:01:07.768953
+Monitoring step:
+	Epochs seen: 16
+	Batches seen: 5888
+	Examples seen: 588352
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 101.362739563
+	training_seconds_this_epoch: 67.7691268921
+	valid_comparator_col_norms_max: 2.44757151604
+	valid_comparator_col_norms_mean: 0.794075727463
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 12.3660459518
+	valid_comparator_max_x_mean_u: 5.37953996658
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 3.65637040138
+	valid_comparator_mean_x_mean_u: 1.14912879467
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 12.3660459518
+	valid_comparator_range_x_mean_u: 5.37953996658
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.951688170433
+	valid_comparator_row_norms_mean: 0.802084028721
+	valid_comparator_row_norms_min: 0.755032241344
+	valid_objective: 0.0102593060583
+	valid_optional_layer_optional_left_col_norms_max: 1.62257707119
+	valid_optional_layer_optional_left_col_norms_mean: 1.32671296597
+	valid_optional_layer_optional_left_col_norms_min: 0.781223416328
+	valid_optional_layer_optional_left_max_x_max_u: 0.908936858177
+	valid_optional_layer_optional_left_max_x_mean_u: 0.637526869774
+	valid_optional_layer_optional_left_max_x_min_u: 0.413974761963
+	valid_optional_layer_optional_left_mean_x_max_u: 0.184561401606
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.0101219387725
+	valid_optional_layer_optional_left_mean_x_min_u: -0.195426508784
+	valid_optional_layer_optional_left_min_x_max_u: -0.446465581656
+	valid_optional_layer_optional_left_min_x_mean_u: -0.61682498455
+	valid_optional_layer_optional_left_min_x_min_u: -0.910711884499
+	valid_optional_layer_optional_left_range_x_max_u: 1.35987102985
+	valid_optional_layer_optional_left_range_x_mean_u: 1.25435233116
+	valid_optional_layer_optional_left_range_x_min_u: 0.897733926773
+	valid_optional_layer_optional_left_row_norms_max: 2.56330037117
+	valid_optional_layer_optional_left_row_norms_mean: 2.40689992905
+	valid_optional_layer_optional_left_row_norms_min: 2.28912591934
+	valid_optional_layer_optional_right_col_norms_max: 1.55893039703
+	valid_optional_layer_optional_right_col_norms_mean: 1.37885093689
+	valid_optional_layer_optional_right_col_norms_min: 0.907590091228
+	valid_optional_layer_optional_right_max_x_max_u: 0.888399720192
+	valid_optional_layer_optional_right_max_x_mean_u: 0.635042846203
+	valid_optional_layer_optional_right_max_x_min_u: 0.45371991396
+	valid_optional_layer_optional_right_mean_x_max_u: 0.149318352342
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.0105261467397
+	valid_optional_layer_optional_right_mean_x_min_u: -0.174836084247
+	valid_optional_layer_optional_right_min_x_max_u: -0.460269391537
+	valid_optional_layer_optional_right_min_x_mean_u: -0.662228763103
+	valid_optional_layer_optional_right_min_x_min_u: -0.893654048443
+	valid_optional_layer_optional_right_range_x_max_u: 1.35410428047
+	valid_optional_layer_optional_right_range_x_mean_u: 1.297270298
+	valid_optional_layer_optional_right_range_x_min_u: 1.02065992355
+	valid_optional_layer_optional_right_row_norms_max: 2.60302090645
+	valid_optional_layer_optional_right_row_norms_mean: 2.480281353
+	valid_optional_layer_optional_right_row_norms_min: 2.36283636093
+	valid_projection_col_norms_max: 1.45555078983
+	valid_projection_col_norms_mean: 1.42882275581
+	valid_projection_col_norms_min: 1.40671682358
+	valid_projection_row_norms_max: 0.927457332611
+	valid_projection_row_norms_mean: 0.0873059257865
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.00254886806943
+	valid_term_1_weight_decay: 0.0077104466036
+	valid_y_col_norms_max: 1.37504923344
+	valid_y_col_norms_mean: 1.27083468437
+	valid_y_col_norms_min: 1.1353584528
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.99775493145
+	valid_y_min_max_class: 0.934228420258
+	valid_y_misclass: 0.000135973023134
+	valid_y_nll: 0.00254886806943
+	valid_y_row_norms_max: 0.557477295399
+	valid_y_row_norms_mean: 0.176930069923
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.143000 seconds
+Time this epoch: 0:01:07.772265
+Monitoring step:
+	Epochs seen: 17
+	Batches seen: 6256
+	Examples seen: 625124
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 102.5936203
+	training_seconds_this_epoch: 67.7720718384
+	valid_comparator_col_norms_max: 2.44237518311
+	valid_comparator_col_norms_mean: 0.787687957287
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 12.2609434128
+	valid_comparator_max_x_mean_u: 5.34651374817
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 3.65320110321
+	valid_comparator_mean_x_mean_u: 1.14504158497
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 12.2609434128
+	valid_comparator_range_x_mean_u: 5.34651374817
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.950580239296
+	valid_comparator_row_norms_mean: 0.795851111412
+	valid_comparator_row_norms_min: 0.743452370167
+	valid_objective: 0.0097172698006
+	valid_optional_layer_optional_left_col_norms_max: 1.65159630775
+	valid_optional_layer_optional_left_col_norms_mean: 1.34594249725
+	valid_optional_layer_optional_left_col_norms_min: 0.784827768803
+	valid_optional_layer_optional_left_max_x_max_u: 0.914278745651
+	valid_optional_layer_optional_left_max_x_mean_u: 0.642201662064
+	valid_optional_layer_optional_left_max_x_min_u: 0.41481462121
+	valid_optional_layer_optional_left_mean_x_max_u: 0.187799036503
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.0103155393153
+	valid_optional_layer_optional_left_mean_x_min_u: -0.198586300015
+	valid_optional_layer_optional_left_min_x_max_u: -0.450172394514
+	valid_optional_layer_optional_left_min_x_mean_u: -0.621363461018
+	valid_optional_layer_optional_left_min_x_min_u: -0.916010320187
+	valid_optional_layer_optional_left_range_x_max_u: 1.36909580231
+	valid_optional_layer_optional_left_range_x_mean_u: 1.26356494427
+	valid_optional_layer_optional_left_range_x_min_u: 0.90147292614
+	valid_optional_layer_optional_left_row_norms_max: 2.60007357597
+	valid_optional_layer_optional_left_row_norms_mean: 2.44313621521
+	valid_optional_layer_optional_left_row_norms_min: 2.32543039322
+	valid_optional_layer_optional_right_col_norms_max: 1.57356464863
+	valid_optional_layer_optional_right_col_norms_mean: 1.38811194897
+	valid_optional_layer_optional_right_col_norms_min: 0.907529652119
+	valid_optional_layer_optional_right_max_x_max_u: 0.892056524754
+	valid_optional_layer_optional_right_max_x_mean_u: 0.636968672276
+	valid_optional_layer_optional_right_max_x_min_u: 0.454386651516
+	valid_optional_layer_optional_right_mean_x_max_u: 0.151927784085
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.0106979077682
+	valid_optional_layer_optional_right_mean_x_min_u: -0.177482381463
+	valid_optional_layer_optional_right_min_x_max_u: -0.461196780205
+	valid_optional_layer_optional_right_min_x_mean_u: -0.664372444153
+	valid_optional_layer_optional_right_min_x_min_u: -0.897299349308
+	valid_optional_layer_optional_right_range_x_max_u: 1.35856223106
+	valid_optional_layer_optional_right_range_x_mean_u: 1.30134010315
+	valid_optional_layer_optional_right_range_x_min_u: 1.02112329006
+	valid_optional_layer_optional_right_row_norms_max: 2.6257545948
+	valid_optional_layer_optional_right_row_norms_mean: 2.49755096436
+	valid_optional_layer_optional_right_row_norms_min: 2.37826061249
+	valid_projection_col_norms_max: 1.43977844715
+	valid_projection_col_norms_mean: 1.41321325302
+	valid_projection_col_norms_min: 1.39069747925
+	valid_projection_row_norms_max: 0.92927056551
+	valid_projection_row_norms_mean: 0.086184553802
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.00214010593481
+	valid_term_1_weight_decay: 0.00757719390094
+	valid_y_col_norms_max: 1.39006829262
+	valid_y_col_norms_mean: 1.28850162029
+	valid_y_col_norms_min: 1.15732967854
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.998086452484
+	valid_y_min_max_class: 0.943613886833
+	valid_y_misclass: 0.000135973023134
+	valid_y_nll: 0.00214010593481
+	valid_y_row_norms_max: 0.564946234226
+	valid_y_row_norms_mean: 0.17928956449
+	valid_y_row_norms_min: 0.00184633024037
+Time this epoch: 0:01:07.591412
+Monitoring step:
+	Epochs seen: 18
+	Batches seen: 6624
+	Examples seen: 661896
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 102.127708435
+	training_seconds_this_epoch: 67.5913772583
+	valid_comparator_col_norms_max: 2.4343752861
+	valid_comparator_col_norms_mean: 0.780245482922
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 12.1941785812
+	valid_comparator_max_x_mean_u: 5.30628013611
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 3.6548833847
+	valid_comparator_mean_x_mean_u: 1.13891804218
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 12.1941785812
+	valid_comparator_range_x_mean_u: 5.30628013611
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.946537196636
+	valid_comparator_row_norms_mean: 0.788706123829
+	valid_comparator_row_norms_min: 0.737468481064
+	valid_objective: 0.00924404617399
+	valid_optional_layer_optional_left_col_norms_max: 1.67114686966
+	valid_optional_layer_optional_left_col_norms_mean: 1.35784876347
+	valid_optional_layer_optional_left_col_norms_min: 0.785452306271
+	valid_optional_layer_optional_left_max_x_max_u: 0.918286085129
+	valid_optional_layer_optional_left_max_x_mean_u: 0.644643485546
+	valid_optional_layer_optional_left_max_x_min_u: 0.414406716824
+	valid_optional_layer_optional_left_mean_x_max_u: 0.190806046128
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.0104968864471
+	valid_optional_layer_optional_left_mean_x_min_u: -0.201469287276
+	valid_optional_layer_optional_left_min_x_max_u: -0.450576424599
+	valid_optional_layer_optional_left_min_x_mean_u: -0.623588979244
+	valid_optional_layer_optional_left_min_x_min_u: -0.919979691505
+	valid_optional_layer_optional_left_range_x_max_u: 1.37351131439
+	valid_optional_layer_optional_left_range_x_mean_u: 1.26823186874
+	valid_optional_layer_optional_left_range_x_min_u: 0.902526438236
+	valid_optional_layer_optional_left_row_norms_max: 2.62356090546
+	valid_optional_layer_optional_left_row_norms_mean: 2.46592307091
+	valid_optional_layer_optional_left_row_norms_min: 2.34830498695
+	valid_optional_layer_optional_right_col_norms_max: 1.59304392338
+	valid_optional_layer_optional_right_col_norms_mean: 1.40215802193
+	valid_optional_layer_optional_right_col_norms_min: 0.91047078371
+	valid_optional_layer_optional_right_max_x_max_u: 0.896744251251
+	valid_optional_layer_optional_right_max_x_mean_u: 0.639904201031
+	valid_optional_layer_optional_right_max_x_min_u: 0.455671608448
+	valid_optional_layer_optional_right_mean_x_max_u: 0.154283955693
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.010851460509
+	valid_optional_layer_optional_right_mean_x_min_u: -0.179787889123
+	valid_optional_layer_optional_right_min_x_max_u: -0.462577551603
+	valid_optional_layer_optional_right_min_x_mean_u: -0.667530834675
+	valid_optional_layer_optional_right_min_x_min_u: -0.90190243721
+	valid_optional_layer_optional_right_range_x_max_u: 1.36446249485
+	valid_optional_layer_optional_right_range_x_mean_u: 1.30743467808
+	valid_optional_layer_optional_right_range_x_min_u: 1.0244499445
+	valid_optional_layer_optional_right_row_norms_max: 2.65659022331
+	valid_optional_layer_optional_right_row_norms_mean: 2.52338886261
+	valid_optional_layer_optional_right_row_norms_min: 2.40222048759
+	valid_projection_col_norms_max: 1.42377853394
+	valid_projection_col_norms_mean: 1.39752030373
+	valid_projection_col_norms_min: 1.37467002869
+	valid_projection_row_norms_max: 0.932204306126
+	valid_projection_row_norms_mean: 0.0850677713752
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.0018125558272
+	valid_term_1_weight_decay: 0.00743150804192
+	valid_y_col_norms_max: 1.40395534039
+	valid_y_col_norms_mean: 1.30443048477
+	valid_y_col_norms_min: 1.17699158192
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.998301267624
+	valid_y_min_max_class: 0.948690891266
+	valid_y_misclass: 0.000135973023134
+	valid_y_nll: 0.0018125558272
+	valid_y_row_norms_max: 0.571750104427
+	valid_y_row_norms_mean: 0.181419283152
+	valid_y_row_norms_min: 0.00184633024037
+Time this epoch: 0:01:07.791626
+Monitoring step:
+	Epochs seen: 19
+	Batches seen: 6992
+	Examples seen: 698668
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 101.370658875
+	training_seconds_this_epoch: 67.791633606
+	valid_comparator_col_norms_max: 2.4210152626
+	valid_comparator_col_norms_mean: 0.772281050682
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 12.1249027252
+	valid_comparator_max_x_mean_u: 5.26106500626
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 3.64710617065
+	valid_comparator_mean_x_mean_u: 1.13149023056
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 12.1249027252
+	valid_comparator_range_x_mean_u: 5.26106500626
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.944257736206
+	valid_comparator_row_norms_mean: 0.780955553055
+	valid_comparator_row_norms_min: 0.729425430298
+	valid_objective: 0.00888648722321
+	valid_optional_layer_optional_left_col_norms_max: 1.68880927563
+	valid_optional_layer_optional_left_col_norms_mean: 1.36902761459
+	valid_optional_layer_optional_left_col_norms_min: 0.786888003349
+	valid_optional_layer_optional_left_max_x_max_u: 0.92132037878
+	valid_optional_layer_optional_left_max_x_mean_u: 0.646877706051
+	valid_optional_layer_optional_left_max_x_min_u: 0.413728296757
+	valid_optional_layer_optional_left_mean_x_max_u: 0.193244069815
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.0106473173946
+	valid_optional_layer_optional_left_mean_x_min_u: -0.20389033854
+	valid_optional_layer_optional_left_min_x_max_u: -0.451766252518
+	valid_optional_layer_optional_left_min_x_mean_u: -0.625671267509
+	valid_optional_layer_optional_left_min_x_min_u: -0.922998428345
+	valid_optional_layer_optional_left_range_x_max_u: 1.3777333498
+	valid_optional_layer_optional_left_range_x_mean_u: 1.27254903316
+	valid_optional_layer_optional_left_range_x_min_u: 0.903594732285
+	valid_optional_layer_optional_left_row_norms_max: 2.64381551743
+	valid_optional_layer_optional_left_row_norms_mean: 2.48718142509
+	valid_optional_layer_optional_left_row_norms_min: 2.3702788353
+	valid_optional_layer_optional_right_col_norms_max: 1.61006939411
+	valid_optional_layer_optional_right_col_norms_mean: 1.41443002224
+	valid_optional_layer_optional_right_col_norms_min: 0.913100898266
+	valid_optional_layer_optional_right_max_x_max_u: 0.900323271751
+	valid_optional_layer_optional_right_max_x_mean_u: 0.642236828804
+	valid_optional_layer_optional_right_max_x_min_u: 0.456810951233
+	valid_optional_layer_optional_right_mean_x_max_u: 0.156561389565
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.0110039273277
+	valid_optional_layer_optional_right_mean_x_min_u: -0.181959420443
+	valid_optional_layer_optional_right_min_x_max_u: -0.463878363371
+	valid_optional_layer_optional_right_min_x_mean_u: -0.670036315918
+	valid_optional_layer_optional_right_min_x_min_u: -0.905430018902
+	valid_optional_layer_optional_right_range_x_max_u: 1.3692214489
+	valid_optional_layer_optional_right_range_x_mean_u: 1.31227338314
+	valid_optional_layer_optional_right_range_x_min_u: 1.02667331696
+	valid_optional_layer_optional_right_row_norms_max: 2.68156862259
+	valid_optional_layer_optional_right_row_norms_mean: 2.54598093033
+	valid_optional_layer_optional_right_row_norms_min: 2.42384600639
+	valid_projection_col_norms_max: 1.40852975845
+	valid_projection_col_norms_mean: 1.38251960278
+	valid_projection_col_norms_min: 1.35934627056
+	valid_projection_row_norms_max: 0.933326661587
+	valid_projection_row_norms_mean: 0.0839910134673
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.00160382816102
+	valid_term_1_weight_decay: 0.00728267384693
+	valid_y_col_norms_max: 1.41656124592
+	valid_y_col_norms_mean: 1.31887972355
+	valid_y_col_norms_min: 1.19473576546
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.998459100723
+	valid_y_min_max_class: 0.951146543026
+	valid_y_misclass: 5.43892092537e-05
+	valid_y_nll: 0.00160382816102
+	valid_y_row_norms_max: 0.577653169632
+	valid_y_row_norms_mean: 0.183353170753
+	valid_y_row_norms_min: 0.00184633024037
+Saving to tmp.tmp_best.pkl...
+Opened file  tmp.tmp_best.pkl
+Saving to tmp.tmp_best.pkl done. Time elapsed: 0.150941 seconds
+Time this epoch: 0:01:07.844146
+Monitoring step:
+	Epochs seen: 20
+	Batches seen: 7360
+	Examples seen: 735440
+	learning_rate: 0.0100000044331
+	total_seconds_last_epoch: 101.668540955
+	training_seconds_this_epoch: 67.8439407349
+	valid_comparator_col_norms_max: 2.40596985817
+	valid_comparator_col_norms_mean: 0.764451503754
+	valid_comparator_col_norms_min: 0.0
+	valid_comparator_max_x_max_u: 12.063337326
+	valid_comparator_max_x_mean_u: 5.21711111069
+	valid_comparator_max_x_min_u: 0.0
+	valid_comparator_mean_x_max_u: 3.63906550407
+	valid_comparator_mean_x_mean_u: 1.12389945984
+	valid_comparator_mean_x_min_u: 0.0
+	valid_comparator_min_x_max_u: 0.0
+	valid_comparator_min_x_mean_u: 0.0
+	valid_comparator_min_x_min_u: 0.0
+	valid_comparator_range_x_max_u: 12.063337326
+	valid_comparator_range_x_mean_u: 5.21711111069
+	valid_comparator_range_x_min_u: 0.0
+	valid_comparator_row_norms_max: 0.941913843155
+	valid_comparator_row_norms_mean: 0.773238837719
+	valid_comparator_row_norms_min: 0.719783008099
+	valid_objective: 0.00862366613001
+	valid_optional_layer_optional_left_col_norms_max: 1.70813071728
+	valid_optional_layer_optional_left_col_norms_mean: 1.38108873367
+	valid_optional_layer_optional_left_col_norms_min: 0.787907481194
+	valid_optional_layer_optional_left_max_x_max_u: 0.924582839012
+	valid_optional_layer_optional_left_max_x_mean_u: 0.64957255125
+	valid_optional_layer_optional_left_max_x_min_u: 0.413465946913
+	valid_optional_layer_optional_left_mean_x_max_u: 0.195471063256
+	valid_optional_layer_optional_left_mean_x_mean_u: 0.0107860062271
+	valid_optional_layer_optional_left_mean_x_min_u: -0.206093043089
+	valid_optional_layer_optional_left_min_x_max_u: -0.453785389662
+	valid_optional_layer_optional_left_min_x_mean_u: -0.628256320953
+	valid_optional_layer_optional_left_min_x_min_u: -0.926226615906
+	valid_optional_layer_optional_left_range_x_max_u: 1.38322579861
+	valid_optional_layer_optional_left_range_x_mean_u: 1.2778288126
+	valid_optional_layer_optional_left_range_x_min_u: 0.904862761497
+	valid_optional_layer_optional_left_row_norms_max: 2.66853165627
+	valid_optional_layer_optional_left_row_norms_mean: 2.51020407677
+	valid_optional_layer_optional_left_row_norms_min: 2.39307761192
+	valid_optional_layer_optional_right_col_norms_max: 1.62529373169
+	valid_optional_layer_optional_right_col_norms_mean: 1.42457163334
+	valid_optional_layer_optional_right_col_norms_min: 0.913506925106
+	valid_optional_layer_optional_right_max_x_max_u: 0.903654754162
+	valid_optional_layer_optional_right_max_x_mean_u: 0.644301950932
+	valid_optional_layer_optional_right_max_x_min_u: 0.458042502403
+	valid_optional_layer_optional_right_mean_x_max_u: 0.15870924294
+	valid_optional_layer_optional_right_mean_x_mean_u: -0.0111525189131
+	valid_optional_layer_optional_right_mean_x_min_u: -0.184017032385
+	valid_optional_layer_optional_right_min_x_max_u: -0.465217322111
+	valid_optional_layer_optional_right_min_x_mean_u: -0.672266185284
+	valid_optional_layer_optional_right_min_x_min_u: -0.908714234829
+	valid_optional_layer_optional_right_range_x_max_u: 1.37384593487
+	valid_optional_layer_optional_right_range_x_mean_u: 1.31656861305
+	valid_optional_layer_optional_right_range_x_min_u: 1.0275427103
+	valid_optional_layer_optional_right_row_norms_max: 2.70369434357
+	valid_optional_layer_optional_right_row_norms_mean: 2.56485056877
+	valid_optional_layer_optional_right_row_norms_min: 2.44120693207
+	valid_projection_col_norms_max: 1.39412045479
+	valid_projection_col_norms_mean: 1.36831450462
+	valid_projection_col_norms_min: 1.34489047527
+	valid_projection_row_norms_max: 0.935057759285
+	valid_projection_row_norms_mean: 0.0829505249858
+	valid_projection_row_norms_min: 0.0
+	valid_term_0: 0.00148487999104
+	valid_term_1_weight_decay: 0.00713882688433
+	valid_y_col_norms_max: 1.42865896225
+	valid_y_col_norms_mean: 1.33272254467
+	valid_y_col_norms_min: 1.21173083782
+	valid_y_max_max_class: 1.00000047684
+	valid_y_mean_max_class: 0.998596489429
+	valid_y_min_max_class: 0.957335829735
+	valid_y_misclass: 8.15838138806e-05
+	valid_y_nll: 0.00148487999104
+	valid_y_row_norms_max: 0.58309417963
+	valid_y_row_norms_mean: 0.185212820768
+	valid_y_row_norms_min: 0.00184633024037
+Opened file  tmp.tmp_best.pkl
+Opened file  res/bowman_wordnet_longer_shuffled_synset_relations.map
+Opened file  res/bowman_wordnet_longer_shuffled_synset_relations.tsv
+(36772,) (36772,)
+Test Accuracy:  0.999945610791
