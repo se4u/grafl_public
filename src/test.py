@@ -4,9 +4,9 @@
 | Description : A companion script to train.py for testing a trained model.
 | Author      : Pushpendre Rastogi
 | Created     : Thu Aug 20 23:28:02 2015 (-0400)
-| Last-Updated: Fri Aug 21 00:04:27 2015 (-0400)
+| Last-Updated: Fri Aug 21 18:45:49 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 17
+|     Update #: 20
 '''
 import cPickle as pickle
 import theano
@@ -25,7 +25,11 @@ def main(model_file):
         first_column_has_y_label=True,
         first_column_of_map_file_has_index=True,
         return_composite_space_tuples=True,
+        split_percentage_for_training=80,
+        portion_to_return='test',
     )
+    import pdb
+    # pdb.set_trace()
     (x_left, x_right, y_true) = test_data
     y_true = y_true.squeeze()
     y_hat = model.fprop((x_left, x_right)).argmax(axis=1).eval()

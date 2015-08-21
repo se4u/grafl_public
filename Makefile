@@ -1,5 +1,7 @@
 BOWDIR = ~/data/vector-entailment/
 FN_TO_PARAM = $(foreach var,$(subst ~, ,$*),--$(subst :, ,$(var)))
+# yaml.load("!!python/object/apply:operator.add  ['1', '2']")
+# '12'
 
 all: res/bowman_wordnet_longer_shuffled_synset_relations.tsv
 	echo $(basename $<)
@@ -35,6 +37,9 @@ all: res/bowman_wordnet_longer_shuffled_synset_relations.tsv
 #  |    (train%=30)  (11031) 33% |               95 |                95 |
 #  |    (train%=10) (33094) 100% |               99 |                99 |
 #########################################################################
+almost_automatic:
+	PYTHONPATH=$PWD/src ~/tools/pylearn2/pylearn2/scripts/train.py res/experiments/train_bowman2.yaml \
+	python src/test.py
 b experiment_reproduce_bowman:
 	$(MAKE) batch_edgeprediction_architecture:partsymmetric_nn~input:longer_shuffled_synset_relations.tsv
 

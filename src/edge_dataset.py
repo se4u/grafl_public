@@ -3,9 +3,9 @@
 | Description : pylearn2 compatible dense_design_matrix objects that wrap Edge prediction data in csv files.
 | Author      : Pushpendre Rastogi
 | Created     : Tue Aug 18 00:45:47 2015 (-0400)
-| Last-Updated: Thu Aug 20 22:56:32 2015 (-0400)
+| Last-Updated: Fri Aug 21 18:12:55 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 32
+|     Update #: 39
 '''
 import csv
 import numpy as np
@@ -20,10 +20,24 @@ def convert_to_one_hot(y, y_labels):
     return arr
 
 
-def load_data(start=0, stop=None, filename='', token_map='', header=False,
-              first_column_has_y_label=False,
-              first_column_of_map_file_has_index=False,
-              return_composite_space_tuples=False):
+def repeatable_shuffle(x, seed):
+    state = np.random.get_state()
+    np.random.seed(seed)
+    np.random.shuffle(x)
+    np.random.set_state(state)
+    return
+
+
+def load_data(start=0, stop=None,
+              filename='res/bowman_wordnet_longer_shuffled_synset_relations.tsv',
+              token_map='res/bowman_wordnet_longer_shuffled_synset_relations.map',
+              header=False,
+              first_column_has_y_label=True,
+              first_column_of_map_file_has_index=True,
+              return_composite_space_tuples=False,
+              split_percentage_for_training=100,
+              portion_to_return='train',
+              rng_for_shuffle_before_split=1234):
     token_map = dict(((c1, int(c0)) if first_column_of_map_file_has_index else (c0, int(c1)))
                      for (c0, c1)
                      in [e.strip().split()
@@ -55,8 +69,21 @@ def load_data(start=0, stop=None, filename='', token_map='', header=False,
 
     X_labels = int(X.max()) + 1
     y_labels = int(y.max()) + 1
+    import numpy
+    repeatable_shuffle(X, rng_for_shuffle_before_split)
+    repeatable_shuffle(y, rng_for_shuffle_before_split)
+    idx_for_split = int(
+        float(split_percentage_for_training) / 100 * X.shape[0])
     import pdb
     # pdb.set_trace()
+    if portion_to_return == 'test':
+        X = X[idx_for_split:]
+        y = y[idx_for_split:]
+    elif portion_to_return == 'train':
+        X = X[:idx_for_split]
+        y = y[:idx_for_split]
+    else:
+        pass
     if return_composite_space_tuples:
         ddm = (X[:, 0:1], X[:, 1:2], y)
     else:
@@ -64,3 +91,12 @@ def load_data(start=0, stop=None, filename='', token_map='', header=False,
         ddm = DenseDesignMatrix(
             X=X, y=y, X_labels=X_labels, y_labels=y_labels)
     return ddm
+
+if __name__ == '__main__':
+    import argparse
+    arg_parser = argparse.ArgumentParser(
+        description='Edge Dataset Loading Script')
+    arg_parser.add_argument('--split_percentage_for_training', default=80,
+                            type=int, help='Default={80}')
+    args = arg_parser.parse_args()
+    load_data(split_percentage_for_training=args.split_percentage_for_training)
