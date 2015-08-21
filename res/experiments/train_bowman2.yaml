@@ -1,0 +1,131 @@
+# A Train constructor needs dataset, model, algorithm, extension
+# and a save path.
+!obj:pylearn2.train.Train {
+    dataset: &train !obj:pylearn2.datasets.vector_spaces_dataset.VectorSpacesDataset {
+        data: !obj:edge_dataset.load_data {
+            start: 0,
+            stop: !!null '',
+            filename: 'res/bowman_wordnet_longer_shuffled_synset_relations.tsv',
+            token_map: 'res/bowman_wordnet_longer_shuffled_synset_relations.map',
+            first_column_has_y_label: True,
+            first_column_of_map_file_has_index: True,
+            return_composite_space_tuples: True,
+        },
+        data_specs: [
+            !obj:pylearn2.space.CompositeSpace {
+                components: [
+                        &left_input !obj:pylearn2.space.IndexSpace {
+                            dim: 1,
+                            max_labels: &vertex_count 3217,
+                            dtype: &DTYPE 'int32'
+                        },
+                        &right_input !obj:pylearn2.space.IndexSpace {
+                            dim: 1,
+                            max_labels: *vertex_count,
+                            dtype: *DTYPE,
+                        },
+                        &target !obj:pylearn2.space.IndexSpace {
+                            dim: 1,
+                            max_labels: &chromaticity 3,
+                            dtype: *DTYPE,
+                        },
+                ],
+            },
+            [ &left_input_name 'left_input',
+              &right_input_name 'right_input',
+              &target_name 'target',
+            ],
+        ],
+    },
+    # An MLP constructor needs layers, batch_size,
+    # input_space, input_source, target_source, layer_name, monitor_targets
+    model: !obj:pylearn2.models.mlp.MLP {
+        layers: [
+            !obj:pylearn2.sandbox.nlp.models.mlp.ProjectionLayer {
+                layer_name: 'projection',
+                dim: 25,
+                irange: 0.01, # NOTE: This could be set to 0.05
+            },
+            # A CompositeLayer may receive a compositespace as input
+            # which it then routes to its components by using the input_to_layers
+            # map.
+            !obj:pylearn2.models.mlp.CompositeLayer {
+                layer_name: 'optional_layer',
+                inputs_to_layers: { 0: [0], 1: [1] },
+                layers: [
+                    !obj:pylearn2.models.mlp.Tanh {
+                        layer_name: 'optional_left',
+                        dim: &optional_layer_dim 80,
+                        irange: 0.01
+                    },
+                    !obj:pylearn2.models.mlp.Tanh {
+                        layer_name: 'optional_right',
+                        dim: *optional_layer_dim ,
+                        irange: 0.01
+                    },
+                ],
+            },
+            !obj:pylearn2.models.mlp.RectifiedLinear {
+                layer_name: 'comparator',
+                dim: 80,
+                irange: 0.01,
+            },
+            !obj:pylearn2.models.mlp.Softmax {
+                layer_name: 'y',
+                n_classes: *chromaticity,
+                irange: 0.01,
+            },
+        ],
+        input_space: !obj:pylearn2.space.CompositeSpace {
+            components: [ *left_input, *right_input ],
+        },
+        input_source: [ *left_input_name, *right_input_name],
+        target_source: [ *target_name ],
+    },
+    algorithm: !obj:pylearn2.training_algorithms.sgd.SGD {
+        batch_size: 100,
+        learning_rate: .01,
+        monitoring_dataset: {
+            'valid' : *train,
+        },
+        cost: !obj:pylearn2.costs.cost.SumOfCosts {
+            costs: [
+                !obj:pylearn2.costs.mlp.Default { },
+                !obj:pylearn2.costs.mlp.WeightDecay {
+                    coeffs: {
+                        projection: &wdc 5e-5, # NOTE: This can be set to 5e-4?
+                        optional_left: *wdc,
+                        optional_right: *wdc,
+                        comparator: *wdc,
+                        final_output: *wdc,
+                    }
+                }
+            ]
+        },
+        learning_rule: !obj:pylearn2.training_algorithms.learning_rule.AdaGrad {
+            max_scaling: 1e5
+        },
+        termination_criterion: !obj:pylearn2.termination_criteria.And {
+            criteria: [
+                !obj:pylearn2.termination_criteria.MonitorBased {
+                    # NOTE: _y_ in the middle comes from name of outer layer of
+                    # of the MLP.
+                    channel_name: 'valid_y_misclass',
+                    prop_decrease: 0.,
+                    N: 10
+                },
+                !obj:pylearn2.termination_criteria.EpochCounter {
+                    max_epochs: 20,
+                }
+            ]
+        }
+    },
+    extensions: [
+        !obj:pylearn2.train_extensions.best_params.MonitorBasedSaveBest {
+            channel_name: 'valid_y_misclass',
+            save_path: '%(best_model_save_path)s',
+        },
+    ],
+    # save_path: '%(save_path)s',
+    # save_freq: 1,
+}

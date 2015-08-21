@@ -4,9 +4,9 @@
 | Description : Invoke this script from command line to cross-validate the performance of a model.
 | Author      : Pushpendre Rastogi
 | Created     : Mon Aug 17 23:36:23 2015 (-0400)
-| Last-Updated: Thu Aug 20 00:46:36 2015 (-0400)
+| Last-Updated: Fri Aug 21 00:08:08 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 29
+|     Update #: 34
 '''
 import config
 from config import open
@@ -27,26 +27,30 @@ def get_acc(model, X, y):
     return fold_acc
 
 
+def get_best_model_save_path(save_path):
+    return save_path + '_best.pkl'
+
+
 def test():
-    import cPickle as pickle
-    import lib_score_builder
-    models = pickle.load(open(config.args.save_path))
-    from edge_dataset import load_data
-    data = load_data(filename='res/hypernymOf_partOf.default.input.tsv',
-                     token_map='res/hypernymOf_partOf.default.input.map')
-    X = data.X
-    y = data.y
-    accuracy = ([get_acc(m, X, y) for m in models]
-                if isinstance(models, list)
-                else [get_acc(models, X, y)])
-    print "Final Accuracy", float(sum(accuracy)) / len(accuracy)
+    import test as test_module
+    test_module.main(get_best_model_save_path(config.args.save_path))
 
 
 def train():
+    save_path = config.args.save_path
     config_yaml = (open(config.args.yaml).read()) % dict(
-        save_path=config.args.save_path)
-    trainer = yaml_parse.load(config_yaml)
-    trainer.main_loop()
+        save_path=save_path,
+        best_model_save_path=get_best_model_save_path(save_path))
+
+    if config.args.debug_load:
+        trainer = pdb.runcall(yaml_parse.load, config_yaml)
+    else:
+        trainer = yaml_parse.load(config_yaml)
+
+    if config.args.debug_main_loop:
+        pdb.runcall(trainer.main_loop)
+    else:
+        trainer.main_loop()
 
 
 def main():
@@ -77,6 +81,10 @@ if __name__ == '__main__':
         '--do_test', default=1, type=int, help='Default={1}')
     arg_parser.add_argument(
         '--skip_train', default=0, type=int, help='Default={1}')
+    arg_parser.add_argument(
+        '--debug_load', default=0, type=int, help='Default={0}')
+    arg_parser.add_argument(
+        '--debug_main_loop', default=0, type=int, help='Default={0}')
     config.args = arg_parser.parse_args()
     random.seed(config.args.seed)
     np.random.seed(config.args.seed)
