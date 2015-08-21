@@ -1,0 +1,8 @@
+dog rover hypernymOf
+heart animal partOf
+brain animal partOf
+animal pet hypernymOf
+livingBeing animal hypernymOf
+soul livingBeing partOf
+pet dog hypernymOf
+dogear dog partOf
