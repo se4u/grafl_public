@@ -14,3 +14,6 @@ tex/*.log
 *.glsdefs
 *.ist
 *.pyc
+res/experiments/*.pkl
+res/experiments/*.err
+res/experiments/*.log

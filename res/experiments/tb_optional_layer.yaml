@@ -1,0 +1,16 @@
+!obj:pylearn2.models.mlp.CompositeLayer {
+    layer_name: 'optional_layer',
+    inputs_to_layers: { 0: [0], 1: [1] },
+    layers: [
+        !obj:pylearn2.models.mlp.Tanh {
+            layer_name: 'optional_left',
+            dim: &optional_layer_dim 80,
+            irange: 0.01
+        },
+        !obj:pylearn2.models.mlp.Tanh {
+            layer_name: 'optional_right',
+            dim: *optional_layer_dim ,
+            irange: 0.01
+        },
+    ],
+}

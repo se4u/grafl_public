@@ -3,8 +3,8 @@ FN_TO_PARAM = $(foreach var,$(subst ~, ,$*),--$(subst :, ,$(var)))
 # yaml.load("!!python/object/apply:operator.add  ['1', '2']")
 # '12'
 
-all: res/bowman_wordnet_longer_shuffled_synset_relations.tsv
-	echo $(basename $<)
+all: res/experiments/train_bowman_tensor_activation.pkl
+	echo Done
 # Run experiments for investigating the benefits of symmetry and transitivity
 # on different types of graphs (chromatic,multi-uni,symmetric/transitive)
 # for batch training of edge prediction.
@@ -37,9 +37,18 @@ all: res/bowman_wordnet_longer_shuffled_synset_relations.tsv
 #  |    (train%=30)  (11031) 33% |               95 |                95 |
 #  |    (train%=10) (33094) 100% |               99 |                99 |
 #########################################################################
-almost_automatic:
-	PYTHONPATH=$PWD/src ~/tools/pylearn2/pylearn2/scripts/train.py res/experiments/train_bowman2.yaml \
-	python src/test.py
+# PYTHONPATH=$PWD/src ~/tools/pylearn2/pylearn2/scripts/train.py res/experiments/train_bowman_no_optional_layer.yaml 1> res/experiments/train_bowman_no_optional_layer.log 2> res/experiments/train_bowman_no_optional_layer.err ; src/test.py --model res/experiments/train_bowman_no_optional_layer.pkl
+# Opened file  res/experiments/train_bowman_no_optional_layer.pkl
+# Opened file  res/bowman_wordnet_longer_shuffled_synset_relations.map
+# Opened file  res/bowman_wordnet_longer_shuffled_synset_relations.tsv
+# Opened file  src/test.py
+# (7355,) (7355,)
+# Test Accuracy:  0.994017675051
+
+res/experiments/%.pkl: res/experiments/%.yaml
+	PYTHONPATH=$PWD/src ~/tools/pylearn2/pylearn2/scripts/train.py $< 1> $(basename $<).log 2> $(basename $<).err ; \
+	src/test.py --model $(basename $<).pkl
+
 b experiment_reproduce_bowman:
 	$(MAKE) batch_edgeprediction_architecture:partsymmetric_nn~input:longer_shuffled_synset_relations.tsv
 
