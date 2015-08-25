@@ -1,28 +1,31 @@
 !obj:pylearn2.models.mlp.MLP {
-    layer_name: 'NTN_layer_wrapper',
+    layer_name: '%(layer_name)s',
     inputs_to_layers: !!null '',
     layers: [
         !obj:pylearn2.models.mlp.CompositeLayer {
-            layer_name: 'NTN_layer',
+            layer_name: '%(layer_name)s_composite',
             inputs_to_layers: !!null '',
             layers: [
                 !obj:multilinear_mlp.MultiLinear {
-                    layer_name: 'multilinear_activation',
-                    dim: &NTN_dim 80,
+                    layer_name: '%(layer_name)s_multilinear',
+                    dim: &NTN_dim %(dim),
                     irange: 0.01,
                 },
                 !obj:pylearn2.models.mlp.Linear {
-                    layer_name: 'linear_activation',
+                    layer_name: '%(layer_name)s_linear',
                     dim: *NTN_dim,
                     irange: 0.01,
                 },
             ],
         },
         !obj:glue_composite_layer.GlueLayer {
-            layer_name: 'glue_layer',
+            layer_name: '%(layer_name)s_glue',
             dim: *NTN_dim,
             nonlinearity: !obj:glue_composite_layer.Rectifier { },
             operation: !!python/name:operator.add ,
         },
     ],
 }
+# Local Variables:
+# eval: (read-only-mode)
+# End:

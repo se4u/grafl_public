@@ -10,7 +10,8 @@
             split_percentage_for_training: 80,
             portion_to_return: 'train',
         },
-        data_specs: [
+    data_specs: !!python/:edge_dataset. ,
+    [
             !obj:pylearn2.space.CompositeSpace {
                 components: [
                         &left_input !obj:pylearn2.space.IndexSpace {

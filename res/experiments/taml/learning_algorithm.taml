@@ -1,0 +1,31 @@
+!obj:pylearn2.training_algorithms.sgd.SGD {
+    batch_size: 100,
+    learning_rate: .01,
+    monitoring_dataset: {
+        'valid' : !!python/object/apply:edge_dataset.BWD_dataset ['valid'] ,
+    },
+    cost: !obj:pylearn2.costs.cost.SumOfCosts {
+        costs: [
+            !obj:pylearn2.costs.mlp.Default { },
+            !obj:%(weight_decay_tactic)s ,
+        ]
+    },
+    learning_rule: !obj:pylearn2.training_algorithms.learning_rule.AdaGrad {
+        max_scaling: 1e5,
+    },
+    termination_criterion: !obj:pylearn2.termination_criteria.And {
+        criteria: [
+            !obj:pylearn2.termination_criteria.MonitorBased {
+                channel_name: 'valid_y_misclass',
+                prop_decrease: 0.,
+                N: 5
+            },
+            !obj:pylearn2.termination_criteria.EpochCounter {
+                max_epochs: 20,
+            }
+        ]
+    }
+}
+# Local Variables:
+# eval: (read-only-mode)
+# End:

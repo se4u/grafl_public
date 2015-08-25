@@ -46,7 +46,7 @@ all: res/experiments/train_bowman_tensor_activation.pkl
 # Test Accuracy:  0.994017675051
 
 res/experiments/%.pkl: res/experiments/%.yaml
-	PYTHONPATH=$PWD/src ~/tools/pylearn2/pylearn2/scripts/train.py $< 1> $(basename $<).log 2> $(basename $<).err ; \
+	PYTHONPATH=$$PWD/src ~/tools/pylearn2/pylearn2/scripts/train.py $< 1> $(basename $<).log 2> $(basename $<).err ; \
 	src/test.py --model $(basename $<).pkl
 
 b experiment_reproduce_bowman:

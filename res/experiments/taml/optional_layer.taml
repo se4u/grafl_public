@@ -1,16 +1,19 @@
 !obj:pylearn2.models.mlp.CompositeLayer {
-    layer_name: 'optional_layer',
+    layer_name: '%(layer_name)s',
     inputs_to_layers: { 0: [0], 1: [1] },
     layers: [
         !obj:pylearn2.models.mlp.Tanh {
-            layer_name: 'optional_left',
-            dim: &optional_layer_dim 80,
+            layer_name: '%(layer_name)s_left',
+            dim: &optional_layer_dim %(dim)d,
             irange: 0.01
         },
         !obj:pylearn2.models.mlp.Tanh {
-            layer_name: 'optional_right',
+            layer_name: '%(layer_name)s_right',
             dim: *optional_layer_dim ,
             irange: 0.01
         },
     ],
 }
+# Local Variables:
+# eval: (read-only-mode)
+# End:
