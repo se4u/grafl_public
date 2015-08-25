@@ -5,6 +5,17 @@ FN_TO_PARAM = $(foreach var,$(subst ~, ,$*),--$(subst :, ,$(var)))
 
 all: res/experiments/train_bowman_tensor_activation.pkl
 	echo Done
+########################################################################
+# TARGET: Examples of a library that can learn the model parameters of
+#  a vector space model for predicting the edges between two nodes.
+#  There are multiple score functions:
+#   1. RNTN : Socher/Bowman
+#   2. RNN
+#   3. Tensor Factorization : Sameer Singh, Tim Rocktaschel
+#   4. Gaussian Embeddings : McCallum
+#  At present assume that there is only type of edge between two
+#   nodes. No multi-relational graphs/rulesets.
+########################################################################
 # Run experiments for investigating the benefits of symmetry and transitivity
 # on different types of graphs (chromatic,multi-uni,symmetric/transitive)
 # for batch training of edge prediction.
@@ -63,42 +74,25 @@ CLSP_RUNS2:
 	$(QSUBPEMAKE) res/experiments/train_bowman_with_symmetry_$${circuit}$${suffix}.pkl; \
 	done; done
 
-res/experiments/%.pkl: res/experiments/%.yaml
+output/res/experiments/%.pkl: res/experiments/%.yaml
 	OMP_NUM_THREADS=4 THEANO_FLAGS="compiledir_format=compiledir-$(shell date +%F-%H-%M-%S)-%(hostname)s", PYTHONPATH=$$PWD/src ~/tools/pylearn2/pylearn2/scripts/train.py --time-budget 18000 $<  1> $(basename $<).log 2> $(basename $<).err && \
-	src/test.py --model $(basename $<).pkl 1> $(basename $<).testresult ; \
-	src/test.py --model $(basename $<)_best.pkl 1> $(basename $<).bestvalid_testresult
-
-b experiment_reproduce_bowman:
-	$(MAKE) batch_edgeprediction_architecture:partsymmetric_nn~input:longer_shuffled_synset_relations.tsv
-
-# src/train.py --yaml res/experiments/crossvalidate.yaml
-t small_experiment:
-	$(MAKE) batch_edgeprediction_architecture:nn~input:hypernymOf_partOf.default.input.tsv~fold:1
+	src/test.py --model output/$(basename $<).pkl 1> output/$(basename $<).testresult ; \
+	src/test.py --model output/$(basename $<)_best.pkl 1> output/$(basename $<).bestvalid_testresult
 
 #########################################################################
 # EXAMPLE: See experiment_reproduce_bowman and small_experiment
 # --fold 5 --test_percentage 10 --train_percentage 90
 #########################################################################
+experiment_reproduce_bowman:
+	$(MAKE) batch_edgeprediction_architecture:partsymmetric_nn~input:longer_shuffled_synset_relations.tsv
+
+# src/train.py --yaml res/experiments/crossvalidate.yaml
+small_experiment:
+	$(MAKE) batch_edgeprediction_architecture:nn~input:hypernymOf_partOf.default.input.tsv~fold:1
+
 batch_edgeprediction_%:
 	python src/cross_validate.py $(FN_TO_PARAM)
 
-########################################################################
-# TARGET: Examples of a library that can learn the model parameters of
-#  a vector space model for predicting the edges between two nodes.
-#  There are multiple score functions:
-#   1. RNTN : Socher/Bowman
-#   2. RNN
-#   3. Tensor Factorization : Sameer Singh, Tim Rocktaschel
-#   4. Gaussian Embeddings : McCallum
-#  At present assume that there is only type of edge between two
-#   nodes. No multi-relational graphs/rulesets.
-########################################################################
-
-
-###########################################
-# TARGET: Test the graph creation library
-###########################################
-test_graph_creation_library:
 
 
 ######################################################################
