@@ -1,0 +1,23 @@
+!obj:pylearn2.models.mlp.CompositeLayer {
+    layer_name: '%(layer_name)s',
+    layers: [
+        !include:res/experiments/taml/Equivalence_layer.taml {
+            layer_name: '%(layer_name)s_entailment',
+            dim_in: &dim_in %(dim_in)d,
+            operation: 'operator.%(op1)s',
+            dim_interim: &dim_interim %(dim_interim)d,
+        },
+        !include:res/experiments/taml/Equivalence_layer.taml {
+            layer_name: '%(layer_name)s_rentailment',
+            dim_in: *dim_in,
+            operation: 'operator.%(op2)s',
+            dim_interim: *dim_interim ,
+        },
+        !include:res/experiments/taml/Equivalence_layer.taml {
+            layer_name: '%(layer_name)s_coordinate',
+            dim_in: *dim_in,
+            operation: 'operator.%(op3)s',
+            dim_interim: *dim_interim ,
+        }
+    ],
+}

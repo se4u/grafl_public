@@ -8,33 +8,19 @@
                 dim: &dim_in 25,
                 irange: 0.01, # NOTE: This could be set to 0.05
             },
-            !obj:pylearn2.models.mlp.CompositeLayer {
-                layer_name: 'symmetric_layer',
-                layers: [
-                    !include:res/experiments/taml/Equivalence_layer.taml {
-                        layer_name: 'entailment',
-                        dim_in: *dim_in,
-                        operation: 'operator.sub',
-                        dim_interim: &dim_interim 20,
-                    },
-                    !include:res/experiments/taml/Equivalence_layer.taml {
-                        layer_name: 'rentailment',
-                        dim_in: *dim_in,
-                        operation: 'operator.sub',
-                        dim_interim: *dim_interim ,
-                    },
-                    !include:res/experiments/taml/Equivalence_layer.taml {
-                        layer_name: 'coordinate',
-                        dim_in: *dim_in,
-                        operation: 'operator.add',
-                        dim_interim: *dim_interim ,
-                    }
-                ],
+            !include:res/experiments/taml/3_relation_equivalence_layer.taml {
+                layer_name: '3_relation_equivalence',
+                dim_in: *dim_in,
+                dim_interim: 80,
+                op1: 'add',
+                op2: 'sub',
+                op3: 'sub',
             },
             !obj:pylearn2.models.mlp.Softmax {
                 layer_name: 'y',
                 n_classes: &chromaticity 3,
-                irange: 0.01,
+                irange: 0.01 ,
+                no_affine: True ,
             },
         ],
         input_space: !!python/name:edge_dataset.BWD_input_space ,
@@ -43,7 +29,7 @@
     },
     algorithm: !include:res/experiments/taml/learning_algorithm.taml {
 # weight_decay_tactic: 'weight_decay_with_default.WeightDecayWithDefault { default: 5e-5 }',
-        weight_decay_tactic: 'pylearn2.costs.mlp.WeightDecay {coeffs: {optional_layer: 5e-5, comparator: 5e-5}}'
+        weight_decay_tactic: 'pylearn2.costs.mlp.WeightDecay {coeffs: {3_relation_equivalence: 5e-5}}'
     },
     extensions: [
         !obj:pylearn2.train_extensions.best_params.MonitorBasedSaveBest {
