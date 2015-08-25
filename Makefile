@@ -76,6 +76,8 @@ CLSP_RUNS2:
 
 output/res/experiments/%.pkl: res/experiments/%.yaml
 	OMP_NUM_THREADS=4 THEANO_FLAGS="compiledir_format=compiledir-$(shell date +%F-%H-%M-%S)-%(hostname)s", PYTHONPATH=$$PWD/src ~/tools/pylearn2/pylearn2/scripts/train.py --time-budget 18000 $<  1> $(basename $<).log 2> $(basename $<).err && \
+	mv $(basename $<).pkl $@; \
+	mv $(basename $<)_best.pkl $(basename $@)_best.pkl; \
 	src/test.py --model output/$(basename $<).pkl 1> output/$(basename $<).testresult ; \
 	src/test.py --model output/$(basename $<)_best.pkl 1> output/$(basename $<).bestvalid_testresult
 
