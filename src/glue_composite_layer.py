@@ -3,9 +3,9 @@
 | Description : Classes/functions to transform CompositeLayer's output to VectorSpace.
 | Author      : Pushpendre Rastogi
 | Created     : Sat Aug 22 18:38:07 2015 (-0400)
-| Last-Updated: Sat Aug 22 19:51:08 2015 (-0400)
+| Last-Updated: Tue Aug 25 02:13:56 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 10
+|     Update #: 11
 '''
 from pylearn2.models.mlp import Layer
 from functools import wraps
@@ -36,6 +36,9 @@ class GlueLayer(Layer):
         p.name = self.layer_name + '_z'
         return p
 
+    @wraps(Layer.get_weight_decay)
+    def get_weight_decay(self, coeffs):
+        return 0.0
 
 class Rectifier(object):
 

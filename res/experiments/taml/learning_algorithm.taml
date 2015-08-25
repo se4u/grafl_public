@@ -21,7 +21,7 @@
                 N: 5
             },
             !obj:pylearn2.termination_criteria.EpochCounter {
-                max_epochs: 20,
+                max_epochs: 500,
             }
         ]
     }

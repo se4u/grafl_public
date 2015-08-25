@@ -4,30 +4,20 @@
 | Description : A companion script to train.py for testing a trained model.
 | Author      : Pushpendre Rastogi
 | Created     : Thu Aug 20 23:28:02 2015 (-0400)
-| Last-Updated: Fri Aug 21 18:45:49 2015 (-0400)
+| Last-Updated: Tue Aug 25 01:41:40 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 20
+|     Update #: 22
 '''
 import cPickle as pickle
 import theano
 import config
 import numpy
-import edge_dataset
+from edge_dataset import BWD_dataset
 
 
 def main(model_file):
     model = pickle.load(open(model_file, 'rb'))
-    test_data = edge_dataset.load_data(
-        start=0,
-        stop=None,
-        filename='res/bowman_wordnet_longer_shuffled_synset_relations.tsv',
-        token_map='res/bowman_wordnet_longer_shuffled_synset_relations.map',
-        first_column_has_y_label=True,
-        first_column_of_map_file_has_index=True,
-        return_composite_space_tuples=True,
-        split_percentage_for_training=80,
-        portion_to_return='test',
-    )
+    test_data = BWD_dataset('test').data
     import pdb
     # pdb.set_trace()
     (x_left, x_right, y_true) = test_data

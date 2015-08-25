@@ -8,9 +8,9 @@
                 dim: 25,
                 irange: 0.01, # NOTE: This could be set to 0.05
             },
-            !include:res/experiments/tb_optional_layer.yaml {
-                layer_name: 'optional_layer',
-                dim: 80,
+            !include:res/experiments/taml/optional_layer.taml {
+                layer_name: 'optional_layer' ,
+                dim: 80 ,
             },
             !include:res/experiments/taml/NTN_layer.taml {
                 layer_name: 'NTN_comparator',

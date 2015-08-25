@@ -44,10 +44,23 @@ all: res/experiments/train_bowman_tensor_activation.pkl
 # Opened file  src/test.py
 # (7355,) (7355,)
 # Test Accuracy:  0.994017675051
+QSUBPEMAKE := qsub -b y -V -j y  -r yes -cwd ./submit_grid_stub.sh -l hostname='[ab]*'
+CLSP_RUNS:
+	for circuit in \
+	    projection-Softmax \
+	    projection-Rectified_NN_comparator-Softmax \
+	    projection-Rectified_TN_comparator-Softmax \
+	    projection-Rectified_NTN_comparator-Softmax \
+	    projection-optional_layer-Rectified_NN_comparator-Softmax \
+	    projection-optional_layer-Rectified_NTN_comparator-Softmax \
+	; do \
+	$(QSUBPEMAKE) res/experiments/BWD-$${circuit}.pkl; \
+	done
 
 res/experiments/%.pkl: res/experiments/%.yaml
-	PYTHONPATH=$$PWD/src ~/tools/pylearn2/pylearn2/scripts/train.py $< 1> $(basename $<).log 2> $(basename $<).err ; \
-	src/test.py --model $(basename $<).pkl
+	OMP_NUM_THREADS=4 THEANO_FLAGS="compiledir_format=compiledir-$(shell date +%F-%H-%M-%S)-%(hostname)s", PYTHONPATH=$$PWD/src ~/tools/pylearn2/pylearn2/scripts/train.py --time-budget 18000 $<  1> $(basename $<).log 2> $(basename $<).err && \
+	src/test.py --model $(basename $<).pkl 1> $(basename $<).testresult ; \
+	src/test.py --model $(basename $<)_best.pkl 1> $(basename $<).bestvalid_testresult
 
 b experiment_reproduce_bowman:
 	$(MAKE) batch_edgeprediction_architecture:partsymmetric_nn~input:longer_shuffled_synset_relations.tsv
