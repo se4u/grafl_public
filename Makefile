@@ -57,6 +57,12 @@ CLSP_RUNS:
 	$(QSUBPEMAKE) res/experiments/BWD-$${circuit}.pkl; \
 	done
 
+CLSP_RUNS2:
+	for circuit in add_sub_sub sub_add_sub sub_sub_add ; do \
+	for suffix in '' _160 ; do \
+	$(QSUBPEMAKE) res/experiments/train_bowman_with_symmetry_$${circuit}$${suffix}.pkl; \
+	done; done
+
 res/experiments/%.pkl: res/experiments/%.yaml
 	OMP_NUM_THREADS=4 THEANO_FLAGS="compiledir_format=compiledir-$(shell date +%F-%H-%M-%S)-%(hostname)s", PYTHONPATH=$$PWD/src ~/tools/pylearn2/pylearn2/scripts/train.py --time-budget 18000 $<  1> $(basename $<).log 2> $(basename $<).err && \
 	src/test.py --model $(basename $<).pkl 1> $(basename $<).testresult ; \

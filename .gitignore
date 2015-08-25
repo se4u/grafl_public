@@ -17,3 +17,6 @@ tex/*.log
 res/experiments/*.pkl
 res/experiments/*.err
 res/experiments/*.log
+submit_grid_stub.sh.o[0-9]*
+*.bestvalid_testresult
+*.testresult
