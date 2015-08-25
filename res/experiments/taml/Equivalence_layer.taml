@@ -1,0 +1,23 @@
+!obj:pylearn2.models.mlp.MLP {
+    layer_name: '%(layer_name)s_mlp',
+    layers: [
+        !obj:glue_composite_layer.GlueLayer {
+            layer_name: '%(layer_name)s_glue',
+            dim: %(dim_in)d,
+            operation: !!python/name:%(operation)s ,
+        },
+        !obj:pylearn2.models.mlp.RectifiedLinear {
+            layer_name: '%(layer_name)s_rectilinear',
+            dim: %(dim_interim)d,
+            irange: 0.01,
+        },
+        !obj:pylearn2.models.mlp.RectifiedLinear {
+            layer_name: '%(layer_name)s_linear',
+            dim: 1,
+            irange: 0.01,
+        },
+    ],
+}
+# Local Variables:
+# eval: (read-only-mode)
+# End:

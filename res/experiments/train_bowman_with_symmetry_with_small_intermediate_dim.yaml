@@ -15,7 +15,7 @@
                         layer_name: 'entailment',
                         dim_in: *dim_in,
                         operation: 'operator.sub',
-                        dim_interim: &dim_interim 80,
+                        dim_interim: &dim_interim 20,
                     },
                     !include:res/experiments/taml/Equivalence_layer.taml {
                         layer_name: 'rentailment',

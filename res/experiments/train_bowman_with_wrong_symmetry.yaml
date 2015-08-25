@@ -14,19 +14,19 @@
                     !include:res/experiments/taml/Equivalence_layer.taml {
                         layer_name: 'entailment',
                         dim_in: *dim_in,
-                        operation: 'operator.sub',
+                        operation: 'operator.add',
                         dim_interim: &dim_interim 80,
                     },
                     !include:res/experiments/taml/Equivalence_layer.taml {
                         layer_name: 'rentailment',
                         dim_in: *dim_in,
-                        operation: 'operator.sub',
+                        operation: 'operator.add',
                         dim_interim: *dim_interim ,
                     },
                     !include:res/experiments/taml/Equivalence_layer.taml {
                         layer_name: 'coordinate',
                         dim_in: *dim_in,
-                        operation: 'operator.add',
+                        operation: 'operator.sub',
                         dim_interim: *dim_interim ,
                     }
                 ],
