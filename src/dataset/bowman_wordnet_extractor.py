@@ -5,7 +5,7 @@
 | Created     : Fri Aug  7 15:29:52 2015 (-0400)
 | Last-Updated:
 |           By:
-|     Update #: 4
+|     Update #: 5
 '''
 from nltk.corpus import wordnet as wn
 from random import choice, uniform
@@ -16,6 +16,19 @@ import copy
 
 
 def addHyponymRelations(root, wn, relations, parents, vocab):
+    """
+    Params
+    ------
+    root : Wordnet synset.
+         The root synset of the tree to be descended.
+    wn : nltk.corpus.wordnet object
+    relations : Dict with tuples of synset names as keys and a string value.
+        The value tells us that tuple[0] is valueOf tuple[1].
+    parents : List
+        All ancestor synset names of this node.
+    vocab : Set
+        A global set to contain all words in wordnet.
+    """
     if not root.name().endswith('n.01') or '_' in root.name():
         return
 
