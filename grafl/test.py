@@ -47,7 +47,7 @@ def get_model_predictions_on_data(model_file, batch_size=1000,
     model_func = make_model_func(model, batch_size=batch_size)
     y_dist = model_func((x_left, x_right))
     y_dist_gold = model.fprop((x_left, x_right)).eval()
-    numpy.testing.assert_array_equal(y_dist, y_dist_gold)
+    numpy.testing.assert_array_almost_equal(y_dist, y_dist_gold)
     print "Gold test passed"
     return y_dist, (x_left, x_right, y_true), model_func
 
