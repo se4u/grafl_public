@@ -4,9 +4,9 @@
 | Description : Simple brute force search while testing.
 | Author      : Pushpendre Rastogi
 | Created     : Wed Aug 26 19:23:26 2015 (-0400)
-| Last-Updated: Thu Aug 27 03:23:26 2015 (-0400)
+| Last-Updated: Thu Aug 27 03:43:02 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 95
+|     Update #: 102
 '''
 from test import get_model_predictions_on_data
 from test import calculate_accuracy
@@ -88,9 +88,9 @@ def create_y_hat_from_search(y_dist, x_left_arrinp, x_right_arrinp, model_func,
         x_right_arr.fill(x_right)
         path_prob = model_func(
             (x_left_arr, eligible_hop_idx), retval=model_func_retval)
+        path_prob = numpy.copy(path_prob)
         path_prob_2 = model_func(
             (eligible_hop_idx, x_right_arr), retval=model_func_retval)
-
         if strategy == 1:
             path1_argmax = path_prob.argmax(axis=1)
             path2_argmax = path_prob_2.argmax(axis=1)
@@ -105,18 +105,27 @@ def create_y_hat_from_search(y_dist, x_left_arrinp, x_right_arrinp, model_func,
     return y_hat
 
 
-def main(model_file, strategy):
+def main(model_file, strategy, datatype='train'):
     y_dist, (x_left, x_right, y_true), model_func = get_model_predictions_on_data(
-        model_file, datatype='train')
+        model_file, datatype=datatype)
     # Now do not look at y_true at all.
     mptla = 1000
     y_hat = create_y_hat_from_search(y_dist, x_left, x_right, model_func,
                                      max_points_to_look_at=mptla,
                                      strategy=strategy)
-    _ = calculate_accuracy(y_hat[:mptla],
-                           y_true[:mptla])
+    return calculate_accuracy(y_hat[:mptla],
+                              y_true[:mptla])
 
 if __name__ == '__main__':
-    main(
+    import argparse
+    arg_parser = argparse.ArgumentParser(description='Test With Search')
+    arg_parser.add_argument(
+        '--strategy', default=1, type=int, help='Default={1}')
+    arg_parser.add_argument(
+        '--datatype', default='test', type=str, help='Default={test}')
+    args = arg_parser.parse_args()
+    acc = main(
         r"output/res/experiments/BWD-projection-identity_sub_glue-Softmax.pkl",
-        1)
+        args.strategy,
+        args.datatype)
+    print args.strategy, args.datatype, acc
