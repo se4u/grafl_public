@@ -1,0 +1,28 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx,amsmath,amssymb,subcaption,url,xspace}
+% tex.stackexchange.com/questions/2291/how-do-i-change-the-enumerate-list-format-to-use-letters-instead-of-the-defaul#comment3172_2294
+\usepackage[shortlabels]{enumitem}
+% tex.stackexchange.com/questions/171803/change-font-size-of-the-verbatim-environment
+\usepackage{fancyvrb}
+\usepackage[acronym]{glossaries}
+\usepackage[]{todonotes} % insert [disable] to disable all notes.
+\newcommand{\note}[1]{\todo[author=Pushpendre,color=blue!40,size=\small,fancyline,inline]{#1}}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\bigeg}{E.g.,\xspace}
+\newcommand{\etal}{\textit{et~al.\xspace}}
+\newcommand{\etc}{etc.\@\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\bigie}{I.e.,\xspace}
+\newcommand{\remove}[1]{} % Change to {\remove}[0]{} to bring back
+
+\title{Experiment Log}
+\author{Pushpendre Rastogi}
+
+\begin{document}
+\maketitle
+
+
+\bibliographystyle{plain}
+\bibliography{references.bib}
+
+\end{document}

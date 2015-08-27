@@ -786,3 +786,32 @@ q. There are three entailment datasets that I can use
 %%% mode: latex
 %%% TeX-master: t
 %%% End:
+
+
+zero shot learning
+online learning
+
+(Given == Initialized/Constructed with)
+The iterator is given a tree.
+The filtration class is given an iterator.
+      - The filtration can also tell us all knowledge that can be inferred on the basis of information received, but which we have not received yet.
+Have a agent/strategy. The agent initializes the transitive graph keeper.
+       - The agent imposes memory And/or FLOP constraints which the transitive graph keeper obeys.
+       - It could be a NN memory module.
+       - The TGK is also told the rules of compositionality.
+At each instance the strategy receives new data D from the filtration. The strategy tells this new data to the transitive graph keeper and asks it what other new inferences I are enabled by this piece of information.
+       - What should be the representation that would naturally obey certain rules of composition? Like transitivity? symmetry? transitivity and asymmetry? transitivity and asymmetry? The constraint of f_r(x, y) > f_/r(x, y) whenever \exists f_r(x, z) > f_/r(x, z) and f_r(z, y) > f_/r(z, y) f_r and f_/r are differentiable functions that are transitive and asymmetric.
+Using a subset of {D U I} the strategy invokes training.
+       - Fast method of online training?
+       - The DEFT apple example?
+       -
+The goal is to predict elements in the transitive closure of the information received by the agent. I.e. correctly predict logically valid inferences based on known knowledge when queried.
+
+The evaluation either happens at each step or it happens at the end.
+
+
+
+
+Ben's idea is to train on the whole transitive closure.
+Now I have kept the representation of the vertex.
+But just use a search strategy to improve the performance.
