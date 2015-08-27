@@ -1,6 +1,6 @@
 # Circuit: projection-
 !obj:pylearn2.train.Train {
-    dataset: !!python/object/apply:edge_dataset.BWD_dataset ['train'] ,
+    dataset: !!python/object/apply:grafl.dataset.edge_dataset.BWD_dataset ['train'] ,
     model: !obj:pylearn2.models.mlp.MLP {
         layers: [
             !obj:pylearn2.sandbox.nlp.models.mlp.ProjectionLayer {
@@ -23,9 +23,9 @@
                 no_affine: True ,
             },
         ],
-        input_space: !!python/name:edge_dataset.BWD_input_space ,
-        input_source: !!python/name:edge_dataset.BWD_input_source ,
-        target_source: !!python/name:edge_dataset.BWD_target_source ,
+        input_space: !!python/name:grafl.dataset.edge_dataset.BWD_input_space ,
+        input_source: !!python/name:grafl.dataset.edge_dataset.BWD_input_source ,
+        target_source: !!python/name:grafl.dataset.edge_dataset.BWD_target_source ,
     },
     algorithm: !include:res/experiments/taml/learning_algorithm.taml {
 # weight_decay_tactic: 'weight_decay_with_default.WeightDecayWithDefault { default: 5e-5 }',

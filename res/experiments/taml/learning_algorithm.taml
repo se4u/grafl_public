@@ -2,7 +2,7 @@
     batch_size: 100,
     learning_rate: .01,
     monitoring_dataset: {
-        'valid' : !!python/object/apply:edge_dataset.BWD_dataset ['valid'] ,
+        'valid' : !!python/object/apply:grafl.dataset.edge_dataset.BWD_dataset ['valid'] ,
     },
     cost: !obj:pylearn2.costs.cost.SumOfCosts {
         costs: [

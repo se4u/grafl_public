@@ -3,7 +3,7 @@
 !obj:pylearn2.cross_validation.TrainCV {
     dataset_iterator: !obj:pylearn2.cross_validation.dataset_iterators.DatasetKFold {
         dataset: &train !obj:pylearn2.datasets.vector_spaces_dataset.VectorSpacesDataset {
-            data: !obj:edge_dataset.load_data {
+            data: !obj:grafl.dataset.edge_dataset.load_data {
                 start: 0,
                 stop: !!null '',
                 filename: 'res/bowman_wordnet_longer_shuffled_synset_relations.tsv',

@@ -3,14 +3,14 @@
 | Description : pylearn2 compatible dense_design_matrix objects that wrap Edge prediction data in csv files.
 | Author      : Pushpendre Rastogi
 | Created     : Tue Aug 18 00:45:47 2015 (-0400)
-| Last-Updated: Mon Aug 24 17:27:23 2015 (-0400)
+| Last-Updated: Thu Aug 27 00:54:13 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 53
+|     Update #: 79
 '''
 import csv
 import numpy as np
 from pylearn2.datasets.dense_design_matrix import DenseDesignMatrix
-from config import open
+from grafl.config import open
 
 
 def convert_to_one_hot(y, y_labels):
@@ -84,12 +84,14 @@ from pylearn2.space import IndexSpace, CompositeSpace
 from pylearn2.datasets.vector_spaces_dataset import VectorSpacesDataset
 
 
+BWD_vertex_count = 3217
+
+
 class BowmanWordnetDataset(object):
-    vertex_count = 3217
     dtype = 'int32'
-    input_components = (IndexSpace(dim=1, max_labels=vertex_count,
+    input_components = (IndexSpace(dim=1, max_labels=BWD_vertex_count,
                                    dtype=dtype),
-                        IndexSpace(dim=1, max_labels=vertex_count,
+                        IndexSpace(dim=1, max_labels=BWD_vertex_count,
                                    dtype=dtype))
     input_source = ('left_input', 'right_input')
     input_space = CompositeSpace(components=input_components)
@@ -106,20 +108,16 @@ class BowmanWordnetDataset(object):
         pass
 
 
-def BWD_dataset(portion_to_return, train_val_test=(0.8, 0.1, 0.1)):
-    assert all(e >= 0 for e in train_val_test)
-    assert sum(train_val_test) == 1
-    total = 36772
-    train_percent = train_val_test[0]
-    val_percent = sum(train_val_test[0:2])
-    train_stop = int(36772 * train_percent)
-    valid_stop = int(36772 * val_percent)
-    if portion_to_return == 'train':
-        start, stop = (0, train_stop)
-    elif portion_to_return == 'valid':
-        start, stop = (train_stop + 1, valid_stop)
-    else:
-        start, stop = (valid_stop + 1, total)
+def BWD_dataset(portion_to_return,
+                total=36772,
+                train_val_test=((0.0, 0.1), (0.8, 0.9), (0.9, 1.0)),
+                portion_keys=('train', 'valid', 'test')):
+    assert all(e[0] >= 0 and e[1] >= 0
+               for e in train_val_test)
+    assert portion_to_return in portion_keys
+    (start_frac, stop_frac) = train_val_test[
+        portion_keys.index(portion_to_return)]
+    start, stop = int(start_frac * total), int(stop_frac * total)
     return VectorSpacesDataset(
         data=load_data(
             start=start,
@@ -145,9 +143,12 @@ class TestModule(unittest.TestCase):
         self.assertEqual((d[0].shape[0]), 36772)
 
     def test_BWD_dataset(self):
-        d_train = BWD_dataset('train', train_val_test=(0.8, 0.1, 0.1)).data
-        d_valid = BWD_dataset('valid', train_val_test=(0.8, 0.1, 0.1)).data
-        d_test = BWD_dataset('test', train_val_test=(0.8, 0.1, 0.1)).data
+        d_train = BWD_dataset('train',
+                              train_val_test=((0.0, 0.1),
+                                              (0.8, 0.9),
+                                              (0.9, 1.0))).data
+        d_valid = BWD_dataset('valid').data
+        d_test = BWD_dataset('test').data
 
         def examples_as_sets(d):
             (col1, col2, col3) = d
@@ -158,6 +159,7 @@ class TestModule(unittest.TestCase):
         s_train = examples_as_sets(d_train)
         s_valid = examples_as_sets(d_valid)
         s_test = examples_as_sets(d_test)
+        self.assertEqual(int(36772 * 0.1), len(s_train))
         self.assertEqual(0, len(s_train.intersection(s_valid)))
         self.assertEqual(0, len(s_train.intersection(s_test)))
         self.assertEqual(0, len(s_test.intersection(s_valid)))
