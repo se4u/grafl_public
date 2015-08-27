@@ -75,11 +75,11 @@ CLSP_RUNS2:
 	done; done
 
 output/res/experiments/%.pkl: res/experiments/%.yaml
-	OMP_NUM_THREADS=4 THEANO_FLAGS="compiledir_format=compiledir-$(shell date +%F-%H-%M-%S)-%(hostname)s", PYTHONPATH=$$PWD/src ~/tools/pylearn2/pylearn2/scripts/train.py --time-budget 18000 $<  1> $(basename $<).log 2> $(basename $<).err && \
-	mv $(basename $<).pkl $@; \
-	mv $(basename $<)_best.pkl $(basename $@)_best.pkl; \
-	src/test.py --model output/$(basename $<).pkl 1> output/$(basename $<).testresult ; \
-	src/test.py --model output/$(basename $<)_best.pkl 1> output/$(basename $<).bestvalid_testresult
+	OMP_NUM_THREADS=4 THEANO_FLAGS="compiledir_format=compiledir-$(shell date +%F-%H-%M-%S)-%(hostname)s", PYTHONPATH=$$PWD:$$PWD/grafl ~/tools/pylearn2/pylearn2/scripts/train.py --time-budget 18000 $<  1> $(basename $<).log 2> $(basename $<).err && \
+	mv $(basename $<).pkl $@ && \
+	mv $(basename $<)_best.pkl $(basename $@)_best.pkl && \
+	PYTHONPATH=$$PWD:$$PWD/grafl grafl/test.py --model output/$(basename $<).pkl 1> output/$(basename $<).testresult ; \
+	PYTHONPATH=$$PWD:$$PWD/grafl grafl/test.py --model output/$(basename $<)_best.pkl 1> output/$(basename $<).bestvalid_testresult
 
 #########################################################################
 # EXAMPLE: See experiment_reproduce_bowman and small_experiment
@@ -88,12 +88,12 @@ output/res/experiments/%.pkl: res/experiments/%.yaml
 experiment_reproduce_bowman:
 	$(MAKE) batch_edgeprediction_architecture:partsymmetric_nn~input:longer_shuffled_synset_relations.tsv
 
-# src/train.py --yaml res/experiments/crossvalidate.yaml
+# grafl/train.py --yaml res/experiments/crossvalidate.yaml
 small_experiment:
 	$(MAKE) batch_edgeprediction_architecture:nn~input:hypernymOf_partOf.default.input.tsv~fold:1
 
 batch_edgeprediction_%:
-	python src/cross_validate.py $(FN_TO_PARAM)
+	python grafl/cross_validate.py $(FN_TO_PARAM)
 
 
 
@@ -108,14 +108,14 @@ batch_edgeprediction_%:
 # have created the `default.output` dot file?
 ######################################################################
 example_graph_creation_library:
-	python src/util_make_toy_graph.py --rules default.ruleset --input default_input.dot --stop_after 0 --output default_output.dot
+	python grafl/dataset/util_make_toy_graph.py --rules default.ruleset --input default_input.dot --stop_after 0 --output default_output.dot
 
 example_convert_tsv_to_map: res/bowman_wordnet_longer_shuffled_synset_relations.tsv
 	awk '{print $$1}' $< | sort | uniq > $(basename $<).map; \
 	awk '{print $$2; print $$3}' $< | sort | uniq | nl -v 0  >> $(basename $<).map
 
 example_convert_dot_to_tsv:
-	python src/util_make_toy_graph.py --output res/hypernymOf_partOf.default.input.tsv
+	python grafl/dataset/util_make_toy_graph.py --output res/hypernymOf_partOf.default.input.tsv
 
 
 ###########################################################################
