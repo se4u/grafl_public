@@ -4,9 +4,9 @@
 | Description : A companion script to train.py for testing a trained model.
 | Author      : Pushpendre Rastogi
 | Created     : Thu Aug 20 23:28:02 2015 (-0400)
-| Last-Updated: Thu Aug 27 02:10:42 2015 (-0400)
+| Last-Updated: Thu Aug 27 03:13:43 2015 (-0400)
 |           By: Pushpendre Rastogi
-|     Update #: 69
+|     Update #: 70
 '''
 import cPickle as pickle
 import numpy
@@ -39,9 +39,10 @@ def make_model_func(model, batch_size=1000):
     return model_func
 
 
-def get_model_predictions_on_test_data(model_file, batch_size=1000):
+def get_model_predictions_on_data(model_file, batch_size=1000,
+                                  datatype='test'):
     model = pickle.load(open(model_file, 'rb'))
-    test_data = BWD_dataset('test').data
+    test_data = BWD_dataset(datatype).data
     (x_left, x_right, y_true) = test_data
     model_func = make_model_func(model, batch_size=batch_size)
     y_dist = model_func((x_left, x_right))
@@ -66,7 +67,7 @@ def main(model_file):
     import traceback
     import sys
     try:
-        y_dist, (_, __, y_true), ___ = get_model_predictions_on_test_data(
+        y_dist, (_, __, y_true), ___ = get_model_predictions_on_data(
             model_file)
     except:
         type, value, tb = sys.exc_info()
